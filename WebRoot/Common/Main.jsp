@@ -101,7 +101,7 @@
 		<p class="endpages" id="user"></p>
 	</div> 
 	<div id="new_user" style="position:absolute; z-index:101; left:2750px; top:500px; width:1250px; height:900px;display:none; background:url(../images/personbg.png) repeat-x top">
-		<h5 class="title_sample"><span>添加用户</span><a id="userlist_close" href="#" ><img src="../images/cross.png" /></a></h5>
+		<h5 class="title_sample"><span>用户信息</span><a id="userlist_close" href="#" ><img src="../images/cross.png" /></a></h5>
 		<form id="new_user_form" style="padding:10px 20px 10px 40px;margin-left:50px;margin-top:30px" method="post">
 			<tr style="width:1000px;margin-left:auto;margin-right:auto;"><td>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名 : </td><td><input type="text" name="Name" class="easyui-validatebox" required="true" style="width:70%;margin:25px;padding:10px 15px 10px 15px"></td></tr>
 			<tr style="width:1000px;margin-left:auto;margin-right:auto;"><td>用&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;名 : </td><td><input type="text" name="userName" class="easyui-validatebox" required="true" style="width:70%;margin:25px;padding:10px 15px 10px 15px"></td></tr>
@@ -983,12 +983,10 @@
 	    
 	}
 	
-	
-	/*分页用户查询功能 */
 	//全局变量
-	var currentPage;
-	var totalPage;
-	var isInit = false;
+	var currentPage; //当前页面
+	var totalPage; //总页面数
+	var isInit = false; //是否初始化页面栏控件的标识位
 	/* *
 	 * @brief 按分页要求查询用户
 	 * @params data 存放查询到的用户对象和用户数的json 
@@ -1099,8 +1097,13 @@
 		});
 	}
 	
-	/*添加用户功能 */
+	/* *
+	 * @brief 操作用户信息
+	 * @params  element submit按钮元素对象
+	 * @return null
+	 * */
 	function saveUser(element){
+		//根据标识位判断对用户的添加或编辑操作
 		var flag = $(element).attr('value');
 		switch(flag){
 			case "1":
@@ -1125,19 +1128,32 @@
 		$("#new_user").css("display","none");
 	}
 	
-	/*编辑用户信息的功能*/
+	/* *
+	 * @brief 编辑用户信息
+	 * @params  element 编辑按钮元素对象
+	 * @return null
+	 * */
 	function modifyUser(element){
+		//获得待编辑用户的id
 		var userId = $(element).parent().parent().find(".user_id").text();
+		//显示编辑窗口
 		$("#new_user").css("display","block");
 		$("#submit_btn").attr("value",""+userId);
 		$("input[name='Id']").attr("value",""+userId);
 	}
 	
-	/*删除用户的功能*/
+	/* *
+	 * @brief 删除用户
+	 * @params  element 删除按钮元素对象
+	 * @return null
+	 * */
 	function deleteUser(element){
 		var deleteJson = {};
+		//获得要删除的用户的id
 		deleteJson.id = $(element).parent().parent().find(".user_id").text();
+		//移除条目
 		$(element).parent().parent().remove();
+		//请求servlet删除用户
 		$.ajax({
 			type: "post", 
 			dataType: 'json',
