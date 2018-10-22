@@ -51,18 +51,19 @@
 		<table border="0" cellspacing="0" cellpadding="0" class="person_name">
 		  <tr>
 			<th align="center" width="10%" style="height:93px">编号</th>
-			<th align="center" width="16%">无人机编号</th>
-			<th align="center" width="16%">视频文件名类型</th>
-			<th align="center" width="16%">时间</th>
-			<th align="center" width="16%">状态</th>
-			<th align="center" width="16%">算法类型</th>
+			<th align="center" width="20%">无人机编号</th>
+			<th align="center" width="20%">视频文件名类型</th>
+			<th align="center" width="15%">时间</th>
+			<th align="center" width="15%">状态</th>
+			<th align="center" width="10%">算法类型</th>
 			<th align="center" width="10%"></th>
 		  </tr>
 		</table>
-		<div style=" height:1323px; overflow-y:auto; background:#092E64">
+		<div style=" height:1323px;overflow-y:auto; background:#092E64">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="person_name"  id="videolist">
 		
 		</table>
+		<p class="endpages" id="video"></p>
 		</div>
 	</div>
 	
@@ -284,49 +285,763 @@
 
 	
 
-    video();
-	function video(){
+    changePage(1);
+	function changePage(page){
+	    /* if(page < 1 || page > totalPage){
+			return;
+		}
+		currentPage = page;
+		var queryJson = {};
+		queryJson.page = page;
+		queryJson.rows = 10; */
 		$.ajax({
 			type: "post", 
 			cache: false, 
 			dataType: 'json',
 			url: '/droneSystem/VideoServlet.do?method=0',
+			//data:queryJson,
 			data:{},
 			success: function(data){
-				      alert(data);
-				      console.log(data);
-                    for(var i=0;i<data.length;i++){     
-                        var tr="";    				
-						tr += "<td width='10%'>" + data[i].code + "</td>";   
-						tr += "<td width='16%'>" + data[i].drone + "</td>";  
-						tr += "<td width='16%'>" + data[i].video + "</td>";       
-						tr += "<td width='16%'>" + data[i].time + "</td>"; 
-						tr += "<td width='16%'>" + data[i].status + "</td>";
-						tr += "<td width='16%'>" + data[i].type  + "</td>";
-						tr += "<td width='10%'><a id='trafficbutton' href='javascript:void(0)'>查看</a></th>";
-                        $("#videolist").append("<tr>"+tr+"</tr>");
-	                    }
-                   	
-                    
-			       /*  data = data.rows;
-		            $.each(data,function (item) {    			      
-					var tr;  				
-					tr += "<td width='10%'>" + item.code + "</td>";   
-					tr += "<td width='16%'>" + item.drone + "</td>";  
-					tr += "<td width='16%'>" + item.video + "</td>";       
-					tr += "<td width='16%'>" + item.time + "</td>"; 
-					tr += "<td width='16%'>" + item.status  + "</td>";
-					tr += "<td width='16%'>" + item.type  + "</td>";
-					tr += "<td width='10%'><a id='trafficbutton' href='javascript:void(0)'>查看</a></th>";				 										
-					$("#videolist").append("<tr>"+tr+"</tr>");		 
-									
-		});
-			
-
-		*/	
+			        //initPage(data.total);
+				    showVideo(data); 			
 			}
 		}); 	
 	    
 	}
+	//全局变量
+	var currentPage; //当前页面
+	var totalPage; //总页面数
+	var isInit = false; //是否初始化页面栏控件的标识位
+	/* *
+	 * @brief 按分页要求查询用户
+	 * @params data 存放查询到的用户对象和用户数的json 
+	 * @return null
+	 * */
+	function showVideo(data){
+	  for(var i=0;i<data.videos.length;i++){                        
+        var tr="";                      			
+		tr += "<td width='10%' class='video_id'>" + data.videos[i].id + "</td>";   
+		tr += "<td width='20%'>" + data.videos[i].drone + "</td>";  
+		tr += "<td width='20%'>" + data.videos[i].video + "</td>";       
+		tr += "<td width='15%'>" + data.videos[i].time + "</td>"; 
+		tr += "<td width='15%'>" + data.videos[i].status + "</td>";
+		tr += "<td width='10%'>" + data.videos[i].type  + "</td>";
+		tr += "<td width='10%'><a id='trafficbutton' href='#' onclick='showCharts(this)'>查看</a></td>";
+        $("#videolist").append("<tr>"+tr+"</tr>");
+        }
+	}
+	
+	function showCharts(element){
+		  var videoId = $(element).parent().parent().find(".video_id").text();
+		  //console.log(videoId);
+          var url = '/droneSystem/VideoServlet.do?method=1';
+		  var paramData={id:videoId};
+		  $.ajax({
+		      url: url,
+		      type: "post",
+		      data: paramData,
+		      dataType: 'json',
+		      cache: false,
+		      error:function(){
+		          console.log("get redis error!!!");
+		      },
+		      success: function(data){		        
+		         var xdata = [];
+		         var ydata1 = [];
+		         var ydata2 = [];
+			     for(var i =0 ;i < data.carNums.length;i++){
+			            xdata[i] = data.carNums[i].time;
+			            ydata1[i] = data.carNums[i].valueLeft;
+			            ydata2[i] = data.carNums[i].valueRight;
+			     } 
+		         aFun(xdata,ydata1,ydata2);
+				}
+				});		      						      
+   }
+   	
+	/* *
+	 * @brief 初始化页面控件
+	 * @params  totalCntOfUser 用户的总数量
+	 * @return null
+	 * */
+/* 	function initPage(totalCntOfUser){
+		//判断是否初始化过页数控件
+		if(isInit){
+			return;
+		}
+		isInit = true;
+		
+		totalPage = Math.ceil(totalCntOfUser / 10);
+		var aLabel = '';
+		if (totalPage >= 3) {
+			aLabel += '<a class="change_page" href="#">上一页</a>'
+			aLabel += '<a class="change_page" href="#">1</a>';
+			aLabel += '<a href="#">...</a>';
+			aLabel += '<a class="change_page" href="#">'+totalPage+'</a>';
+			aLabel += '<a class="change_page" href="#">下一页</a><span>到第<input id="switch_page" type="text" />页<button id="confirm_page">确定</button></span>'
+			$("#video").append(aLabel);
+		} else {
+			aLabel += '<a class="change_page" href="#">上一页</a>'
+			for(var i = 1; i <= totalPage; i++){
+				aLabel += '<a class="change_page" href="#">'+i+'</a>';
+			}
+			aLabel += '<a class="change_page" href="#">下一页</a><span>到第<input id="switch_page" type="text" />页<button id="confirm_page">确定</button></span>'
+			$("#video").append(aLabel);
+		}
+		$(".change_page").click(function(){
+			var temp = $(this).text();
+			if(temp == "上一页" && currentPage > 1){
+				currentPage--;
+			} else if(temp == "下一页" && currentPage < totalPage){
+				currentPage++;
+			} else if(temp != "上一页" && temp != "下一页"){
+				currentPage = temp;
+			}
+			changePage(currentPage);
+		});
+		$("#confirm_page").click(function(){
+			var switchPage = $("#switch_page").val();
+			currentPage = switchPage;
+			changePage(switchPage);
+		});
+	} */
+   
+   var aChart = echarts.init(document.getElementById("trafficechart"),'blue');
+
+    function aFun(x_data, y_data1, y_data2) {
+
+        aChart.setOption({
+        			title : {
+        			    text: '',
+        			    textstyle:{
+        			    	"fontSize":"20",
+        		            "fontWeight": "bolder"
+        		    },
+        			},
+        			tooltip : {
+        			    trigger: 'axis', 
+        		        axisPointer: {
+        		            type: 'cross',
+        		            label: {
+        		            //    backgroundColor: 'F2F2F2'
+        		            }
+        		        }
+        			 },
+        		    legend: {
+        		        data:['实时上行车流量变化', '实时下行车流量变化'],
+        		        textStyle: {  
+        		            color: '#fff',          //legend字体颜色 
+        		            fontSize:'22'
+
+        		        }
+        		    },
+        		    toolbox: {
+        		        show : true,
+        		        feature : {
+        		            dataView : {show: true, readOnly: false},
+        		           // magicType : {show: true,  type:['line', 'bar']},
+        		            restore : {show: true},
+        		            saveAsImage : {show: true}
+        		        },
+        		        
+        	            itemSize:'22',
+        	            emphasis:{//触发时
+        	                iconStyle:{
+        	                    borderColor:"white"//图形的描边颜色
+        	                }
+        	            }
+
+        		    },
+        		    dataZoom : {
+        		        show : true,
+        		        start : 0,
+        		        end : 50
+        		    },
+        		    xAxis : [
+        		        {
+        		            type : 'category',
+        		            axisLabel: {        
+        		                show: true,
+        		                textStyle: {
+        		                    color: '#fff',
+        		                    fontSize:'20'
+        		                }
+        		            },
+        		        // 控制网格线是否显示
+        			        splitLine: {
+        			                show: false, 
+        			                //  改变轴线颜色
+        			                lineStyle: {
+        			                    // 使用深浅的间隔色
+        			                    color: ['white']
+        			                }                            
+        			        },
+        		            axisLine:{
+        		                lineStyle:{
+        		                    color:'#FFFFFF',
+        		                    width:1
+        		                }
+        		            },
+        		            axisPointer: {
+        	                type: 'shadow'
+        	                },
+
+        		            boundaryGap : true,
+        		            data:x_data
+        		        },
+        		         {
+        		            type: 'category',
+        		            boundaryGap: true,
+        		            data: (function (){
+        		                var res = [];
+        		                var len = 10;
+        		                while (len--) {
+        		                    res.push(10 - len - 1);
+        		                }
+        		                return res;
+        		            })()
+        		        }
+        		   ],
+        		   yAxis : [
+        		      {
+        		           type : 'value',
+        		           scale: true,
+        		           name : '车流量V/h',
+        		           axisLabel: {        
+        		                show: true,
+        		                textStyle: {
+        		                    color: '#fff',
+        		                    fontSize:'20'
+        		                }
+        		            },
+        		        // 控制网格线是否显示
+        			        splitLine: {
+        			                show: false, 
+        			                //  改变轴线颜色
+        			                lineStyle: {
+        			                    // 使用深浅的间隔色
+        			                    color: ['white']
+        			                }                            
+        			        },
+        			        max: 20,
+                   			min: 0,
+        		           boundaryGap: [0.2, 0.2],
+        		           
+        		      },
+        		      {
+        		           type : 'value',
+        		           scale: true,
+        		           name : '车流量V/h',
+        		           axisLabel: {        
+        		                show: true,
+        		                textStyle: {
+        		                    color: '#fff',
+        		                    fontSize:'20'
+        		                }
+        		            },
+        		        // 控制网格线是否显示
+        			        splitLine: {
+        			                show: false, 
+        			                //  改变轴线颜色
+        			                lineStyle: {
+        			                    // 使用深浅的间隔色
+        			                    color: ['white']
+        			                }                            
+        			        },
+        			        max: 20,
+                   			min: 0,
+        		           boundaryGap: [0.2, 0.2],
+        		           
+        		      }
+        		  ],
+        		  series : [
+        		       {
+        		            name:"实时上行车流量变化",
+        		            type:'bar',
+        		            //stack:'one',
+        		            data:y_data1,
+        		            markPoint : {
+        			                data : [
+        			                    {type : 'max', name: '最大值'},
+        			                    {type : 'min', name: '最小值'}
+        			                ]
+        			            },
+        			            markLine : {
+        			                data : [
+        			                    {type : 'average', name: '平均值'}
+        			                ]
+        			            }
+        		            
+        		       },
+        		       {
+        		            name:"实时下行车流量变化",
+        		            type:'line',
+        		           // stack:'one',
+        		            
+        		            data:y_data2, 
+        		            markPoint : {
+        			                data : [
+        			                    {type : 'max', name: '最大值'},
+        			                    {type : 'min', name: '最小值'}
+        			                ]
+        			            },
+        			            markLine : {
+        			                data : [
+        			                    {type : 'average', name: '平均值'}
+        			                ]
+        			            }
+        		            
+        		       },
+        		       
+        		  ]
+        });
+
+    }
+    
+  var bChart = echarts.init(document.getElementById("snowechart"),'blue');
+
+    function bFun(x_data, y_data) {
+
+        bChart.setOption({
+
+        	title : {
+			    text: '',
+			    textstyle:{
+			    	"fontSize":"20",
+		            "fontWeight": "bolder"
+		    },
+			},
+			tooltip : {
+			    trigger: 'axis', 
+		        axisPointer: {
+		            type: 'cross',
+		            label: {
+		            //    backgroundColor: 'F2F2F2'
+		            }
+		        }
+			 },
+		    legend: {
+		        data:['雪阻量'],
+		        textStyle: {  
+		            color: '#fff',          //legend字体颜色 
+		            fontSize:'22'
+
+		        }
+		    },
+		    toolbox: {
+		        show : true,
+		        feature : {
+		            dataView : {show: true, readOnly: false},
+		           // magicType : {show: true,  type:['line', 'bar']},
+		            restore : {show: true},
+		            saveAsImage : {show: true}
+		        },
+		        
+	            itemSize:'22',
+	            emphasis:{//触发时
+	                iconStyle:{
+	                    borderColor:"white"//图形的描边颜色
+	                }
+	            }
+
+		    },
+		    dataZoom : {
+		        show : false,
+		        start : 0,
+		        end : 100
+		    },
+		    xAxis : [
+		        {
+		            type : 'category',
+		            axisLabel: {        
+		                show: true,
+		                textStyle: {
+		                    color: '#fff',
+		                    fontSize:'20'
+		                }
+		            },
+		        // 控制网格线是否显示
+			        splitLine: {
+			                show: false, 
+			                //  改变轴线颜色
+			                lineStyle: {
+			                    // 使用深浅的间隔色
+			                    color: ['white']
+			                }                            
+			        },
+		            axisLine:{
+		                lineStyle:{
+		                    color:'#FFFFFF',
+		                    width:1
+		                }
+		            },
+		            axisPointer: {
+	                type: 'shadow'
+	                },
+
+		            boundaryGap : true,
+		            data:x_data
+		        },
+		         {
+		            type: 'category',
+		            boundaryGap: true,
+		            data: (function (){
+		                var res = [];
+		                var len = 10;
+		                while (len--) {
+		                    res.push(10 - len - 1);
+		                }
+		                return res;
+		            })()
+		        }
+		   ],
+		   yAxis : [
+		      {
+		           type : 'value',
+		           scale: true,
+		           name : '雪阻量M',
+		           axisLabel: {        
+		                show: true,
+		                textStyle: {
+		                    color: '#fff',
+		                    fontSize:'20'
+		                }
+		            },
+		        // 控制网格线是否显示
+			        splitLine: {
+			                show: false, 
+			                //  改变轴线颜色
+			                lineStyle: {
+			                    // 使用深浅的间隔色
+			                    color: ['white']
+			                }                            
+			        },
+			        max: 1200,
+           			min: 0,
+		           boundaryGap: [0.2, 0.2],
+		           
+		      }
+		  ],
+		  series : [
+		       {
+		            name:"雪阻量",
+		            type:'bar',
+		            //stack:'one',
+		            data:y_data,
+		            markPoint : {
+			                data : [
+			                    {type : 'max', name: '最大值'},
+			                    {type : 'min', name: '最小值'}
+			                ]
+			            },
+			            markLine : {
+			                data : [
+			                    {type : 'average', name: '平均值'}
+			                ]
+			            }		            
+		       }		       
+		  ]
+        }, true);
+
+    }
+
+ var cChart = echarts.init(document.getElementById("sandechart"),'blue');
+
+    function cFun(x_data, y_data) {
+
+        cChart.setOption({
+
+        	title : {
+			    text: '',
+			    textstyle:{
+			    	"fontSize":"20",
+		            "fontWeight": "bolder"
+		    },
+			},
+			tooltip : {
+			    trigger: 'axis', 
+		        axisPointer: {
+		            type: 'cross',
+		            label: {
+		            //    backgroundColor: 'F2F2F2'
+		            }
+		        }
+			 },
+		    legend: {
+		        data:['沙阻量'],
+		        textStyle: {  
+		            color: '#fff',          //legend字体颜色 
+		            fontSize:'22'
+
+		        }
+		    },
+		    toolbox: {
+		        show : true,
+		        feature : {
+		            dataView : {show: true, readOnly: false},
+		           // magicType : {show: true,  type:['line', 'bar']},
+		            restore : {show: true},
+		            saveAsImage : {show: true}
+		        },
+		        
+	            itemSize:'22',
+	            emphasis:{//触发时
+	                iconStyle:{
+	                    borderColor:"white"//图形的描边颜色
+	                }
+	            }
+
+		    },
+		    dataZoom : {
+		        show : false,
+		        start : 0,
+		        end : 100
+		    },
+		    xAxis : [
+		        {
+		            type : 'category',
+		            axisLabel: {        
+		                show: true,
+		                textStyle: {
+		                    color: '#fff',
+		                    fontSize:'20'
+		                }
+		            },
+		        // 控制网格线是否显示
+			        splitLine: {
+			                show: false, 
+			                //  改变轴线颜色
+			                lineStyle: {
+			                    // 使用深浅的间隔色
+			                    color: ['white']
+			                }                            
+			        },
+		            axisLine:{
+		                lineStyle:{
+		                    color:'#FFFFFF',
+		                    width:1
+		                }
+		            },
+		            axisPointer: {
+	                type: 'shadow'
+	                },
+
+		            boundaryGap : true,
+		            data:x_data
+		        },
+		         {
+		            type: 'category',
+		            boundaryGap: true,
+		            data: (function (){
+		                var res = [];
+		                var len = 10;
+		                while (len--) {
+		                    res.push(10 - len - 1);
+		                }
+		                return res;
+		            })()
+		        }
+		   ],
+		   yAxis : [
+		      {
+		           type : 'value',
+		           scale: true,
+		           name : '沙阻量M^2',
+		           axisLabel: {        
+		                show: true,
+		                textStyle: {
+		                    color: '#fff',
+		                    fontSize:'20'
+		                }
+		            },
+		        // 控制网格线是否显示
+			        splitLine: {
+			                show: false, 
+			                //  改变轴线颜色
+			                lineStyle: {
+			                    // 使用深浅的间隔色
+			                    color: ['white']
+			                }                            
+			        },
+			        max: 1200,
+           			min: 0,
+		           boundaryGap: [0.2, 0.2],
+		           
+		      }
+		  ],
+		  series : [
+		       {
+		            name:"沙阻量",
+		            type:'bar',
+		            //stack:'one',
+		            data:y_data,
+		            markPoint : {
+			                data : [
+			                    {type : 'max', name: '最大值'},
+			                    {type : 'min', name: '最小值'}
+			                ]
+			            },
+			            markLine : {
+			                data : [
+			                    {type : 'average', name: '平均值'}
+			                ]
+			            }		            
+		       }		       
+		  ]
+
+        }, true);
+
+    }
+    
+    var dChart = echarts.init(document.getElementById('infraredechart'),'blue');
+
+    // 指定图表的配置项和数据
+
+    function dFun(x_data,y_data) {
+
+        dChart.setOption({
+        	title : {
+			    text: '',
+			    textstyle:{
+			    	"fontSize":"20",
+		            "fontWeight": "bolder"
+		    },
+			},
+			tooltip : {
+			    trigger: 'axis', 
+		        axisPointer: {
+		            type: 'cross',
+		            label: {
+		            //    backgroundColor: 'F2F2F2'
+		            }
+		        }
+			 },
+		    legend: {
+		        data:['沙阻量'],
+		        textStyle: {  
+		            color: '#fff',          //legend字体颜色 
+		            fontSize:'22'
+
+		        }
+		    },
+		    toolbox: {
+		        show : true,
+		        feature : {
+		            dataView : {show: true, readOnly: false},
+		           // magicType : {show: true,  type:['line', 'bar']},
+		            restore : {show: true},
+		            saveAsImage : {show: true}
+		        },
+		        
+	            itemSize:'22',
+	            emphasis:{//触发时
+	                iconStyle:{
+	                    borderColor:"white"//图形的描边颜色
+	                }
+	            }
+
+		    },
+		    dataZoom : {
+		        show : false,
+		        start : 0,
+		        end : 100
+		    },
+		    xAxis : [
+		        {
+		            type : 'category',
+		            axisLabel: {        
+		                show: true,
+		                textStyle: {
+		                    color: '#fff',
+		                    fontSize:'20'
+		                }
+		            },
+		        // 控制网格线是否显示
+			        splitLine: {
+			                show: false, 
+			                //  改变轴线颜色
+			                lineStyle: {
+			                    // 使用深浅的间隔色
+			                    color: ['white']
+			                }                            
+			        },
+		            axisLine:{
+		                lineStyle:{
+		                    color:'#FFFFFF',
+		                    width:1
+		                }
+		            },
+		            axisPointer: {
+	                type: 'shadow'
+	                },
+
+		            boundaryGap : true,
+		            data:x_data
+		        },
+		         {
+		            type: 'category',
+		            boundaryGap: true,
+		            data: (function (){
+		                var res = [];
+		                var len = 10;
+		                while (len--) {
+		                    res.push(10 - len - 1);
+		                }
+		                return res;
+		            })()
+		        }
+		   ],
+		   yAxis : [
+		      {
+		           type : 'value',
+		           scale: true,
+		           name : '沙阻量M^2',
+		           axisLabel: {        
+		                show: true,
+		                textStyle: {
+		                    color: '#fff',
+		                    fontSize:'20'
+		                }
+		            },
+		        // 控制网格线是否显示
+			        splitLine: {
+			                show: false, 
+			                //  改变轴线颜色
+			                lineStyle: {
+			                    // 使用深浅的间隔色
+			                    color: ['white']
+			                }                            
+			        },
+			        max: 1200,
+           			min: 0,
+		           boundaryGap: [0.2, 0.2],
+		           
+		      }
+		  ],
+		  series : [
+		       {
+		            name:"沙阻量",
+		            type:'bar',
+		            //stack:'one',
+		            data:y_data,
+		            markPoint : {
+			                data : [
+			                    {type : 'max', name: '最大值'},
+			                    {type : 'min', name: '最小值'}
+			                ]
+			            },
+			            markLine : {
+			                data : [
+			                    {type : 'average', name: '平均值'}
+			                ]
+			            }		            
+		       }		       
+		  ]
+            });
+
+    }
+    
+	
+   
 </script>
 
