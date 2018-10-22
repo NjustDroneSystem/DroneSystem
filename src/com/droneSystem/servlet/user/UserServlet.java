@@ -172,6 +172,7 @@ public class UserServlet extends HttpServlet {
 					response.setContentType("text/html;charset=utf-8");
 					response.getWriter().write("{'IsOK':false,'msg':'修改失败，该用户不存在'}");	
 				}else{
+					user.setPassword(request.getParameter("Password"));
 					if(userMgr.update(user)){
 						response.setContentType("text/html;charset=utf-8");
 						response.getWriter().write("{'IsOK':true,'msg':'修改成功}");	
@@ -198,8 +199,7 @@ public class UserServlet extends HttpServlet {
 					response.getWriter().write("{'IsOK':false,'msg':'重置密码失败，该用户不存在'}");	
 				}else{
 					SysUser user = check.get(0);
-					//MessageDigest md = MessageDigest.getInstance("SHA-1");	//重置初始密码，密码用SHA-1算法加密后存放
-					user.setPassword(user.getUserName());						
+					//MessageDigest md = MessageDigest.getInstance("SHA-1");	//重置初始密码，密码用SHA-1算法加密后存放						
 					if(userMgr.update(user)){
 						response.setContentType("text/html;charset=utf-8");
 						response.getWriter().write("{'IsOK':true,'msg':'重置密码成功'}");	
@@ -329,27 +329,27 @@ public class UserServlet extends HttpServlet {
 			}
 			break;
 		case 7://修改密码
-			String pwd = request.getParameter("old_pwd");
-			String new_pwd = request.getParameter("pwd");
+			//String pwd = request.getParameter("old_pwd");
+			String new_pwd = request.getParameter("Password");
 			SysUser user = (SysUser)request.getSession().getAttribute("LOGIN_USER");
-			if(!pwd.equals(user.getPassword()))
-			{
+//			if(!pwd.equals(user.getPassword()))
+//			{
+//				response.setContentType("text/html;charset=utf-8");
+//				response.getWriter().write("{'IsOK':false,'msg':'原密码错误'}");
+//			}
+//			if{
+			user.setPassword(new_pwd);
+			if(userMgr.update(user)){
 				response.setContentType("text/html;charset=utf-8");
-				response.getWriter().write("{'IsOK':false,'msg':'原密码错误'}");
+				response.getWriter().write("{'IsOK':true,'msg':'密码修改成功'}");	
+			}else{
+				response.setContentType("text/html;charset=utf-8");
+				response.getWriter().write("{'IsOK':false,'msg':'密码修改失败'}");	
 			}
-			else{
-				user.setPassword(new_pwd);
-				if(userMgr.update(user)){
-					response.setContentType("text/html;charset=utf-8");
-					response.getWriter().write("{'IsOK':true,'msg':'密码修改成功'}");	
-				}else{
-					response.setContentType("text/html;charset=utf-8");
-					response.getWriter().write("{'IsOK':false,'msg':'密码修改失败'}");	
-				}
-			}
+//			}
 			break;
 		case 8://注销用户
-			String id = request.getParameter("id");
+			String id = request.getParameter("Id");
 			SysUser del_user = userMgr.findById(Integer.valueOf(id));
 			del_user.setStatus(1);
 			del_user.setCancelDate(new Timestamp(System.currentTimeMillis()));
@@ -742,20 +742,20 @@ public class UserServlet extends HttpServlet {
 		String Remark = req.getParameter("Remark");				
 		
 		user.setName(Name);
-		user.setBrief(Brief);
-		user.setJobNum(JobNum);
+		user.setBrief(Brief==null?"":Brief);
+		user.setJobNum(JobNum==null?"":JobNum);
 		user.setUserName(id==0?userName:user.getUserName());
 		user.setGender(Integer.valueOf(Gender).equals(0));
 		user.setBirthday(Birthday);
-		user.setIdnum(IDNum);
-		user.setJobTitle(JobTitle);
-		user.setEducation(Education);
-		user.setDegree(Degree);
-		user.setHomeAdd(HomeAdd);
-		user.setTel(Tel);
-		user.setCellphone1(Cellphone1);
-		user.setCellphone2(Cellphone2);
-		user.setEmail(Email);
+		user.setIdnum(IDNum==null?"":IDNum);
+		user.setJobTitle(JobTitle==null?"":JobTitle);
+		user.setEducation(Education==null?"":Education);
+		user.setDegree(Degree==null?"":Degree);
+		user.setHomeAdd(HomeAdd==null?"":HomeAdd);
+		user.setTel(Tel==null?"":Tel);
+		user.setCellphone1(Cellphone1==null?"":Cellphone1);
+		user.setCellphone2(Cellphone2==null?"":Cellphone2);
+		user.setEmail(Email==null?"":Email);
 		user.setDepartment(dep);
 		user.setStatus(Status);
 		

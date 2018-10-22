@@ -93,7 +93,7 @@
 	<!--弹框001-->
 	<div class="userlist" id="userlist">
 		<h5 class="title_sample"><span>用户列表</span><a id="userlist_close" href="#" ><img src="../images/cross.png" /></a></h5>
-		<div class="fleft sousuolf"><a href='javascript:$("#new_user").css("display","block");$("#submit_btn").attr("value","1");'><img src="../images/addperson.png" /></a></div>
+		<div class="fleft sousuolf"><a href='javascript:$("#new_user").css("display","block");'><img src="../images/addperson.png" /></a></div>
 		<div class="fright sousuort"><input type="text" /><button><img src="../images/searchicon.png" /></button></div>
 		<div class="myclear"></div> 
 		<table id="usertable" width="100%" border="0" cellpadding="0" cellspacing="0" class="person_name">
@@ -101,7 +101,7 @@
 		<p class="endpages" id="user"></p>
 	</div> 
 	<div id="new_user" style="position:absolute; z-index:101; left:2750px; top:500px; width:1250px; height:900px;display:none; background:url(../images/personbg.png) repeat-x top">
-		<h5 class="title_sample"><span>用户信息</span><a id="userlist_close" href="#" ><img src="../images/cross.png" /></a></h5>
+		<h5 class="title_sample"><span>添加用户</span><a id="userlist_close" href="#" ><img src="../images/cross.png" /></a></h5>
 		<form id="new_user_form" style="padding:10px 20px 10px 40px;margin-left:50px;margin-top:30px" method="post">
 			<tr style="width:1000px;margin-left:auto;margin-right:auto;"><td>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名 : </td><td><input type="text" name="Name" class="easyui-validatebox" required="true" style="width:70%;margin:25px;padding:10px 15px 10px 15px"></td></tr>
 			<tr style="width:1000px;margin-left:auto;margin-right:auto;"><td>用&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;名 : </td><td><input type="text" name="userName" class="easyui-validatebox" required="true" style="width:70%;margin:25px;padding:10px 15px 10px 15px"></td></tr>
@@ -125,10 +125,40 @@
 				</td>
 			</tr>
 			<tr style="width:1000px;margin-left:auto;margin-right:auto;"><td>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码 : </td><td><input type="text" name="Password" class="easyui-validatebox" required="true" style="width:70%;margin:25px;padding:10px 15px 10px 15px"></td></tr>
+			<div style="padding:5px;text-align:center;margin-top:30px">
+				<button id="new_submit_btn" class="easyui-linkbutton" icon="icon-ok" style="width:150px;height:60px;margin-right:20px" onclick="saveUser(this)">确认</button>
+				<button class="easyui-linkbutton" icon="icon-cancel" style="width:150px;height:60px" onclick='$("#new_user").css("display","none");'>取消</button>
+			</div>
+		</form>
+	</div>
+	<div id="modify_user" style="position:absolute; z-index:101; left:2750px; top:500px; width:1250px; height:900px;display:none; background:url(../images/personbg.png) repeat-x top">
+		<h5 class="title_sample"><span>修改用户</span><a id="userlist_close" href="#" ><img src="../images/cross.png" /></a></h5>
+		<form id="modify_user_form" style="padding:10px 20px 10px 40px;margin-left:50px;margin-top:30px" method="post">
+			<tr style="width:1000px;margin-left:auto;margin-right:auto;"><td>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名 : </td><td><input type="text" name="Name" class="easyui-validatebox" required="true" style="width:70%;margin:25px;padding:10px 15px 10px 15px"></td></tr>
+			<tr style="width:1000px;margin-left:auto;margin-right:auto;">
+				<td>所&nbsp;属&nbsp;部&nbsp;门 : </td>
+				<td>
+					<select id="department" class="easyui-validatebox" name="DepartmentId" style="width:73%;margin:25px;padding:10px 15px 10px 15px" required="true">
+						<option value="1">财务部</option>
+						<option value="2">收发室</option>
+						<option value="3">业务管理科</option>
+					</select>
+				</td>
+			</tr>
+			<tr style="width:1000px;margin-left:auto;margin-right:auto;">
+				<td>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别 : </td>
+				<td>
+					<select class="easyui-validatebox" name="Gender" style="width:73%;margin:25px;padding:10px 15px 10px 15px" required="true">
+						<option value="0">男</option>
+						<option value="1">女</option>
+					</select>
+				</td>
+			</tr>
+			<tr style="width:1000px;margin-left:auto;margin-right:auto;"><td>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码 : </td><td><input type="text" name="Password" class="easyui-validatebox" required="true" style="width:70%;margin:25px;padding:10px 15px 10px 15px"></td></tr>
 			<tr><td><input style='display:none;' name='Id' class='easyui-validatebox' value='-1'></input></td></tr>
 			<div style="padding:5px;text-align:center;margin-top:30px">
-				<button id="submit_btn" class="easyui-linkbutton" icon="icon-ok" style="width:150px;height:60px;margin-right:20px" onclick="saveUser(this)" value="0">确认</button>
-				<button class="easyui-linkbutton" icon="icon-cancel" style="width:150px;height:60px" onclick='$("#new_user").css("display","none");'>取消</button>
+				<button id="modify_submit_btn" class="easyui-linkbutton" icon="icon-ok" style="width:150px;height:60px;margin-right:20px" onclick="modifyUser()">确认</button>
+				<button class="easyui-linkbutton" icon="icon-cancel" style="width:150px;height:60px" onclick='$("#modify_user").css("display","none");'>取消</button>
 			</div>
 		</form>
 	</div>
@@ -1016,7 +1046,7 @@
 			tr += "<td>" + item.Education  + "</td>";     
 			tr += "<td>" + item.Status + "</td>";    
 			tr += "<td>" + item.CancelDate + "</td>";     					
-			tr += "<td><a href='#' onclick='modifyUser(this)'>编辑</a><a href='#' onclick='deleteUser(this)'>删除</a></td>";   
+			tr += "<td><a href='#' onclick='prepareToModifyUser(this)'>编辑</a><a href='#' onclick='deleteUser(this)'>删除</a></td>";   
 			  										
 			$("#usertable").append("<tr>"+tr+"</tr>");			
 									
@@ -1104,42 +1134,43 @@
 	 * */
 	function saveUser(element){
 		//根据标识位判断对用户的添加或编辑操作
-		var flag = $(element).attr('value');
-		switch(flag){
-			case "1":
-				$('#new_user_form').form({
-					url:'/droneSystem/servlet/UserServlet.do?method=1',
-					success:function(data){			
-						console.log(data);		   			
-					}
-				});
-				break;
-			default:
-				//修改用户信息
-				$('#new_user_form').form({
-					url:'/droneSystem/servlet/UserServlet.do?method=2',
-					success:function(data){			
-						console.log(data);		   			
-					},
-				});
-				break;
-		}
+		$('#new_user_form').form({
+			url:'/droneSystem/servlet/UserServlet.do?method=1',
+			success:function(data){			
+				console.log(data);		   			
+			}
+		});
 		//隐藏窗口
 		$("#new_user").css("display","none");
 	}
 	
 	/* *
-	 * @brief 编辑用户信息
+	 * @brief 获得待编辑用户的id并填入表单
 	 * @params  element 编辑按钮元素对象
 	 * @return null
 	 * */
-	function modifyUser(element){
-		//获得待编辑用户的id
+	function prepareToModifyUser(element){
+		$("#modify_user").css("display","block");
 		var userId = $(element).parent().parent().find(".user_id").text();
-		//显示编辑窗口
-		$("#new_user").css("display","block");
-		$("#submit_btn").attr("value",""+userId);
 		$("input[name='Id']").attr("value",""+userId);
+		console.log(userId);
+	}
+	
+	/* *
+	 * @brief 编辑用户信息
+	 * @params  null
+	 * @return null
+	 * */
+	function modifyUser(){
+		//上传表单
+		$('#modify_user_form').form({
+			url:'/droneSystem/servlet/UserServlet.do?method=2',
+			success:function(data){			
+				console.log(data);		   			
+			},
+		});
+		//隐藏窗口
+		$("#modify_user").css("display","none");
 	}
 	
 	/* *
@@ -1150,7 +1181,7 @@
 	function deleteUser(element){
 		var deleteJson = {};
 		//获得要删除的用户的id
-		deleteJson.id = $(element).parent().parent().find(".user_id").text();
+		deleteJson.Id = $(element).parent().parent().find(".user_id").text();
 		//移除条目
 		$(element).parent().parent().remove();
 		//请求servlet删除用户
