@@ -820,7 +820,7 @@
 			            //map.panTo(point);		            
 						showInfo(this, thepoint);//开启信息窗口
 						
-						test(droneId);
+						sendURL(droneId);
 						
 						getEcharts1(droneId);
 						
@@ -828,7 +828,7 @@
 						var vlc = document.getElementById("vlc"); 
 						var id = 0; 
 						//id = vlc.playlist.add(videoUrl); //添加mrl到播放列表
-						id = vlc.playlist.add("rtsp://47.94.19.230:10554/stream0.sdp"); //添加mrl到播放列表						
+						id = vlc.playlist.add("../Inc/freeway_clip.mov"); //添加mrl到播放列表						
 						vlc.playlist.playItem(id);  //播放播放列表里的序列
 						/* videojs("my-video").ready(function(){
 							var myPlayer = this;
@@ -927,7 +927,8 @@
 						          //lastData = Math.round(Math.random() * 1000);
 						        
 						          }
-						      }
+						      },
+						      async:false
 						  }); 
   
 						    
@@ -964,16 +965,16 @@
          
      
      
-	 function test(droneId){
+	 function sendURL(droneId){
 	  $.ajax({
        	 	type: "post", 
            	cache: false, 
            	dataType: 'json',
            	url: '/droneSystem/DroneServlet.do?method=3',
-//           	data:{droneId:droneId, type:3,inputStream:"D:\\test\\MOV_0030.MOV"},
+          data:{droneId:droneId, type:3,inputStream:"D:\\test\\MOV_0030.MOV"},
 //			data:{droneId:droneId, type:3,inputStream:"D:\\test\\total_Receive_HDMI.h264"},
 //			data:{droneId:droneId, type:3,inputStream:"rtsp://47.94.19.230:10554/gzrtsp.sdp"},
-			data:{droneId:droneId, type:3,inputStream:"rtsp://47.94.19.230:10554/stream0.sdp"},
+//			data:{droneId:droneId, type:3,inputStream:"rtsp://47.94.19.230:10554/stream0.sdp"},
             success: function(data){
             //alert(321);
          		videoId = data.videoId;

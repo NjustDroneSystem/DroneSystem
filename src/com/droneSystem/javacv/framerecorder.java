@@ -86,6 +86,7 @@ public class framerecorder {
 	            int flag = 0;
 	            int num = 0;
 	            while (status&& (frame = grabber.grabFrame()) != null) {  
+	            	
 	                recorder.record(frame);  
 	                String fileName = videoFramesPath + "/img_" + String.valueOf(flag) + ".jpg";
 	                File outPut = new File(fileName); 
@@ -99,51 +100,50 @@ public class framerecorder {
 	                Timestamp time = new Timestamp(System.currentTimeMillis());
 	                System.out.println(time);
 	                
-	                if(flag%20 == 1){
-	                	Record record = new Record();
-		                record.setDrone(drone);
-		                record.setType(reqType);
-		                record.setTime(time);
-		                record.setVideo(video);
-//						String Volume = hUtil .doPost("http://127.0.0.1:4050", "{\"UAVID\":\"1\", \"ImgSrc\":\""+fileName+"\",\"Lat\":\""+latitude+"\",\"Lon\":\""+longitude+"\", \"ReqType\":\"" + reqType +"\"}");
-//						JSONObject resp = new JSONObject(Volume); 
-//						if(reqType == 1){
-//			            	snowv.setSnowVolume(Double.parseDouble(resp.getString("Value")));
-//			            	snowv.setTime(time);
-//			            	snowVMgr.update(snowv);
-//			            	record.setValue(Double.parseDouble(resp.getString("Value")));
-//			            	
-//			            }
-//			            if(reqType == 2){
-//			            	sandv.setSandVolume(Double.parseDouble(resp.getString("Value")));
-//			            	sandv.setTime(time);
-//			            	sandVMgr.update(sandv);
-//			            	record.setValue(Double.parseDouble(resp.getString("Value")));
-//			            }
-			            if(reqType == 3){
-//			            	tf.setVolumeLeft(Double.parseDouble(resp.getString("ValueLeft")));
-//			            	tf.setVolumeRight(Double.parseDouble(resp.getString("ValueRight")));
-			            	tf.setVolumeLeft(1.1);
-			            	tf.setVolumeRight(1.1);
-			            	tf.setTime(time);
-			            	TFMgr.update(tf);
-//			            	record.setValueLeft(Double.parseDouble(resp.getString("ValueLeft"))); 
-//			            	record.setValueRight(Double.parseDouble(resp.getString("ValueRight"))); 
-			            	record.setValueLeft(1.1);
-			            	record.setValueRight(1.1);
-			            	reMgr.save(record);
-			            	CarNum carNum = new CarNum();
-			            	carNum.setTrafficFlow(tf);
-			            	carNum.setTime(time);
-			            	carNum.setVideo(video);
-//			            	carNum.setCarNumLeft(Integer.parseInt(resp.getString("TrackLeft")));
-//			            	carNum.setCarNumRight(Integer.parseInt(resp.getString("TrackRight")));
-			            	carNum.setCarNumLeft(num);
-			            	carNum.setCarNumRight(num);
-			            	carMgr.save(carNum);
-			            	
-			            }
-	                }
+                	Record record = new Record();
+	                record.setDrone(drone);
+	                record.setType(reqType);
+	                record.setTime(time);
+	                record.setVideo(video);
+					String Volume = hUtil .doPost("http://127.0.0.1:4050", "{\"UAVID\":\"1\", \"ImgSrc\":\""+fileName+"\",\"Lat\":\""+latitude+"\",\"Lon\":\""+longitude+"\", \"ReqType\":\"" + reqType +"\"}");
+					JSONObject resp = new JSONObject(Volume); 
+//					if(reqType == 1){
+//		            	snowv.setSnowVolume(Double.parseDouble(resp.getString("Value")));
+//		            	snowv.setTime(time);
+//		            	snowVMgr.update(snowv);
+//		            	record.setValueLeft(Double.parseDouble(resp.getString("Value")));
+//		            	
+//		            }
+//		            if(reqType == 2){
+//		            	sandv.setSandVolume(Double.parseDouble(resp.getString("Value")));
+//		            	sandv.setTime(time);
+//		            	sandVMgr.update(sandv);
+//		            	record.setValueLeft(Double.parseDouble(resp.getString("Value")));
+//		            }
+		            if(reqType == 3){
+		            	tf.setVolumeLeft(Double.parseDouble(resp.getString("ValueLeft")));
+		            	tf.setVolumeRight(Double.parseDouble(resp.getString("ValueRight")));
+//			            tf.setVolumeLeft(1.1);
+//			            tf.setVolumeRight(1.1);
+		            	tf.setTime(time);
+		            	TFMgr.update(tf);
+		            	record.setValueLeft(Double.parseDouble(resp.getString("ValueLeft"))); 
+		            	record.setValueRight(Double.parseDouble(resp.getString("ValueRight"))); 
+//			            record.setValueLeft(1.1);
+//			            record.setValueRight(1.1);
+		            	reMgr.save(record);
+		            	CarNum carNum = new CarNum();
+		            	carNum.setTrafficFlow(tf);
+		            	carNum.setTime(time);
+		            	carNum.setVideo(video);
+		            	carNum.setCarNumLeft(Integer.parseInt(resp.getString("TrackLeft")));
+		            	carNum.setCarNumRight(Integer.parseInt(resp.getString("TrackRight")));
+//			           	carNum.setCarNumLeft(num);
+//			            carNum.setCarNumRight(num);
+		            	carMgr.save(carNum);
+		            	
+		            }
+	                
 	                flag++; 
 	                num++;
 	                
