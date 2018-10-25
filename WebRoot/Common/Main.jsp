@@ -19,7 +19,7 @@
 <!-- <script type="text/javascript" src="../JScript/chart1.js"></script> -->
 <!-- <script type="text/javascript" src="../JScript/chart2.js"></script> -->
 <script type="text/javascript" src="../JScript/json2.js"></script>
-<script type="text/javascript" src="http://vjs.zencdn.net/5.18.4/video.min.js"></script>
+<!-- <script type="text/javascript" src="http://vjs.zencdn.net/5.18.4/video.min.js"></script> -->
 <title>内蒙古无人机项目管理系统-车流量</title>
 </head>
 <body>
@@ -594,7 +594,7 @@
 			        }
 			    },
 			    dataZoom: {
-			        show: true,
+			        show: false,
 			        start: 0,
 			        end: 100
 			    },
@@ -730,7 +730,7 @@
 			        },
 			        {
 			            name:'每分钟下行车流量变化',
-			            type:'bar',
+			            type:'line',
 			            data:(function (){
 			                var res = [];
 			                var len = 0;
@@ -795,7 +795,7 @@
 				   
 				    anchor:new BMap.Size(0,0),
                     imageOffset:new BMap.Size(0,0)});
-                    icon.setImageSize(new BMap.Size(24, 24));
+                    icon.setImageSize(new BMap.Size(44, 44));
 			        var point = new BMap.Point(data.drones[i].longitude,data.drones[i].latitude);  
 			        var marker = new BMap.Marker(point,{ // 创建标注点
 							icon: icon
@@ -805,10 +805,10 @@
                     var label = new window.BMap.Label("无人机编号:"+data.drones[i].code,{offset: new window.BMap.Size(20, -10)});  // 创建文本标注对象
 		                label.setStyle({
 			                  color : "#0099cc",
-			                  fontSize : "20px",
+			                  fontSize : "40px",
 			                  backgroundColor :"0.05",
 			                  border:"0",			                  
-			                  lineHeight : "20px",
+			                  lineHeight : "40px",
 			                  fontWeight :"bold" //字体加粗
 		                 });
 		            marker.setLabel(label);  //添加标签
@@ -842,7 +842,7 @@
 		            function showInfo(thisMarker,point){
 			         //thisMarker.setAnimation(BMAP_ANIMATION_BOUNCE);
 			         var content = 
-					"<p style='margin:0;line-height:1.5;font-size:20px;text-indent:0em'>无人机编号： "+point.code+"<br/>经度："+point.longitude+" 纬度："+point.latitude+"</br>雪阻预警等级： 2</br>状态： 0</p>";
+					"<p style='margin:0;line-height:1.5;font-size:20px;text-indent:0em'>无人机编号： "+point.code+"<br/>经度："+point.longitude+" 纬度："+point.latitude+"<br/>状态:"+point.status+"</p>";
 					 var infoWindow = new BMap.InfoWindow(content, opts);
 					 thisMarker.openInfoWindow(infoWindow);
 			       }	
@@ -867,8 +867,8 @@
 						      success: function(data){
 						          if(data != null){
 						          
-						          lastData = data.tsLeft;
-						          lastData1 = data.tsRight;
+						          lastData = data.tsRight;
+						          lastData1 = data.tsLeft;
 						          //lastData = Math.round(Math.random() * 1000);
 						        
 						          }
@@ -922,8 +922,8 @@
 						      },
 						      success: function(data){
 						          if(data != null){
-						          lastData2 = data.carNumLeft;
-						          lastData3 = data.carNumRight;
+						          lastData2 = data.carNumRight;
+						          lastData3 = data.carNumLeft;
 						          //lastData = Math.round(Math.random() * 1000);
 						        
 						          }
@@ -1074,6 +1074,7 @@
 			url: '/droneSystem/UserServlet.do?method=0',
 			data: queryJson,
 			success: function(data){
+			//console.log(queryJson);
 				initPage(data.total);
 				queryUser(data);
 			}

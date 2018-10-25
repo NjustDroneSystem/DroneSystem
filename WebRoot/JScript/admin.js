@@ -77,7 +77,7 @@ function change(obj){
 			$(this).html("<input type='text' name='editname' class='text' value="+old+" >");
 			});
 			$(obj).html('±£´æ');
-			$(obj).css("color","4FCD74");
+			$(obj).css("color","#4FCD74");
 		}else if(xg=='±£´æ'){
 			$('input[name=editname]').each(function(){
 				//var old=$(this).html();
