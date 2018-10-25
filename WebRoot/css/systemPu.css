@@ -53,10 +53,10 @@ div.map_search button,div.sousuort button{ background:none; border:0; float:left
 div.videoarea{width:2500px; height:1505px; border:2px solid #14548c; margin-right:26px; display:inline }
 div.timesarea{width:960px; height:722px; border:2px solid #14548c; margin-bottom:63px; display:inline}
 div.montharea{width:960px; height:716px; border:2px solid #14548c; display:inline}
-div.trafficarea{width:1560px; height:722px; border:2px solid #14548c; margin-bottom:63px; margin-right:63px;display:inline}
-div.snowarea{width:1560px; height:722px; border:2px solid #14548c; margin-bottom:63px; display:inline}
-div.sandarea{width:1560px; height:722px; border:2px solid #14548c; margin-right:63px; display:inline}
-div.infraredarea{width:1560px; height:722px; border:2px solid #14548c; display:inline}
+div.trafficarea{width:3200px; height:1508px; border:2px solid #14548c; margin-bottom:63px;display:block}
+div.snowarea{width:3200px; height:1508px; border:2px solid #14548c; margin-bottom:63px; display:none}
+div.sandarea{width:3200px; height:1508px; border:2px solid #14548c; display:none}
+div.infraredarea{width:3200px; height:1508px; border:2px solid #14548c; display:none}
 
 
 div.userlist{position:absolute; z-index:101; left:2100px; top:250px; width:2500px; height:1616px;display:none; background:url(../images/personbg.png) repeat-x top}
@@ -72,6 +72,15 @@ table.person_name td a:hover{ color:#0f58c0}
 table.person_name td a:first-child:link,table.person_name td a:first-child:visited{ color:#f86b0e}
 table.person_name td a:first-child:hover{ color:#0f58c0}
 table.person_name td input{width:30px; height:30px; background:#fff; border:1px solid #fff}
+table.video_name{width:100%;}
+table.video_name th{background:#123d77; height:77px; font-size:42px; color:#fff;}
+table.video_name td{font-size:36px; color:#fff; text-align:center; padding:36px 0; line-height:50px}
+table.video_name td a{margin:0 30px}
+table.video_name td a:link,table.video_name td a:visited{ color:#fff;}
+table.video_name td a:hover{ color:#0f58c0}
+table.video_name td a:first-child:link,table.video_name td a:first-child:visited{ color:#f86b0e}
+table.video_name td a:first-child:hover{ color:#0f58c0}
+table.video_name td input{width:30px; height:30px; background:#fff; border:1px solid #fff}
 p.endpages{margin:30px auto 0 auto; font-size:36px; text-align:center; color:#fff;}
 p.endpages a{display:inline-block; margin:0 20px}
 p.endpages a:link,p.endpages a:visited{ color:#fff}

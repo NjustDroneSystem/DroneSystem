@@ -4,17 +4,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link type="text/css" rel="stylesheet" href="../css/systemPu.css" />
-<link href="http://api.map.baidu.com/library/TrafficControl/1.4/src/TrafficControl_min.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=jwTcIoGGL3WahiyCb2Hg7juZi1TGym0Y" charset="utf-8"></script>
-<script type="text/javascript" src="http://api.map.baidu.com/library/TrafficControl/1.4/src/TrafficControl_min.js" charset="utf-8"></script>
 <link rel="stylesheet" type="text/css" href="../Inc/Style/themes/default/easyui.css" />
 <link rel="stylesheet" type="text/css" href="../Inc/Style/Style.css" />
 <script type="text/javascript" src="../Inc/JScript/jquery-1.6.min.js"></script>
-<script type="text/javascript" src="../Inc/JScript/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="../Inc/JScript/locale/easyui-lang-zh_CN.js" charset="utf-8"></script>
 <script type="text/javascript" src="../JScript/upload.js"></script>
 <script type="text/javascript" src="../JScript/admin.js"></script>
-<script type="text/javascript" src="../JScript/inquiry.js"></script>
+<!-- <script type="text/javascript" src="../JScript/inquiry.js"></script> -->
 <script type="text/javascript" src="../JScript/json2.js"></script>
 <title>内蒙古无人机项目管理系统-查询统计</title>
 </head>
@@ -34,7 +29,7 @@
 		</ul>
 		</div>
 		<div class="fright">
-		 <a id="drop_down" href="javascript:void(0)">admin<img src="../images/down_sanjiao.png" /></a><a id="logout" href="javascript:void(0)" onclick="doLogout()"><img src="../images/lines10.png" />退出</a>
+		 <a id="drop_down" href="javascript:void(0)" style="margin-right:29px">admin<img src="../images/down_sanjiao.png" /></a><a id="logout" href="javascript:void(0)" style="margin-left:0px" onclick="doLogout()"><img src="../images/lines10.png" />退出</a>
 		 <div class="js_list001" id="drop_list">
 			<p id="p1"><a href="#">用户列表</a></p>
 			<p id="p2"><a href="#">角色列表</a></p>
@@ -47,197 +42,274 @@
 	<p class="h128box"></p>
 	
 	<div class="fleft maparea" >
-		<h5 class="title_sample"><span>无人机视频列表</span></h5>
+		<h5 class="title_sample" ><span>无人机视频列表</span></h5>
 		<table border="0" cellspacing="0" cellpadding="0" class="person_name">
 		  <tr>
-			<th align="center" width="10%" style="height:93px">编号</th>
-			<th align="center" width="20%">无人机编号</th>
-			<th align="center" width="20%">视频文件名类型</th>
-			<th align="center" width="15%">时间</th>
-			<th align="center" width="15%">状态</th>
-			<th align="center" width="10%">算法类型</th>
+			<th align="center" width="10%" style="height:93px">视频编号</th>
+			<th align="center" width="15%">无人机编号</th>
+			<th align="center" width="25%">时间</th>
+			<th align="center" width="25%">视频文件名</th>
+			<th align="center" width="15%">算法类型</th>
 			<th align="center" width="10%"></th>
 		  </tr>
 		</table>
-		<div style=" height:1323px;overflow-y:auto; background:#092E64">
-		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="person_name"  id="videolist">
+		<div style=" height:1323px; background:#092E64">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="video_name"  id="videolist">
 		
 		</table>
-		<p class="endpages" id="video"></p>
+		<p class="endpages" style="margin-bottom: 40px;margin-top: 40px;" id="video"></p>
 		</div>
 	</div>
-	
-	<!-- <div class="fleft videoarea">
-		<h5 class="title_sample"><span>无人机视频算法图表</span></h5>
-		<div id="echarts" style="width:2500px;height:1410px">
-		
-		</div>
-	</div> -->
 
-	
-	<div class="fleft trafficarea">
-		<h5 class="title_sample"><span>车流量查询统计结果</span></h5>
-		<div id="trafficechart" style="width:1460px;height:616px"></div>
+	<div class="fleft trafficarea" id="trafficarea">
+		<h5 class="title_sample" style="width:3200px;background:#0B3F7D"><span>车流量查询统计结果</span></h5>
+		<div id="trafficechart" style="width:3200px;height:1323px;"></div>
 	</div>
-	<div class="fleft snowarea">
-		<h5 class="title_sample"><span>雪阻查询统计结果</span></h5>
-		<div id="snowechart" style="width:1460px;height:616px"></div>
+	<div class="fleft snowarea" id="snowarea">
+		<h5 class="title_sample" style="width:3200px;background:#0B3F7D"><span>雪阻查询统计结果</span></h5>
+		<div id="snowechart" style="width:3200px;height:1323px;"></div>
 	</div>
-	<div class="fleft sandarea">
-		<h5 class="title_sample"><span>沙阻查询统计结果</span></h5>
-		<div id="sandechart" style="width:1460px;height:616px"></div>
+	<div class="fleft sandarea" id="sandarea">
+		<h5 class="title_sample" style="width:3200px;background:#0B3F7D"><span>沙阻查询统计结果</span></h5>
+		<div id="sandechart" style="width:3200px;height:1323px"></div>
 	</div>
-	<div class="fleft infraredarea">
-		<h5 class="title_sample"><span>红外查询统计结果</span></h5>
-		<div id="infraredechart" style="width:1460px;height:616px"></div>
+	<div class="fleft infraredarea" id="infraredarea">
+		<h5 class="title_sample" style="width:3200px;background:#0B3F7D"><span>红外查询统计结果</span></h5>
+		<div id="infraredechart" style="width:3200px;height:1323px"></div>
 	</div>
 	<div class="myclear"></div>	
 	
 	
 	<!--弹框001-->
-	<div class="userlist">
-		<h5 class="title_sample"><span>用户列表</span><a id="userlist_close" href="javascript:void(0)" onclick="closeUserlist()"><img src="../images/cross.png" /></a></h5>
-		<div class="fleft sousuolf"><a href="#"><img src="../images/addperson.png" /></a><a href="#"><img src="../images/delectperson.png" /></a></div>
+	<div class="userlist" id="userlist">
+		<h5 class="title_sample"><span>用户列表</span><a id="userlist_close" href="#" ><img src="../images/cross.png" /></a></h5>
+		<div class="fleft sousuolf"><a href='javascript:$("#new_user").css("display","block");'><img src="../images/addperson.png" /></a></div>
 		<div class="fright sousuort"><input type="text" /><button><img src="../images/searchicon.png" /></button></div>
 		<div class="myclear"></div> 
-		<!-------每页112条数据-------->
+		<table id="usertable" width="100%" border="0" cellpadding="0" cellspacing="0" class="person_name">
+		</table>
+		<p class="endpages" id="user"></p>
+	</div> 
+	<div id="new_user" style="position:absolute; z-index:101; left:2750px; top:500px; width:1250px; height:900px;display:none; background:url(../images/personbg.png) repeat-x top">
+		<h5 class="title_sample"><span>添加用户</span><a id="userlist_close" href="#" ><img src="../images/cross.png" /></a></h5>
+		<form id="new_user_form" style="padding:10px 20px 10px 40px;margin-left:50px;margin-top:30px" method="post">
+			<tr style="width:1000px;margin-left:auto;margin-right:auto;"><td>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名 : </td><td><input type="text" name="Name" class="easyui-validatebox" required="true" style="width:70%;margin:25px;padding:10px 15px 10px 15px"></td></tr>
+			<tr style="width:1000px;margin-left:auto;margin-right:auto;"><td>用&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;名 : </td><td><input type="text" name="userName" class="easyui-validatebox" required="true" style="width:70%;margin:25px;padding:10px 15px 10px 15px"></td></tr>
+			<tr style="width:1000px;margin-left:auto;margin-right:auto;">
+				<td>所&nbsp;属&nbsp;部&nbsp;门 : </td>
+				<td>
+					<select id="department" class="easyui-validatebox" name="DepartmentId" style="width:73%;margin:25px;padding:10px 15px 10px 15px" required="true">
+						<option value="1">财务部</option>
+						<option value="2">收发室</option>
+						<option value="3">业务管理科</option>
+					</select>
+				</td>
+			</tr>
+			<tr style="width:1000px;margin-left:auto;margin-right:auto;">
+				<td>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别 : </td>
+				<td>
+					<select class="easyui-validatebox" name="Gender" style="width:73%;margin:25px;padding:10px 15px 10px 15px" required="true">
+						<option value="0">男</option>
+						<option value="1">女</option>
+					</select>
+				</td>
+			</tr>
+			<tr style="width:1000px;margin-left:auto;margin-right:auto;"><td>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码 : </td><td><input type="text" name="Password" class="easyui-validatebox" required="true" style="width:70%;margin:25px;padding:10px 15px 10px 15px"></td></tr>
+			<div style="padding:5px;text-align:center;margin-top:30px">
+				<button id="new_submit_btn" class="easyui-linkbutton" icon="icon-ok" style="width:150px;height:60px;margin-right:20px" onclick="saveUser(this)">确认</button>
+				<button class="easyui-linkbutton" icon="icon-cancel" style="width:150px;height:60px" onclick='$("#new_user").css("display","none");'>取消</button>
+			</div>
+		</form>
+	</div>
+	<div id="modify_user" style="position:absolute; z-index:101; left:2750px; top:500px; width:1250px; height:900px;display:none; background:url(../images/personbg.png) repeat-x top">
+		<h5 class="title_sample"><span>修改用户</span><a id="userlist_close" href="#" ><img src="../images/cross.png" /></a></h5>
+		<form id="modify_user_form" style="padding:10px 20px 10px 40px;margin-left:50px;margin-top:30px" method="post">
+			<tr style="width:1000px;margin-left:auto;margin-right:auto;"><td>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名 : </td><td><input type="text" name="Name" class="easyui-validatebox" required="true" style="width:70%;margin:25px;padding:10px 15px 10px 15px"></td></tr>
+			<tr style="width:1000px;margin-left:auto;margin-right:auto;">
+				<td>所&nbsp;属&nbsp;部&nbsp;门 : </td>
+				<td>
+					<select id="department" class="easyui-validatebox" name="DepartmentId" style="width:73%;margin:25px;padding:10px 15px 10px 15px" required="true">
+						<option value="1">财务部</option>
+						<option value="2">收发室</option>
+						<option value="3">业务管理科</option>
+					</select>
+				</td>
+			</tr>
+			<tr style="width:1000px;margin-left:auto;margin-right:auto;">
+				<td>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别 : </td>
+				<td>
+					<select class="easyui-validatebox" name="Gender" style="width:73%;margin:25px;padding:10px 15px 10px 15px" required="true">
+						<option value="0">男</option>
+						<option value="1">女</option>
+					</select>
+				</td>
+			</tr>
+			<tr style="width:1000px;margin-left:auto;margin-right:auto;"><td>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码 : </td><td><input type="text" name="Password" class="easyui-validatebox" required="true" style="width:70%;margin:25px;padding:10px 15px 10px 15px"></td></tr>
+			<tr><td><input style='display:none;' name='Id' class='easyui-validatebox' value='-1'></input></td></tr>
+			<div style="padding:5px;text-align:center;margin-top:30px">
+				<button id="modify_submit_btn" class="easyui-linkbutton" icon="icon-ok" style="width:150px;height:60px;margin-right:20px" onclick="modifyUser()">确认</button>
+				<button class="easyui-linkbutton" icon="icon-cancel" style="width:150px;height:60px" onclick='$("#modify_user").css("display","none");'>取消</button>
+			</div>
+		</form>
+	</div>
+	<!--弹框001结束-->
+	<div class="userlist" id="rolelist">
+		<h5 class="title_sample"><span>角色列表</span><a href="#"><img src="../images/cross.png" /></a></h5>
+		<div class="fleft sousuolf"><a href="#"><img src="../images/addperson.png" /></a><a href="#"><img src="../images/delectperson.png" /></a></div>
+		<div class="myclear"></div>
+		<!-------由于权限描述字数不定，所以没办法确定放多少条目，开发自己斟酌-------->
 		<table width="100%" border="0" cellpadding="0" cellspacing="0" class="person_name">
 		  <tr>
 			<th scope="col" width="140">&nbsp;</th>
 			<th scope="col">ID</th>
-			<th scope="col">用户名</th>
-			<th scope="col">真实姓名</th>
-			<th scope="col">部门</th>
-			<th scope="col">角色</th>
-			<th scope="col">账号状态</th>
-			<th scope="col">注册时间</th>
+			<th scope="col">角色名称</th>
+			<th scope="col">基本权限</th>
+			<th scope="col" width="30%">操作权限</th>
+			<th scope="col">创建时间</th>
 			<th scope="col">操作选择</th>
 		  </tr>
 		  <tr>
 			<td><input type="checkbox" /></td>
 			<td>17001</td>
-			<td>33dfadsfd</td>
-			<td>张天翼</td>
-			<td>审计部门</td>
-			<td>普通管理员</td>
-			<td>可用</td>
-			<td>2017-05-22</td>
+			<td>超级管理员</td>
+			<td>查看所有页面</td>
+			<td>编辑、发布、预览、删除、保存、推送、还原、添加人员、添加角色、添加权限</td>
+			<td>2017-08-19</td>
 			<td><a href="#">编辑</a><a href="#">删除</a></td>
 		  </tr>
-		   <tr>
+		  <tr>
 			<td><input type="checkbox" /></td>
 			<td>17001</td>
-			<td>33dfadsfd</td>
-			<td>张天翼</td>
-			<td>审计部门</td>
-			<td>普通管理员</td>
-			<td>可用</td>
-			<td>2017-05-22</td>
+			<td>超级管理员</td>
+			<td>查看所有页面</td>
+			<td>编辑、发布、预览、删除、保存、推送、还原、添加人员、添加角色、添加权限</td>
+			<td>2017-08-19</td>
 			<td><a href="#">编辑</a><a href="#">删除</a></td>
 		  </tr>
-		   <tr>
+		  <tr>
 			<td><input type="checkbox" /></td>
 			<td>17001</td>
-			<td>33dfadsfd</td>
-			<td>张天翼</td>
-			<td>审计部门</td>
-			<td>普通管理员</td>
-			<td>可用</td>
-			<td>2017-05-22</td>
+			<td>超级管理员</td>
+			<td>查看所有页面</td>
+			<td>编辑、发布、预览、删除、保存、推送、还原、添加人员、添加角色、添加权限</td>
+			<td>2017-08-19</td>
 			<td><a href="#">编辑</a><a href="#">删除</a></td>
 		  </tr>
-		   <tr>
+		  <tr>
 			<td><input type="checkbox" /></td>
 			<td>17001</td>
-			<td>33dfadsfd</td>
-			<td>张天翼</td>
-			<td>审计部门</td>
-			<td>普通管理员</td>
-			<td>可用</td>
-			<td>2017-05-22</td>
+			<td>超级管理员</td>
+			<td>查看所有页面</td>
+			<td>编辑、发布、预览、删除、保存、推送、还原、添加人员、添加角色、添加权限</td>
+			<td>2017-08-19</td>
 			<td><a href="#">编辑</a><a href="#">删除</a></td>
 		  </tr>
-		   <tr>
+		  <tr>
 			<td><input type="checkbox" /></td>
 			<td>17001</td>
-			<td>33dfadsfd</td>
-			<td>张天翼</td>
-			<td>审计部门</td>
-			<td>普通管理员</td>
-			<td>可用</td>
-			<td>2017-05-22</td>
+			<td>超级管理员</td>
+			<td>查看所有页面</td>
+			<td>编辑、发布、预览、删除、保存、推送、还原、添加人员、添加角色、添加权限</td>
+			<td>2017-08-19</td>
 			<td><a href="#">编辑</a><a href="#">删除</a></td>
 		  </tr>
-		   <tr>
+		  <tr>
 			<td><input type="checkbox" /></td>
 			<td>17001</td>
-			<td>33dfadsfd</td>
-			<td>张天翼</td>
-			<td>审计部门</td>
-			<td>普通管理员</td>
-			<td>可用</td>
-			<td>2017-05-22</td>
+			<td>超级管理员</td>
+			<td>查看所有页面</td>
+			<td>编辑、发布、预览、删除、保存、推送、还原、添加人员、添加角色、添加权限</td>
+			<td>2017-08-19</td>
 			<td><a href="#">编辑</a><a href="#">删除</a></td>
 		  </tr>
-		   <tr>
+		  <tr>
 			<td><input type="checkbox" /></td>
 			<td>17001</td>
-			<td>33dfadsfd</td>
-			<td>张天翼</td>
-			<td>审计部门</td>
-			<td>普通管理员</td>
-			<td>可用</td>
-			<td>2017-05-22</td>
+			<td>超级管理员</td>
+			<td>查看所有页面</td>
+			<td>编辑、发布、预览、添加权限</td>
+			<td>2017-08-19</td>
 			<td><a href="#">编辑</a><a href="#">删除</a></td>
 		  </tr>
-		   <tr>
+		  <tr>
 			<td><input type="checkbox" /></td>
 			<td>17001</td>
-			<td>33dfadsfd</td>
-			<td>张天翼</td>
-			<td>审计部门</td>
-			<td>普通管理员</td>
-			<td>可用</td>
-			<td>2017-05-22</td>
+			<td>超级管理员</td>
+			<td>查看所有页面</td>
+			<td>编辑、发布、预览、删除、添加权限</td>
+			<td>2017-08-19</td>
 			<td><a href="#">编辑</a><a href="#">删除</a></td>
 		  </tr>
-		   <tr>
-			<td><input type="checkbox" /></td>
-			<td>17001</td>
-			<td>33dfadsfd</td>
-			<td>张天翼</td>
-			<td>审计部门</td>
-			<td>普通管理员</td>
-			<td>可用</td>
-			<td>2017-05-22</td>
-			<td><a href="#">编辑</a><a href="#">删除</a></td>
-		  </tr>
-		   <tr>
-			<td><input type="checkbox" /></td>
-			<td>17001</td>
-			<td>33dfadsfd</td>
-			<td>张天翼</td>
-			<td>审计部门</td>
-			<td>普通管理员</td>
-			<td>可用</td>
-			<td>2017-05-22</td>
-			<td><a href="#">编辑</a><a href="#">删除</a></td>
-		  </tr>
-		   <tr>
-			<td><input type="checkbox" /></td>
-			<td>17001</td>
-			<td>33dfadsfd</td>
-			<td>张天翼</td>
-			<td>审计部门</td>
-			<td>普通管理员</td>
-			<td>可用</td>
-			<td>2017-05-22</td>
-			<td><a href="#">编辑</a><a href="#">删除</a></td>
-		  </tr>
-		</table>
+		 </table>
 		<p class="endpages"><a href="#">1</a><a href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#">...</a><a href="#">49</a><a href="#">下一页</a><span>到第<input type="text" />页<button>确定</button></span></p>
-	</div> 
-	<!--弹框001结束-->
+	</div>
+	<!--弹框002结束-->
+	<!--弹框003-->
+	<div class="userlist" id="privilegelist">
+		<h5 class="title_sample"><span>权限列表</span><a href="#"><img src="../images/cross.png" /></a></h5>
+		<div class="fleft sousuolf"><a href="#"><img src="../images/addperson.png" /></a><a href="#"><img src="../images/delectperson.png" /></a></div>
+		<div class="fright sousuort"><input type="text" /><button><img src="../images/searchicon.png" /></button></div>
+		<div class="myclear"></div>
+		<!-------由于权限描述字数不定，所以没办法确定放多少条目，开发自己斟酌-------->
+		<table width="100%" border="0" cellpadding="0" cellspacing="0" class="person_name">
+		  <tr>
+			<th scope="col" width="140">&nbsp;</th>
+			<th scope="col">ID</th>
+			<th scope="col">权限名称</th>
+			<th scope="col">性质</th>
+			<th scope="col" width="30%">权限描述</th>
+			<th scope="col">创建时间</th>
+			<th scope="col">操作选择</th>
+		  </tr>
+		  <tr>
+			<td><input type="checkbox" /></td>
+			<td>17001</td>
+			<td>查看数据</td>
+			<td>基本权限</td>
+			<td>权限描述性文字权限描述性权限描述性文字权限描述性文字权限描述性文字权限描述性文字</td>
+			<td>2017-08-19</td>
+			<td><a href="#">编辑</a><a href="#">删除</a></td>
+		  </tr>
+		  <tr>
+			<td><input type="checkbox" /></td>
+			<td>17001</td>
+			<td>查看数据</td>
+			<td>基本权限</td>
+			<td>权限描述性文字权限描述性文字权限描述性文字权限描述性文字权限描字权限描述性文字权限描述性文字权限描述性文字权限描述性文字权限描述性文字</td>
+			<td>2017-08-19</td>
+			<td><a href="#">编辑</a><a href="#">删除</a></td>
+		  </tr>
+		  <tr>
+			<td><input type="checkbox" /></td>
+			<td>17001</td>
+			<td>查看数据</td>
+			<td>基本权限</td>
+			<td>权限描述性文字权限文字权限描述性文字权限描述性文字权限描述性文字权限描述性文字</td>
+			<td>2017-08-19</td>
+			<td><a href="#">编辑</a><a href="#">删除</a></td>
+		  </tr>
+		  <tr>
+			<td><input type="checkbox" /></td>
+			<td>17001</td>
+			<td>查看数据</td>
+			<td>基本权限</td>
+			<td>权限描述性文字权限描述性文字权限描述性文字权限描述性文字权限描述性文字权限描述性文字权限描述性文字权限描述性文字权限描述性文字权限描述性文字</td>
+			<td>2017-08-19</td>
+			<td><a href="#">编辑</a><a href="#">删除</a></td>
+		  </tr>
+		  <tr>
+			<td><input type="checkbox" /></td>
+			<td>17001</td>
+			<td>查看数据</td>
+			<td>基本权限</td>
+			<td>权限描述性文字权限描述性文字权限描述性文字权限描述性文字权限描述性文字权限描述性文字权限描述性文字权限描述性文字权限描述性文字权限描述性文字</td>
+			<td>2017-08-19</td>
+			<td><a href="#">编辑</a><a href="#">删除</a></td>
+		  </tr>
+		 </table>
+		<p class="endpages"><a href="#">1</a><a href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#">...</a><a href="#">49</a><a href="#">下一页</a><span>到第<input type="text" />页<button>确定</button></span></p>
+	</div>
+	<!--弹框003结束-->
 </body>
 </html>	
 
@@ -285,29 +357,32 @@
 
 	
 
-    changePage(1);
+    
 	function changePage(page){
-	    /* if(page < 1 || page > totalPage){
+	    if(page < 1 || page > totalPage){
 			return;
 		}
 		currentPage = page;
 		var queryJson = {};
 		queryJson.page = page;
-		queryJson.rows = 10; */
+		queryJson.rows = 10;
 		$.ajax({
 			type: "post", 
 			cache: false, 
 			dataType: 'json',
 			url: '/droneSystem/VideoServlet.do?method=0',
-			//data:queryJson,
-			data:{},
+			data:queryJson,
+			//data:{video.page:page},
 			success: function(data){
-			        //initPage(data.total);
+			console.log(queryJson);
+			console.log(data);
+			        initPage(data.total);
 				    showVideo(data); 			
 			}
 		}); 	
 	    
 	}
+	changePage(1);
 	//全局变量
 	var currentPage; //当前页面
 	var totalPage; //总页面数
@@ -318,22 +393,25 @@
 	 * @return null
 	 * */
 	function showVideo(data){
-	  for(var i=0;i<data.videos.length;i++){                        
-        var tr="";                      			
-		tr += "<td width='10%' class='video_id'>" + data.videos[i].id + "</td>";   
-		tr += "<td width='20%'>" + data.videos[i].drone + "</td>";  
-		tr += "<td width='20%'>" + data.videos[i].video + "</td>";       
-		tr += "<td width='15%'>" + data.videos[i].time + "</td>"; 
-		tr += "<td width='15%'>" + data.videos[i].status + "</td>";
-		tr += "<td width='10%'>" + data.videos[i].type  + "</td>";
-		tr += "<td width='10%'><a id='trafficbutton' href='#' onclick='showCharts(this)'>查看</a></td>";
-        $("#videolist").append("<tr>"+tr+"</tr>");
-        }
+	  $("#videolist").empty();
+	  data = data.videos;
+	  $.each(data,function (index,item) {    
+			var tr="";  				
+			tr += "<td width='10%' class='video_id'>" + item.id + "</td>";   
+			tr += "<td width='15%'>" + item.droneCode + "</td>";  
+			tr += "<td width='25%'>" + item.time + "</td>"; 
+			tr += "<td width='25%'>" + item.video + "</td>";       
+			tr += "<td width='15%' class='video_type'>" + item.type  + "</td>";				
+			tr += "<td width='10%'><a id='trafficbutton' href='#' onclick='showCharts(this)'>查看</a></td>";   
+			  										
+			$("#videolist").append("<tr>"+tr+"</tr>");			
+									
+		});
 	}
 	
 	function showCharts(element){
 		  var videoId = $(element).parent().parent().find(".video_id").text();
-		  //console.log(videoId);
+		  var videoType = $(element).parent().parent().find(".video_type").text();
           var url = '/droneSystem/VideoServlet.do?method=1';
 		  var paramData={id:videoId};
 		  $.ajax({
@@ -345,7 +423,9 @@
 		      error:function(){
 		          console.log("get redis error!!!");
 		      },
-		      success: function(data){		        
+		      success: function(data){ 
+		      if(videoType==3){
+		       	        
 		         var xdata = [];
 		         var ydata1 = [];
 		         var ydata2 = [];
@@ -354,7 +434,60 @@
 			            ydata1[i] = data.carNums[i].valueLeft;
 			            ydata2[i] = data.carNums[i].valueRight;
 			     } 
+			     console.log(xdata);
 		         aFun(xdata,ydata1,ydata2);
+		        $('.trafficarea').show();
+                $('.sandarea').hide();			
+		        $('.snowarea').hide();			
+		        $('.infraredarea').hide();
+				}
+				else if(videoType==2){
+		       	        
+		         var xdata = [];
+		         var ydata1 = [];		         
+			     for(var i =0 ;i < data.carNums.length;i++){
+			            xdata[i] = data.carNums[i].time;
+			            ydata1[i] = data.carNums[i].valueLeft;
+			     } 
+		         cFun(xdata,ydata1);
+		        $('.trafficarea').hide();
+                $('.sandarea').show();			
+		        $('.snowarea').hide();			
+		        $('.infraredarea').hide();
+				}
+				else if(videoType==1){
+		       	        
+		         var xdata = [];
+		         var ydata1 = [];		         
+			     for(var i =0 ;i < data.carNums.length;i++){
+			            xdata[i] = data.carNums[i].time;
+			            ydata1[i] = data.carNums[i].valueLeft;
+			     }
+			     bFun(xdata,ydata1);
+			    $('.trafficarea').hide();
+                $('.sandarea').hide();			
+		        $('.snowarea').show();			
+		        $('.infraredarea').hide();	
+		         
+				}
+				else if(videoType==4){
+		       	        
+		         var xdata = [];
+		         var ydata1 = [];		         
+			     for(var i =0 ;i < data.carNums.length;i++){
+			            xdata[i] = data.carNums[i].time;
+			            ydata1[i] = data.carNums[i].valueLeft;
+			     } 
+			      dFun(xdata,ydata1);
+			    $('.trafficarea').hide();
+                $('.sandarea').hide();			
+		        $('.snowarea').hide();			
+		        $('.infraredarea').show();
+		        
+				}
+				else{
+				 alert("未能查询到该视频信息!");
+				}
 				}
 				});		      						      
    }
@@ -364,14 +497,14 @@
 	 * @params  totalCntOfUser 用户的总数量
 	 * @return null
 	 * */
-/* 	function initPage(totalCntOfUser){
+	function initPage(totalCntOfVideo){
 		//判断是否初始化过页数控件
 		if(isInit){
 			return;
 		}
 		isInit = true;
 		
-		totalPage = Math.ceil(totalCntOfUser / 10);
+		totalPage = Math.ceil(totalCntOfVideo / 10);
 		var aLabel = '';
 		if (totalPage >= 3) {
 			aLabel += '<a class="change_page" href="#">上一页</a>'
@@ -390,6 +523,7 @@
 		}
 		$(".change_page").click(function(){
 			var temp = $(this).text();
+			$(this).css("color","#4FCD74");
 			if(temp == "上一页" && currentPage > 1){
 				currentPage--;
 			} else if(temp == "下一页" && currentPage < totalPage){
@@ -404,7 +538,7 @@
 			currentPage = switchPage;
 			changePage(switchPage);
 		});
-	} */
+	}
    
    var aChart = echarts.init(document.getElementById("trafficechart"),'blue');
 
@@ -414,9 +548,14 @@
         			title : {
         			    text: '',
         			    textstyle:{
-        			    	"fontSize":"20",
+        			    	"fontSize":"40",
         		            "fontWeight": "bolder"
-        		    },
+        		         },
+        			},
+        			grid:{
+        			     top:'10%',
+        			     left:'10%',
+        			     right:'10%'
         			},
         			tooltip : {
         			    trigger: 'axis', 
@@ -428,23 +567,23 @@
         		        }
         			 },
         		    legend: {
-        		        data:['实时上行车流量变化', '实时下行车流量变化'],
+        		        data:['上行车流量变化统计', '下行车流量变化统计'],
         		        textStyle: {  
         		            color: '#fff',          //legend字体颜色 
-        		            fontSize:'22'
+        		            fontSize:'40'
 
         		        }
         		    },
         		    toolbox: {
         		        show : true,
         		        feature : {
-        		            dataView : {show: true, readOnly: false},
+        		            dataView : {show: true, readOnly: false, iconStyle:{borderWidth:1}},
         		           // magicType : {show: true,  type:['line', 'bar']},
         		            restore : {show: true},
         		            saveAsImage : {show: true}
         		        },
-        		        
-        	            itemSize:'22',
+        		        right:'10%',
+        	            itemSize:'32',
         	            emphasis:{//触发时
         	                iconStyle:{
         	                    borderColor:"white"//图形的描边颜色
@@ -455,7 +594,7 @@
         		    dataZoom : {
         		        show : true,
         		        start : 0,
-        		        end : 50
+        		        end : 25
         		    },
         		    xAxis : [
         		        {
@@ -464,7 +603,7 @@
         		                show: true,
         		                textStyle: {
         		                    color: '#fff',
-        		                    fontSize:'20'
+        		                    fontSize:'30'
         		                }
         		            },
         		        // 控制网格线是否显示
@@ -479,7 +618,7 @@
         		            axisLine:{
         		                lineStyle:{
         		                    color:'#FFFFFF',
-        		                    width:1
+        		                    width:2
         		                }
         		            },
         		            axisPointer: {
@@ -491,6 +630,13 @@
         		        },
         		         {
         		            type: 'category',
+        		            axisLabel: {        
+        		                show: true,
+        		                textStyle: {
+        		                    color: '#fff',
+        		                    fontSize:'30'
+        		                }
+        		            },
         		            boundaryGap: true,
         		            data: (function (){
         		                var res = [];
@@ -507,11 +653,14 @@
         		           type : 'value',
         		           scale: true,
         		           name : '车流量V/h',
+        		           nameTextStyle:{
+        		                fontSize:30
+        		           },
         		           axisLabel: {        
         		                show: true,
         		                textStyle: {
         		                    color: '#fff',
-        		                    fontSize:'20'
+        		                    fontSize:'30'
         		                }
         		            },
         		        // 控制网格线是否显示
@@ -532,11 +681,14 @@
         		           type : 'value',
         		           scale: true,
         		           name : '车流量V/h',
+        		           nameTextStyle:{
+        		                fontSize:30
+        		           },
         		           axisLabel: {        
         		                show: true,
         		                textStyle: {
         		                    color: '#fff',
-        		                    fontSize:'20'
+        		                    fontSize:'30'
         		                }
         		            },
         		        // 控制网格线是否显示
@@ -556,7 +708,7 @@
         		  ],
         		  series : [
         		       {
-        		            name:"实时上行车流量变化",
+        		            name:"上行车流量变化统计",
         		            type:'bar',
         		            //stack:'one',
         		            data:y_data1,
@@ -574,7 +726,7 @@
         		            
         		       },
         		       {
-        		            name:"实时下行车流量变化",
+        		            name:"下行车流量变化统计",
         		            type:'line',
         		           // stack:'one',
         		            
@@ -607,10 +759,15 @@
         	title : {
 			    text: '',
 			    textstyle:{
-			    	"fontSize":"20",
+			    	"fontSize":"40",
 		            "fontWeight": "bolder"
 		    },
 			},
+			grid:{
+      			     top:'10%',
+      			     left:'10%',
+      			     right:'10%'
+      			},
 			tooltip : {
 			    trigger: 'axis', 
 		        axisPointer: {
@@ -624,7 +781,7 @@
 		        data:['雪阻量'],
 		        textStyle: {  
 		            color: '#fff',          //legend字体颜色 
-		            fontSize:'22'
+		            fontSize:'40'
 
 		        }
 		    },
@@ -636,8 +793,8 @@
 		            restore : {show: true},
 		            saveAsImage : {show: true}
 		        },
-		        
-	            itemSize:'22',
+		        right:'10%',
+	            itemSize:'32',
 	            emphasis:{//触发时
 	                iconStyle:{
 	                    borderColor:"white"//图形的描边颜色
@@ -648,7 +805,7 @@
 		    dataZoom : {
 		        show : false,
 		        start : 0,
-		        end : 100
+		        end : 25
 		    },
 		    xAxis : [
 		        {
@@ -657,7 +814,7 @@
 		                show: true,
 		                textStyle: {
 		                    color: '#fff',
-		                    fontSize:'20'
+		                    fontSize:'30'
 		                }
 		            },
 		        // 控制网格线是否显示
@@ -672,7 +829,7 @@
 		            axisLine:{
 		                lineStyle:{
 		                    color:'#FFFFFF',
-		                    width:1
+		                    width:2
 		                }
 		            },
 		            axisPointer: {
@@ -685,6 +842,13 @@
 		         {
 		            type: 'category',
 		            boundaryGap: true,
+		            axisLabel: {        
+        		                show: true,
+        		                textStyle: {
+        		                    color: '#fff',
+        		                    fontSize:'30'
+        		                }
+        		            },
 		            data: (function (){
 		                var res = [];
 		                var len = 10;
@@ -700,11 +864,14 @@
 		           type : 'value',
 		           scale: true,
 		           name : '雪阻量M',
+		           nameTextStyle:{
+        		                fontSize:30
+        		           },
 		           axisLabel: {        
 		                show: true,
 		                textStyle: {
 		                    color: '#fff',
-		                    fontSize:'20'
+		                    fontSize:'30'
 		                }
 		            },
 		        // 控制网格线是否显示
@@ -754,10 +921,15 @@
         	title : {
 			    text: '',
 			    textstyle:{
-			    	"fontSize":"20",
+			    	"fontSize":"40",
 		            "fontWeight": "bolder"
 		    },
 			},
+			grid:{
+     			     top:'10%',
+     			     left:'10%',
+     			     right:'10%'
+        			},
 			tooltip : {
 			    trigger: 'axis', 
 		        axisPointer: {
@@ -771,7 +943,7 @@
 		        data:['沙阻量'],
 		        textStyle: {  
 		            color: '#fff',          //legend字体颜色 
-		            fontSize:'22'
+		            fontSize:'40'
 
 		        }
 		    },
@@ -783,8 +955,8 @@
 		            restore : {show: true},
 		            saveAsImage : {show: true}
 		        },
-		        
-	            itemSize:'22',
+		        right:'10%',
+	            itemSize:'32',
 	            emphasis:{//触发时
 	                iconStyle:{
 	                    borderColor:"white"//图形的描边颜色
@@ -795,7 +967,7 @@
 		    dataZoom : {
 		        show : false,
 		        start : 0,
-		        end : 100
+		        end : 25
 		    },
 		    xAxis : [
 		        {
@@ -804,7 +976,7 @@
 		                show: true,
 		                textStyle: {
 		                    color: '#fff',
-		                    fontSize:'20'
+		                    fontSize:'30'
 		                }
 		            },
 		        // 控制网格线是否显示
@@ -819,7 +991,7 @@
 		            axisLine:{
 		                lineStyle:{
 		                    color:'#FFFFFF',
-		                    width:1
+		                    width:2
 		                }
 		            },
 		            axisPointer: {
@@ -832,6 +1004,13 @@
 		         {
 		            type: 'category',
 		            boundaryGap: true,
+		            axisLabel: {        
+      		                show: true,
+      		                textStyle: {
+      		                    color: '#fff',
+      		                    fontSize:'30'
+      		                }
+        		            },
 		            data: (function (){
 		                var res = [];
 		                var len = 10;
@@ -847,11 +1026,14 @@
 		           type : 'value',
 		           scale: true,
 		           name : '沙阻量M^2',
+		           nameTextStyle:{
+        		                fontSize:30
+        		           },
 		           axisLabel: {        
 		                show: true,
 		                textStyle: {
 		                    color: '#fff',
-		                    fontSize:'20'
+		                    fontSize:'30'
 		                }
 		            },
 		        // 控制网格线是否显示
@@ -903,10 +1085,15 @@
         	title : {
 			    text: '',
 			    textstyle:{
-			    	"fontSize":"20",
+			    	"fontSize":"40",
 		            "fontWeight": "bolder"
 		    },
 			},
+			grid:{
+      			     top:'10%',
+      			     left:'10%',
+      			     right:'10%'
+        			},
 			tooltip : {
 			    trigger: 'axis', 
 		        axisPointer: {
@@ -920,7 +1107,7 @@
 		        data:['沙阻量'],
 		        textStyle: {  
 		            color: '#fff',          //legend字体颜色 
-		            fontSize:'22'
+		            fontSize:'40'
 
 		        }
 		    },
@@ -932,8 +1119,8 @@
 		            restore : {show: true},
 		            saveAsImage : {show: true}
 		        },
-		        
-	            itemSize:'22',
+		        right:'10%',
+	            itemSize:'32',
 	            emphasis:{//触发时
 	                iconStyle:{
 	                    borderColor:"white"//图形的描边颜色
@@ -944,7 +1131,7 @@
 		    dataZoom : {
 		        show : false,
 		        start : 0,
-		        end : 100
+		        end : 25
 		    },
 		    xAxis : [
 		        {
@@ -953,7 +1140,7 @@
 		                show: true,
 		                textStyle: {
 		                    color: '#fff',
-		                    fontSize:'20'
+		                    fontSize:'30'
 		                }
 		            },
 		        // 控制网格线是否显示
@@ -968,7 +1155,7 @@
 		            axisLine:{
 		                lineStyle:{
 		                    color:'#FFFFFF',
-		                    width:1
+		                    width:2
 		                }
 		            },
 		            axisPointer: {
@@ -980,6 +1167,13 @@
 		        },
 		         {
 		            type: 'category',
+		            axisLabel: {        
+      		                show: true,
+      		                textStyle: {
+      		                    color: '#fff',
+      		                    fontSize:'30'
+      		                }
+        		            },
 		            boundaryGap: true,
 		            data: (function (){
 		                var res = [];
@@ -996,11 +1190,14 @@
 		           type : 'value',
 		           scale: true,
 		           name : '沙阻量M^2',
+		            nameTextStyle:{
+        		                fontSize:30
+        		           },
 		           axisLabel: {        
 		                show: true,
 		                textStyle: {
 		                    color: '#fff',
-		                    fontSize:'20'
+		                    fontSize:'30'
 		                }
 		            },
 		        // 控制网格线是否显示
@@ -1014,7 +1211,7 @@
 			        },
 			        max: 1200,
            			min: 0,
-		           boundaryGap: [0.2, 0.2],
+		            boundaryGap: [0.2, 0.2],
 		           
 		      }
 		  ],

@@ -17,9 +17,9 @@
 <script type="text/javascript" src="../JScript/admin.js"></script>
 <script type="text/javascript" src="../JScript/map.js"></script>
 <!-- <script type="text/javascript" src="../JScript/chart1.js"></script> -->
-<script type="text/javascript" src="../JScript/chart2.js"></script>
+<!-- <script type="text/javascript" src="../JScript/chart2.js"></script> -->
 <script type="text/javascript" src="../JScript/json2.js"></script>
-<script type="text/javascript" src="http://vjs.zencdn.net/5.18.4/video.min.js"></script>
+<!-- <script type="text/javascript" src="http://vjs.zencdn.net/5.18.4/video.min.js"></script> -->
 <title>内蒙古无人机项目管理系统-雪阻</title>
 </head>
 <body>
@@ -34,7 +34,7 @@
 			<li><a href="Snow.jsp"  class="pagenow">雪阻信息</a></li>
 			<li><a href="Sand.jsp">沙阻信息</a></li>
 			<li><a href="javascript:void(0)" onclick="ale()">红外信息</a></li>
-			<li><a href="javascript:void(0)" onclick="ale()">查询统计</a></li>
+			<li><a href="Inquiry.jsp">查询统计</a></li>
 		</ul>
 		</div>
 		<div class="fright">
@@ -70,7 +70,8 @@
 			</video>
 			-->
 		<object type='application/x-vlc-plugin' id='vlc' events='True' width="2500px" height="1410px" pluginspage="http://www.videolan.org" codebase="http://downloads.videolan.org/pub/videolan/vlc-webplugins/2.0.6/npapi-vlc-2.0.6.tar.xz">
-        <param name='mrl' value='../Inc/XZ.mp4' />
+<!-- <param name='mrl' value='../Inc/MOV_0030.MOV' /> -->        
+		<param name='mrl' value='rtsp://47.94.19.230:10554/gzrtsp.sdp' />
         <param name='volume' value='50' />
         <param name='autoplay' value='false' />
         <param name='loop' value='false' />
@@ -756,7 +757,7 @@
 				   
 				    anchor:new BMap.Size(0,0),
                     imageOffset:new BMap.Size(0,0)});
-                    icon.setImageSize(new BMap.Size(24, 24));
+                    icon.setImageSize(new BMap.Size(44, 44));
 			        var point = new BMap.Point(data.drones[i].longitude,data.drones[i].latitude);  
 			        var marker = new BMap.Marker(point,{ // 创建标注点
 							icon: icon
@@ -766,10 +767,10 @@
                     var label = new window.BMap.Label("无人机编号:"+data.drones[i].code,{offset: new window.BMap.Size(20, -10)});  // 创建文本标注对象
 		                label.setStyle({
 			                  color : "#0099cc",
-			                  fontSize : "20px",
+			                  fontSize : "40px",
 			                  backgroundColor :"0.05",
 			                  border:"0",			                  
-			                  lineHeight : "20px",
+			                  lineHeight : "40px",
 			                  fontWeight :"bold" //字体加粗
 		                 });
 		            marker.setLabel(label);  //添加标签
@@ -780,17 +781,17 @@
 			            //map.panTo(point);		            
 						showInfo(this, thepoint);//开启信息窗口
 						test();
-						/* videojs("my-video").ready(function(){
+						videojs("my-video").ready(function(){
 							var myPlayer = this;
 							myPlayer.play();
-						}); */
+						});
 						getEcharts();
 			            });
 		            })();		            		           		
 			function showInfo(thisMarker,point){
 			         //thisMarker.setAnimation(BMAP_ANIMATION_BOUNCE);
 			         var content = 
-					"<p style='margin:0;line-height:1.5;font-size:20px;text-indent:0em'>无人机编号： "+point.code+"<br/>经度："+point.longitude+" 纬度："+point.latitude+"</br>雪阻预警等级： 2</br>状态： 0</p>";
+					"<p style='margin:0;line-height:1.5;font-size:20px;text-indent:0em'>无人机编号： "+point.code+"<br/>经度："+point.longitude+" 纬度："+point.latitude+"<br/>状态:"+point.status+"</p>";
 					 var infoWindow = new BMap.InfoWindow(content, opts);
 					 thisMarker.openInfoWindow(infoWindow);
 			       }	
