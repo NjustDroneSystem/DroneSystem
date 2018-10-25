@@ -971,7 +971,7 @@
            	cache: false, 
            	dataType: 'json',
            	url: '/droneSystem/DroneServlet.do?method=3',
-          data:{droneId:droneId, type:3,inputStream:"D:\\test\\MOV_0030.MOV"},
+          	data:{droneId:droneId, type:3,inputStream:"D:\\test\\freeway_clip.mov"},
 //			data:{droneId:droneId, type:3,inputStream:"D:\\test\\total_Receive_HDMI.h264"},
 //			data:{droneId:droneId, type:3,inputStream:"rtsp://47.94.19.230:10554/gzrtsp.sdp"},
 //			data:{droneId:droneId, type:3,inputStream:"rtsp://47.94.19.230:10554/stream0.sdp"},

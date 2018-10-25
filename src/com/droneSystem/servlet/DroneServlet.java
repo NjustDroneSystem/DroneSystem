@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -267,6 +268,8 @@ public class DroneServlet extends HttpServlet {
 		case 3: //测试方法  读取视频流，保存视频文件，并将视频名称存入数据库
 			JSONObject res3 = new JSONObject();
 			try {
+				//由于前端视频延迟，本处延迟7s调用算法
+				TimeUnit.MILLISECONDS.sleep(7000);
 				int droneId = Integer.parseInt(req.getParameter("droneId"));
 				String type = req.getParameter("type");
 				String inputFile = req.getParameter("inputStream");
@@ -425,6 +428,8 @@ public class DroneServlet extends HttpServlet {
 		case 6: //测试方法
 			JSONObject res6 = new JSONObject();
 			try {
+				//由于前端视频延迟，本处延迟7s调用算法
+				TimeUnit.MILLISECONDS.sleep(7000);
 				String droneId = req.getParameter("droneId");
 				Drone drone = droneMgr.findById(Integer.parseInt(droneId));
 				String type = req.getParameter("type");
@@ -486,6 +491,8 @@ public class DroneServlet extends HttpServlet {
 		case 7: //测试方法
 			JSONObject res7 = new JSONObject();
 			try {
+				//由于前端视频延迟，本处延迟7s调用算法
+				TimeUnit.MILLISECONDS.sleep(7000);
 				CarNumDAO carNumDao = new CarNumDAO();
 				String droneId = req.getParameter("droneId");
 				Drone drone = droneMgr.findById(Integer.parseInt(droneId));
