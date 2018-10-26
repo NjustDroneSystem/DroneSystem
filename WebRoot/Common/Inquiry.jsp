@@ -6,7 +6,10 @@
 <link type="text/css" rel="stylesheet" href="../css/systemPu.css" />
 <link rel="stylesheet" type="text/css" href="../Inc/Style/themes/default/easyui.css" />
 <link rel="stylesheet" type="text/css" href="../Inc/Style/Style.css" />
+<link rel="stylesheet" type="text/css" href="../Inc/Style/themes/default/easyui.css" />
 <script type="text/javascript" src="../Inc/JScript/jquery-1.6.min.js"></script>
+<script type="text/javascript" src="../Inc/JScript/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../Inc/JScript/locale/easyui-lang-zh_CN.js" charset="utf-8"></script>
 <script type="text/javascript" src="../JScript/upload.js"></script>
 <script type="text/javascript" src="../JScript/admin.js"></script>
 <!-- <script type="text/javascript" src="../JScript/inquiry.js"></script> -->
@@ -314,55 +317,16 @@
 </html>	
 
 <script type="text/javascript">
-	function totable3(data){
-		data = data.rows;
-		$.each(data,function (index,item) {    
-			//alert(index+item.userName);
-			var tr;  				
-			tr = "<td><input type='checkbox' /></td>"; 	
-			tr += "<td>" + item.Id + "</td>";   
-			tr += "<td>" + item.userName + "</td>";  
-			tr += "<td>" + item.Name + "</td>";       
-			tr += "<td>" + item.JobTitle + "</td>"; 
-			tr += "<td>" + item.Education  + "</td>";     
-			tr += "<td>" + item.Status + "</td>";    
-			tr += "<td>" + item.CancelDate + "</td>";     					
-			tr += "<td><a href='#'>编辑</a><a href='#'>删除</a></td>";   
-			  										
-			$("#usertable").append("<tr>"+tr+"</tr>");			
-									
-		});
-	    
-	}
-
+	//全局变量
+	var currentVideoPage; //当前页面
+	var totalVideoPage; //总页面数
+	var isVideoPageInit = false; //是否初始化页面栏控件的标识位
 	
-	user();
-	function user(){
-		$.ajax({
-			type: "post", 
-			cache: false, 
-			dataType: 'json',
-			url: '/droneSystem/UserServlet.do?method=0',
-			data:{},
-			success: function(data){
-//				totable1(data);
-//				totable2(data);
-				totable3(data);
-				//totable4(data);
-		
-			}
-		}); 	
-	    
-	}
-
-	
-
-    
-	function changePage(page){
-	    if(page < 1 || page > totalPage){
+	function changeVideoPage(page){
+	    if(page < 1 || page > totalVideoPage){
 			return;
 		}
-		currentPage = page;
+		currentVideoPage = page;
 		var queryJson = {};
 		queryJson.page = page;
 		queryJson.rows = 10;
@@ -374,19 +338,15 @@
 			data:queryJson,
 			//data:{video.page:page},
 			success: function(data){
-			console.log(queryJson);
-			console.log(data);
-			        initPage(data.total);
-				    showVideo(data); 			
+				console.log(queryJson);
+				console.log(data);
+			    initVideoPage(data.total);
+				showVideo(data); 			
 			}
 		}); 	
 	    
 	}
-	changePage(1);
-	//全局变量
-	var currentPage; //当前页面
-	var totalPage; //总页面数
-	var isInit = false; //是否初始化页面栏控件的标识位
+	changeVideoPage(1);
 	/* *
 	 * @brief 按分页要求查询用户
 	 * @params data 存放查询到的用户对象和用户数的json 
@@ -497,50 +457,50 @@
 	 * @params  totalCntOfUser 用户的总数量
 	 * @return null
 	 * */
-	function initPage(totalCntOfVideo){
+	function initVideoPage(totalCntOfVideo){
 		//判断是否初始化过页数控件
-		if(isInit){
+		if(isVideoPageInit){
 			return;
 		}
-		isInit = true;
+		isVideoPageInit = true;
 		
-		totalPage = Math.ceil(totalCntOfVideo / 10);
+		totalVideoPage = Math.ceil(totalCntOfVideo / 10);
 		var aLabel = '';
-		if (totalPage >= 3) {
-			aLabel += '<a class="change_page" href="#">上一页</a>'
-			aLabel += '<a class="change_page" href="#">1</a>';
+		if (totalVideoPage >= 3) {
+			aLabel += '<a class="change_video_page" href="#">上一页</a>'
+			aLabel += '<a class="change_video_page" href="#">1</a>';
 			aLabel += '<a href="#">...</a>';
-			aLabel += '<a class="change_page" href="#">'+totalPage+'</a>';
-			aLabel += '<a class="change_page" href="#">下一页</a><span>到第<input id="switch_page" type="text" />页<button id="confirm_page">确定</button></span>'
+			aLabel += '<a class="change_video_page" href="#">'+totalVideoPage+'</a>';
+			aLabel += '<a class="change_video_page" href="#">下一页</a><span>到第<input id="switch_video_page" type="text" />页<button id="confirm_video_page">确定</button></span>'
 			$("#video").append(aLabel);
 		} else {
-			aLabel += '<a class="change_page" href="#">上一页</a>'
-			for(var i = 1; i <= totalPage; i++){
-				aLabel += '<a class="change_page" href="#">'+i+'</a>';
+			aLabel += '<a class="change_video_page" href="#">上一页</a>'
+			for(var i = 1; i <= totalVideoPage; i++){
+				aLabel += '<a class="change_video_page" href="#">'+i+'</a>';
 			}
-			aLabel += '<a class="change_page" href="#">下一页</a><span>到第<input id="switch_page" type="text" />页<button id="confirm_page">确定</button></span>'
+			aLabel += '<a class="change_video_page" href="#">下一页</a><span>到第<input id="switch_video_page" type="text" />页<button id="confirm_video_page">确定</button></span>'
 			$("#video").append(aLabel);
 		}
-		$(".change_page").click(function(){
+		$(".change_video_page").click(function(){
 			var temp = $(this).text();
 			//$(this).css("color","#4FCD74");
-			if(temp == "上一页" && currentPage > 1){
-				currentPage--;
-			} else if(temp == "下一页" && currentPage < totalPage){
-				currentPage++;
+			if(temp == "上一页" && currentVideoPage > 1){
+				currentVideoPage--;
+			} else if(temp == "下一页" && currentVideoPage < totalVideoPage){
+				currentVideoPage++;
 			} else if(temp != "上一页" && temp != "下一页"){
-				currentPage = temp;
+				currentVideoPage = temp;
 			}
-			changePage(currentPage);
+			changeVideoPage(currentVideoPage);
 		});
-		$("#confirm_page").click(function(){
-			var switchPage = $("#switch_page").val();
-			currentPage = switchPage;
-			changePage(switchPage);
+		$("#confirm_video_page").click(function(){
+			var switchPage = $("#switch_video_page").val();
+			currentVideoPage = switchPage;
+			changeVideoPage(switchPage);
 		});
 	}
    
-   var aChart = echarts.init(document.getElementById("trafficechart"),'blue');
+   	var aChart = echarts.init(document.getElementById("trafficechart"),'blue');
 
     function aFun(x_data, y_data1, y_data2) {
 
@@ -752,7 +712,7 @@
 
     }
     
-  var bChart = echarts.init(document.getElementById("snowechart"),'blue');
+  	var bChart = echarts.init(document.getElementById("snowechart"),'blue');
 
     function bFun(x_data, y_data) {
 
@@ -909,7 +869,7 @@
 
     }
 
- var cChart = echarts.init(document.getElementById("sandechart"),'blue');
+ 	var cChart = echarts.init(document.getElementById("sandechart"),'blue');
 
     function cFun(x_data, y_data) {
 
@@ -1228,4 +1188,4 @@
 	
    
 </script>
-
+<script type="text/javascript" src="../JScript/UserOperation.js"></script>
