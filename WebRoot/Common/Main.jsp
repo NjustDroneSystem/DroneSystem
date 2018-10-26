@@ -374,7 +374,7 @@
 		        }
 			 },
 		    legend: {
-		        data:['实时上行车流量变化', '实时下行车流量变化'],
+		        data:['实时下行车流量变化', '实时上行车流量变化'],
 		        textStyle: {  
 		            color: '#fff',          //legend字体颜色 
 		            fontSize:'22'
@@ -502,7 +502,7 @@
 		  ],
 		  series : [
 		       {
-		            name:"实时上行车流量变化",
+		            name:"实时下行车流量变化",
 		            type:'bar',
 		            //stack:'one',
 		            data:yAxisData,
@@ -520,7 +520,7 @@
 		            
 		       },
 		       {
-		            name:"实时下行车流量变化",
+		            name:"实时上行车流量变化",
 		            type:'line',
 		           // stack:'one',
 		            
@@ -569,7 +569,7 @@
 			        }
 			    },
 			    legend: {
-			        data:['每分钟上行车流量变化', '每分钟下行车流量变化'],
+			        data:['每分钟下行车流量变化', '每分钟上行车流量变化'],
 			        textStyle: {  
 			            color: '#fff',          //legend字体颜色 
 			            fontSize:'22'
@@ -703,7 +703,7 @@
 			    ],
 			    series: [
 			        {
-			            name:'每分钟上行车流量变化',
+			            name:'每分钟下行车流量变化',
 			            type:'bar',
 			            xAxisIndex: 1,
 			            yAxisIndex: 1,   
@@ -729,7 +729,7 @@
 			            }
 			        },
 			        {
-			            name:'每分钟下行车流量变化',
+			            name:'每分钟上行车流量变化',
 			            type:'line',
 			            data:(function (){
 			                var res = [];
