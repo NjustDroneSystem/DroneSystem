@@ -56,10 +56,10 @@ public class VideoServlet extends HttpServlet {
 				String EndDate = req.getParameter("EndDate");
 				
 				String droneId = req.getParameter("droneId");
-				Drone drone = droneMgr.findById(Integer.parseInt(droneId));
 				int VideoNum = 0;
 				List<KeyValueWithOperator> keys = new ArrayList<KeyValueWithOperator>();
 				if(droneId!= null && droneId.equals("")){
+					Drone drone = droneMgr.findById(Integer.parseInt(droneId));
 					keys.add(new KeyValueWithOperator("drone", drone, "="));
 				}
 				if(BeginDate != null && BeginDate.length() > 0){
