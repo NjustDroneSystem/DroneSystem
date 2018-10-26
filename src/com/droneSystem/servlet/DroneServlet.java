@@ -269,7 +269,7 @@ public class DroneServlet extends HttpServlet {
 			JSONObject res3 = new JSONObject();
 			try {
 				//由于前端视频延迟，本处延迟7s调用算法
-				TimeUnit.MILLISECONDS.sleep(7000);
+				TimeUnit.MILLISECONDS.sleep(5000);
 				int droneId = Integer.parseInt(req.getParameter("droneId"));
 				String type = req.getParameter("type");
 				String inputFile = req.getParameter("inputStream");
@@ -429,7 +429,7 @@ public class DroneServlet extends HttpServlet {
 			JSONObject res6 = new JSONObject();
 			try {
 				//由于前端视频延迟，本处延迟7s调用算法
-				TimeUnit.MILLISECONDS.sleep(7000);
+				TimeUnit.MILLISECONDS.sleep(5000);
 				String droneId = req.getParameter("droneId");
 				Drone drone = droneMgr.findById(Integer.parseInt(droneId));
 				String type = req.getParameter("type");
@@ -492,7 +492,7 @@ public class DroneServlet extends HttpServlet {
 			JSONObject res7 = new JSONObject();
 			try {
 				//由于前端视频延迟，本处延迟7s调用算法
-				TimeUnit.MILLISECONDS.sleep(7000);
+				TimeUnit.MILLISECONDS.sleep(5000);
 				CarNumDAO carNumDao = new CarNumDAO();
 				String droneId = req.getParameter("droneId");
 				Drone drone = droneMgr.findById(Integer.parseInt(droneId));

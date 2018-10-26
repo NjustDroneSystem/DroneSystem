@@ -899,7 +899,7 @@
 					            axisData //∫·÷· ˝æ›
 					        ]		       
 						  ]); */
-						}, 3000);
+						}, 500);
 				     } 
 				     
 				     function getEcharts2(droneId){
