@@ -369,12 +369,21 @@
 		        axisPointer: {
 		            type: 'cross',
 		            label: {
+		            fontSize:20
 		            //    backgroundColor: 'F2F2F2'
 		            }
-		        }
+		        },
+		        /* backgroundColor: 'rgba(245, 245, 245, 0.8)',
+	            borderWidth: 1,
+	            borderColor: '#ccc',
+	            padding: 10, */
+	            textStyle: {
+	               /*  color: '#000', */
+	                fontSize:20
+	            },		       
 			 },
 		    legend: {
-		        data:['实时下行车流量变化', '实时上行车流量变化'],
+		        data:['实时上行车流量变化', '实时下行车流量变化'],
 		        textStyle: {  
 		            color: '#fff',          //legend字体颜色 
 		            fontSize:'22'
@@ -427,9 +436,13 @@
 		                    color:'#FFFFFF',
 		                    width:1
 		                }
-		            },
+		            },		            
 		            axisPointer: {
-	                type: 'shadow'
+	                    type: 'line',
+	                    label:{
+	                    backgroundColor:'#CDCDCD',
+	                    color:'#3F48CC'
+	                    }
 	                },
 
 		            boundaryGap : true,
@@ -437,6 +450,20 @@
 		        },
 		         {
 		            type: 'category',
+	                axisLabel: {        
+       		                show: true,
+       		                textStyle: {
+       		                    color: '#fff',
+       		                    fontSize:'20'
+       		                }
+       		            },
+      		        axisPointer: {
+	                    type: 'line',
+	                    label:{
+	                    backgroundColor:'#CDCDCD',
+	                    color:'#3F48CC'
+                    }
+                    },
 		            boundaryGap: true,
 		            data: (function (){
 		                var res = [];
@@ -453,6 +480,9 @@
 		           type : 'value',
 		           scale: true,
 		           name : '车流量V/h',
+		           nameTextStyle:{
+        		           fontSize:20
+        		        },
 		           axisLabel: {        
 		                show: true,
 		                textStyle: {
@@ -460,6 +490,13 @@
 		                    fontSize:'20'
 		                }
 		            },
+		            axisPointer: {
+	                    type: 'line',
+	                    label:{
+	                    backgroundColor:'#CDCDCD',
+	                    color:'#3F48CC'
+	                    }
+	                    },
 		        // 控制网格线是否显示
 			        splitLine: {
 			                show: false, 
@@ -478,6 +515,16 @@
 		           type : 'value',
 		           scale: true,
 		           name : '车流量V/h',
+		           nameTextStyle:{
+        		          fontSize:20
+        		          },
+        		   axisPointer: {
+	                    type: 'line',
+	                    label:{
+	                    backgroundColor:'#CDCDCD',
+	                    color:'#3F48CC'
+	                    }
+	                    },
 		           axisLabel: {        
 		                show: true,
 		                textStyle: {
@@ -502,7 +549,7 @@
 		  ],
 		  series : [
 		       {
-		            name:"实时下行车流量变化",
+		            name:"实时上行车流量变化",
 		            type:'bar',
 		            //stack:'one',
 		            data:yAxisData,
@@ -520,7 +567,7 @@
 		            
 		       },
 		       {
-		            name:"实时上行车流量变化",
+		            name:"实时下行车流量变化",
 		            type:'line',
 		           // stack:'one',
 		            
@@ -564,12 +611,16 @@
 			        axisPointer: {
 			            type: 'cross',
 			            label: {
-			            //    backgroundColor: 'F2F2F2'
-			            }
+		                    fontSize:'20'
 			        }
+			        },
+			        textStyle: {
+	               /*  color: '#000', */
+	                fontSize:'20'
+	            },	
 			    },
 			    legend: {
-			        data:['每分钟下行车流量变化', '每分钟上行车流量变化'],
+			        data:['每分钟上行车流量变化', '每分钟下行车流量变化'],
 			        textStyle: {  
 			            color: '#fff',          //legend字体颜色 
 			            fontSize:'22'
@@ -617,6 +668,13 @@
 				                    color: ['white']
 				                }                            
 				        },
+				        axisPointer: {
+	                    type: 'line',
+	                    label:{
+	                    backgroundColor:'#CDCDCD',
+	                    color:'#3F48CC'
+	                    }
+	                    },
 			            axisLine:{
 			                lineStyle:{
 			                    color:'#FFFFFF',
@@ -638,23 +696,40 @@
 				            })()
 			        },
 			        {
-			            type: 'category',
-			            boundaryGap: true,
-			            data: (function (){
-			                var res = [];
-			                var len = 10;
-			                while (len--) {
-			                    res.push(10 - len - 1);
-			                }
-			                return res;
-			            })()
-			        }
+		            type: 'category',
+	                axisLabel: {        
+       		                show: true,
+       		                textStyle: {
+       		                    color: '#fff',
+       		                    fontSize:'20'
+       		                }
+       		            },
+      		        axisPointer: {
+	                    type: 'line',
+	                    label:{
+	                    backgroundColor:'#CDCDCD',
+	                    color:'#3F48CC'
+                    }
+                    },
+		            boundaryGap: true,
+		            data: (function (){
+		                var res = [];
+		                var len = 10;
+		                while (len--) {
+		                    res.push(10 - len - 1);
+		                }
+		                return res;
+		            })()
+		        }
 			    ],
 			    yAxis: [
 			        {
 			            type: 'value',
 			            scale: true,
 			            name: '车流量V/h',
+			            nameTextStyle:{
+        		                fontSize:20
+        		           },
 			            axisLabel: {        
 			                show: true,
 			                textStyle: {
@@ -662,6 +737,13 @@
 			                    fontSize:'20'
 			                }
 			            },
+			            axisPointer: {
+		                    type: 'line',
+		                    label:{
+		                    backgroundColor:'#CDCDCD',
+		                    color:'#3F48CC'
+	                    }
+	                    },
 			            // 控制网格线是否显示
 			            splitLine: {
 			                    show: false, 
@@ -679,6 +761,9 @@
 			            type: 'value',
 			            scale: true,
 			            name: '车流量V/h',
+			            nameTextStyle:{
+        		                fontSize:20
+        		           },
 			            axisLabel: {        
 			                show: true,
 			                textStyle: {
@@ -686,6 +771,13 @@
 			                    fontSize:'20'
 			                }
 			            },
+			            axisPointer: {
+		                    type: 'line',
+		                    label:{
+		                    backgroundColor:'#CDCDCD',
+		                    color:'#3F48CC'
+	                    }
+	                    },
 			            // 控制网格线是否显示
 			            splitLine: {
 			                    show: false, 
@@ -703,7 +795,7 @@
 			    ],
 			    series: [
 			        {
-			            name:'每分钟下行车流量变化',
+			            name:'每分钟上行车流量变化',
 			            type:'bar',
 			            xAxisIndex: 1,
 			            yAxisIndex: 1,   
@@ -729,7 +821,7 @@
 			            }
 			        },
 			        {
-			            name:'每分钟上行车流量变化',
+			            name:'每分钟下行车流量变化',
 			            type:'line',
 			            data:(function (){
 			                var res = [];
@@ -899,7 +991,7 @@
 					            axisData //横轴数据
 					        ]		       
 						  ]); */
-						}, 3000);
+						}, 500);
 				     } 
 				     
 				     function getEcharts2(droneId){

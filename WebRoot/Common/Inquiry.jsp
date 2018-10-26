@@ -523,7 +523,7 @@
 		}
 		$(".change_page").click(function(){
 			var temp = $(this).text();
-			$(this).css("color","#4FCD74");
+			//$(this).css("color","#4FCD74");
 			if(temp == "上一页" && currentPage > 1){
 				currentPage--;
 			} else if(temp == "下一页" && currentPage < totalPage){
@@ -557,15 +557,19 @@
         			     left:'10%',
         			     right:'10%'
         			},
-        			tooltip : {
-        			    trigger: 'axis', 
-        		        axisPointer: {
-        		            type: 'cross',
-        		            label: {
-        		            //    backgroundColor: 'F2F2F2'
-        		            }
-        		        }
-        			 },
+        			tooltip: {
+				        trigger: 'axis',
+				        axisPointer: {
+				            type: 'cross',
+				            label: {
+			                    fontSize:'30'
+				        }
+				        },
+				        textStyle: {
+		               /*  color: '#000', */
+		                fontSize:'30'
+		            },	
+				    },
         		    legend: {
         		        data:['上行车流量变化统计', '下行车流量变化统计'],
         		        textStyle: {  
@@ -606,6 +610,13 @@
         		                    fontSize:'30'
         		                }
         		            },
+        		            axisPointer: {
+			                    type: 'shadow',
+			                    label:{
+			                    backgroundColor:'#CDCDCD',
+			                    color:'#3F48CC'
+			                    }
+			                },
         		        // 控制网格线是否显示
         			        splitLine: {
         			                show: false, 
@@ -620,32 +631,9 @@
         		                    color:'#FFFFFF',
         		                    width:2
         		                }
-        		            },
-        		            axisPointer: {
-        	                type: 'shadow'
-        	                },
-
+        		            },       		           
         		            boundaryGap : true,
         		            data:x_data
-        		        },
-        		         {
-        		            type: 'category',
-        		            axisLabel: {        
-        		                show: true,
-        		                textStyle: {
-        		                    color: '#fff',
-        		                    fontSize:'30'
-        		                }
-        		            },
-        		            boundaryGap: true,
-        		            data: (function (){
-        		                var res = [];
-        		                var len = 10;
-        		                while (len--) {
-        		                    res.push(10 - len - 1);
-        		                }
-        		                return res;
-        		            })()
         		        }
         		   ],
         		   yAxis : [
@@ -663,6 +651,13 @@
         		                    fontSize:'30'
         		                }
         		            },
+        		            axisPointer: {
+			                    type: 'line',
+			                    label:{
+			                    backgroundColor:'#CDCDCD',
+			                    color:'#3F48CC'
+			                    }
+			                },
         		        // 控制网格线是否显示
         			        splitLine: {
         			                show: false, 
@@ -691,6 +686,13 @@
         		                    fontSize:'30'
         		                }
         		            },
+        		            axisPointer: {
+			                    type: 'line',
+			                    label:{
+			                    backgroundColor:'#CDCDCD',
+			                    color:'#3F48CC'
+			                    }
+			                },
         		        // 控制网格线是否显示
         			        splitLine: {
         			                show: false, 
@@ -768,15 +770,19 @@
       			     left:'10%',
       			     right:'10%'
       			},
-			tooltip : {
-			    trigger: 'axis', 
-		        axisPointer: {
-		            type: 'cross',
-		            label: {
-		            //    backgroundColor: 'F2F2F2'
-		            }
-		        }
-			 },
+			tooltip: {
+				        trigger: 'axis',
+				        axisPointer: {
+				            type: 'cross',
+				            label: {
+			                    fontSize:'30'
+				        }
+				        },
+				        textStyle: {
+		               /*  color: '#000', */
+		                fontSize:'30'
+		            },	
+				    },
 		    legend: {
 		        data:['雪阻量'],
 		        textStyle: {  
@@ -817,6 +823,13 @@
 		                    fontSize:'30'
 		                }
 		            },
+		            axisPointer: {
+	                    type: 'shadow',
+	                    label:{
+	                    backgroundColor:'#CDCDCD',
+	                    color:'#3F48CC'
+	                    }
+	                },
 		        // 控制网格线是否显示
 			        splitLine: {
 			                show: false, 
@@ -831,32 +844,9 @@
 		                    color:'#FFFFFF',
 		                    width:2
 		                }
-		            },
-		            axisPointer: {
-	                type: 'shadow'
-	                },
-
+		            },		           
 		            boundaryGap : true,
 		            data:x_data
-		        },
-		         {
-		            type: 'category',
-		            boundaryGap: true,
-		            axisLabel: {        
-        		                show: true,
-        		                textStyle: {
-        		                    color: '#fff',
-        		                    fontSize:'30'
-        		                }
-        		            },
-		            data: (function (){
-		                var res = [];
-		                var len = 10;
-		                while (len--) {
-		                    res.push(10 - len - 1);
-		                }
-		                return res;
-		            })()
 		        }
 		   ],
 		   yAxis : [
@@ -874,6 +864,13 @@
 		                    fontSize:'30'
 		                }
 		            },
+		            axisPointer: {
+			                    type: 'line',
+			                    label:{
+			                    backgroundColor:'#CDCDCD',
+			                    color:'#3F48CC'
+			                    }
+			                },
 		        // 控制网格线是否显示
 			        splitLine: {
 			                show: false, 
@@ -930,15 +927,19 @@
      			     left:'10%',
      			     right:'10%'
         			},
-			tooltip : {
-			    trigger: 'axis', 
-		        axisPointer: {
-		            type: 'cross',
-		            label: {
-		            //    backgroundColor: 'F2F2F2'
-		            }
-		        }
-			 },
+			tooltip: {
+				        trigger: 'axis',
+				        axisPointer: {
+				            type: 'cross',
+				            label: {
+			                    fontSize:'30'
+				        }
+				        },
+				        textStyle: {
+		               /*  color: '#000', */
+		                fontSize:'30'
+		            },	
+				    },
 		    legend: {
 		        data:['沙阻量'],
 		        textStyle: {  
@@ -979,6 +980,13 @@
 		                    fontSize:'30'
 		                }
 		            },
+		            axisPointer: {
+	                    type: 'shadow',
+	                    label:{
+	                    backgroundColor:'#CDCDCD',
+	                    color:'#3F48CC'
+	                    }
+	                },
 		        // 控制网格线是否显示
 			        splitLine: {
 			                show: false, 
@@ -993,32 +1001,9 @@
 		                    color:'#FFFFFF',
 		                    width:2
 		                }
-		            },
-		            axisPointer: {
-	                type: 'shadow'
-	                },
-
+		            },		           
 		            boundaryGap : true,
 		            data:x_data
-		        },
-		         {
-		            type: 'category',
-		            boundaryGap: true,
-		            axisLabel: {        
-      		                show: true,
-      		                textStyle: {
-      		                    color: '#fff',
-      		                    fontSize:'30'
-      		                }
-        		            },
-		            data: (function (){
-		                var res = [];
-		                var len = 10;
-		                while (len--) {
-		                    res.push(10 - len - 1);
-		                }
-		                return res;
-		            })()
 		        }
 		   ],
 		   yAxis : [
@@ -1036,6 +1021,13 @@
 		                    fontSize:'30'
 		                }
 		            },
+		            axisPointer: {
+	                    type: 'line',
+	                    label:{
+	                    backgroundColor:'#CDCDCD',
+	                    color:'#3F48CC'
+	                    }
+	                },
 		        // 控制网格线是否显示
 			        splitLine: {
 			                show: false, 
@@ -1094,15 +1086,19 @@
       			     left:'10%',
       			     right:'10%'
         			},
-			tooltip : {
-			    trigger: 'axis', 
-		        axisPointer: {
-		            type: 'cross',
-		            label: {
-		            //    backgroundColor: 'F2F2F2'
-		            }
-		        }
-			 },
+			tooltip: {
+				        trigger: 'axis',
+				        axisPointer: {
+				            type: 'cross',
+				            label: {
+			                    fontSize:'30'
+				        }
+				        },
+				        textStyle: {
+		               /*  color: '#000', */
+		                fontSize:'30'
+		            },	
+				    },
 		    legend: {
 		        data:['沙阻量'],
 		        textStyle: {  
@@ -1143,6 +1139,13 @@
 		                    fontSize:'30'
 		                }
 		            },
+		            axisPointer: {
+	                    type: 'shadow',
+	                    label:{
+	                    backgroundColor:'#CDCDCD',
+	                    color:'#3F48CC'
+	                    }
+	                },
 		        // 控制网格线是否显示
 			        splitLine: {
 			                show: false, 
@@ -1157,32 +1160,9 @@
 		                    color:'#FFFFFF',
 		                    width:2
 		                }
-		            },
-		            axisPointer: {
-	                type: 'shadow'
-	                },
-
+		            },		           
 		            boundaryGap : true,
 		            data:x_data
-		        },
-		         {
-		            type: 'category',
-		            axisLabel: {        
-      		                show: true,
-      		                textStyle: {
-      		                    color: '#fff',
-      		                    fontSize:'30'
-      		                }
-        		            },
-		            boundaryGap: true,
-		            data: (function (){
-		                var res = [];
-		                var len = 10;
-		                while (len--) {
-		                    res.push(10 - len - 1);
-		                }
-		                return res;
-		            })()
 		        }
 		   ],
 		   yAxis : [
@@ -1200,6 +1180,13 @@
 		                    fontSize:'30'
 		                }
 		            },
+		            axisPointer: {
+			                    type: 'shadow',
+			                    label:{
+			                    backgroundColor:'#CDCDCD',
+			                    color:'#3F48CC'
+			                    }
+			                },
 		        // 控制网格线是否显示
 			        splitLine: {
 			                show: false, 
