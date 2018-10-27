@@ -920,7 +920,7 @@
 						var vlc = document.getElementById("vlc"); 
 						var id = 0; 
 						//id = vlc.playlist.add(videoUrl); //添加mrl到播放列表
-						id = vlc.playlist.add("../Inc/freeway_clip.mov"); //添加mrl到播放列表						
+						id = vlc.playlist.add("../Inc/freeway_clip_3m.mov"); //添加mrl到播放列表						
 						vlc.playlist.playItem(id);  //播放播放列表里的序列
 						/* videojs("my-video").ready(function(){
 							var myPlayer = this;
@@ -962,25 +962,26 @@
 						          lastData = data.tsRight;
 						          lastData1 = data.tsLeft;
 						          //lastData = Math.round(Math.random() * 1000);
-						        
+						          
+						          //往EChart1塞数据
+						          	var axisData;	
+								    axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
+								    var data0 = option1.series[0].data;
+								    var data1 = option1.series[1].data;
+								    data0.shift();
+								    data0.push(lastData);
+								    //data0.push(Math.round(Math.random() * 1000));
+								    data1.shift();
+								    data1.push(lastData1); 
+								    option1.xAxis[0].data.shift();
+						    		option1.xAxis[0].data.push(axisData);
+						    		option1.xAxis[1].data.shift();
+		                            option1.xAxis[1].data.push(app1.count++);				    		
+						    		myChart1.setOption(option1);
 						          }
 						      }
 						  }); 
-
-						    var axisData;	
-						    axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
-						    var data0 = option1.series[0].data;
-						    var data1 = option1.series[1].data;
-						    data0.shift();
-						    data0.push(lastData);
-						    //data0.push(Math.round(Math.random() * 1000));
-						    data1.shift();
-						    data1.push(lastData1); 
-						    option1.xAxis[0].data.shift();
-				    		option1.xAxis[0].data.push(axisData);
-				    		option1.xAxis[1].data.shift();
-                            option1.xAxis[1].data.push(app1.count++);				    		
-				    		myChart1.setOption(option1);
+						    
 						  // 动态数据接口 addData
 					      /* myChart1.addData([
 					        [
@@ -1014,29 +1015,27 @@
 						      },
 						      success: function(data){
 						          if(data != null){
-						          lastData2 = data.carNumRight;
-						          lastData3 = data.carNumLeft;
-						          //lastData = Math.round(Math.random() * 1000);
-						        
+							        lastData2 = data.carNumRight;
+							        lastData3 = data.carNumLeft;
+							        //lastData = Math.round(Math.random() * 1000);
+							        
+							        //往EChart2塞数据
+							        var axisData1;
+									axisData1 = (new Date()).toLocaleTimeString().replace(/^\D*/, ''); 
+									var data3 = option2.series[0].data;
+									var data4 = option2.series[1].data;
+									data3.shift();
+									data3.push(lastData2);
+									data4.shift();
+									data4.push(lastData3);
+									option2.xAxis[0].data.shift();
+								    option2.xAxis[0].data.push(axisData1);
+								    option2.xAxis[1].data.shift();
+				                    option2.xAxis[1].data.push(app2.count++);				    		
+								    myChart2.setOption(option2);
 						          }
-						      },
-						      async:false
+						      }
 						  }); 
-  
-						    
-						    var axisData1;
-						    axisData1 = (new Date()).toLocaleTimeString().replace(/^\D*/, ''); 
-						    var data3 = option2.series[0].data;
-						    var data4 = option2.series[1].data;
-						    data3.shift();
-						    data3.push(lastData2);
-						    data4.shift();
-						    data4.push(lastData3);
-						    option2.xAxis[0].data.shift();
-				    		option2.xAxis[0].data.push(axisData1);
-				    		option2.xAxis[1].data.shift();
-                            option2.xAxis[1].data.push(app2.count++);				    		
-				    		myChart2.setOption(option2);
 						  // 动态数据接口 addData
 					      /* myChart1.addData([
 					        [
@@ -1063,7 +1062,7 @@
            	cache: false, 
            	dataType: 'json',
            	url: '/droneSystem/DroneServlet.do?method=3',
-          	data:{droneId:droneId, type:3,inputStream:"D:\\test\\freeway_clip.mov"},
+          	data:{droneId:droneId, type:3,inputStream:"D:\\test\\freeway_clip_3m.mov"},
 //			data:{droneId:droneId, type:3,inputStream:"D:\\test\\total_Receive_HDMI.h264"},
 //			data:{droneId:droneId, type:3,inputStream:"rtsp://47.94.19.230:10554/gzrtsp.sdp"},
 //			data:{droneId:droneId, type:3,inputStream:"rtsp://47.94.19.230:10554/stream0.sdp"},
