@@ -91,7 +91,6 @@ public class framerecorder {
 			recorder.start();
 			Frame frame = null;
 			int flag = 0;
-			int num = 0;
 			while (status && (frame = grabber.grabFrame()) != null) {
 				recorder.record(frame);
 				//if(flag % 2 == 0){
@@ -107,7 +106,6 @@ public class framerecorder {
 					} else {
 						break;
 					}
-					HttpUtil hUtil = new HttpUtil();
 					Timestamp time = new Timestamp(System.currentTimeMillis());
 					//System.out.println(time);
 	
@@ -116,26 +114,40 @@ public class framerecorder {
 					record.setType(reqType);
 					record.setTime(time);
 					record.setVideo(video);
-					String Volume = hUtil.doPost("http://127.0.0.1:4050",
-							"{\"UAVID\":\"1\", \"ImgSrc\":\"" + fileName
-									+ "\",\"Lat\":\"" + latitude + "\",\"Lon\":\""
-									+ longitude + "\", \"ReqType\":\"" + reqType
-									+ "\"}");
-					JSONObject resp = new JSONObject(Volume);
-					// if(reqType == 1){
-					// snowv.setSnowVolume(Double.parseDouble(resp.getString("Value")));
-					// snowv.setTime(time);
-					// snowVMgr.update(snowv);
-					// record.setValueLeft(Double.parseDouble(resp.getString("Value")));
-					//
-					// }
-					// if(reqType == 2){
-					// sandv.setSandVolume(Double.parseDouble(resp.getString("Value")));
-					// sandv.setTime(time);
-					// sandVMgr.update(sandv);
-					// record.setValueLeft(Double.parseDouble(resp.getString("Value")));
-					// }
+					
+					
+					 if(reqType == 1 && flag % 45 ==1){
+						 String Volume = HttpUtil.doPost("http://127.0.0.1:4050",
+									"{\"UAVID\":\"1\", \"ImgSrc\":\"" + fileName
+											+ "\",\"Lat\":\"" + latitude + "\",\"Lon\":\""
+											+ longitude + "\", \"ReqType\":\"" + reqType
+											+ "\"}");
+							JSONObject resp = new JSONObject(Volume);
+						 snowv.setSnowVolume(Double.parseDouble(resp.getString("Value")));
+						 snowv.setTime(time);
+						 snowVMgr.update(snowv);
+						 record.setValueLeft(Double.parseDouble(resp.getString("Value")));
+						
+					 }
+					 if(reqType == 2 && flag % 45 ==1){
+						 String Volume = HttpUtil.doPost("http://127.0.0.1:4050",
+									"{\"UAVID\":\"1\", \"ImgSrc\":\"" + fileName
+											+ "\",\"Lat\":\"" + latitude + "\",\"Lon\":\""
+											+ longitude + "\", \"ReqType\":\"" + reqType
+											+ "\"}");
+							JSONObject resp = new JSONObject(Volume);
+						 sandv.setSandVolume(Double.parseDouble(resp.getString("Value")));
+						 sandv.setTime(time);
+						 sandVMgr.update(sandv);
+						 record.setValueLeft(Double.parseDouble(resp.getString("Value")));
+					 }
 					if (reqType == 3) {
+						String Volume = HttpUtil.doPost("http://127.0.0.1:4050",
+								"{\"UAVID\":\"1\", \"ImgSrc\":\"" + fileName
+										+ "\",\"Lat\":\"" + latitude + "\",\"Lon\":\""
+										+ longitude + "\", \"ReqType\":\"" + reqType
+										+ "\"}");
+						JSONObject resp = new JSONObject(Volume);
 						tf.setVolumeLeft(Double.parseDouble(resp
 								.getString("ValueLeft")));
 						tf.setVolumeRight(Double.parseDouble(resp
@@ -166,7 +178,6 @@ public class framerecorder {
 					}
 				//}
 				flag++;
-				num++;
 
 			}
 			recorder.stop();
