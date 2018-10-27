@@ -5,6 +5,7 @@ import java.io.File;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 
@@ -174,7 +175,7 @@ public class framerecorder {
 						// carNum.setCarNumLeft(num);
 						// carNum.setCarNumRight(num);
 						carMgr.save(carNum);
-	
+						TimeUnit.MILLISECONDS.sleep(5);
 					}
 				//}
 				flag++;
