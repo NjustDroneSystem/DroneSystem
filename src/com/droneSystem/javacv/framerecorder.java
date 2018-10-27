@@ -5,7 +5,6 @@ import java.io.File;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 
@@ -95,7 +94,6 @@ public class framerecorder {
 			while (status && (frame = grabber.grabFrame()) != null) {
 				recorder.record(frame);
 				//if(flag % 2 == 0){
-					TimeUnit.MILLISECONDS.sleep(5);
 					String fileName = videoFramesPath + "/img_"
 							+ String.valueOf(flag) + ".jpg";
 					File outPut = new File(fileName);
