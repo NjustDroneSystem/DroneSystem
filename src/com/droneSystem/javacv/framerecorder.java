@@ -175,7 +175,7 @@ public class framerecorder {
 						// carNum.setCarNumLeft(num);
 						// carNum.setCarNumRight(num);
 						carMgr.save(carNum);
-						TimeUnit.MILLISECONDS.sleep(5);
+						//TimeUnit.MILLISECONDS.sleep(5);
 					}
 				//}
 				flag++;

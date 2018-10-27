@@ -48,6 +48,8 @@ import com.droneSystem.util.KeyValueWithOperator;
 
 public class DroneServlet extends HttpServlet {
 	private static final Log log = LogFactory.getLog(DroneServlet.class);
+	private int lastMinNumLeft = 0;
+	private int lastMinNumRight = 0;
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -295,7 +297,7 @@ public class DroneServlet extends HttpServlet {
 		        v.setType(ReqType);
 		        vMgr.save(v);
 		        //由于前端视频延迟，本处延迟5s调用算法
-				TimeUnit.MILLISECONDS.sleep(5000);
+				TimeUnit.MILLISECONDS.sleep(4000);
 				
 		        framerecorder f = new framerecorder();
 		        if(ReqType == 1){
@@ -499,20 +501,11 @@ public class DroneServlet extends HttpServlet {
 				List<Object> keys = new ArrayList<Object>();
 				keys.add(nowNum.getTime());
 				keys.add(video);
-				int lastMinNumLeft = 0;
-				int lastMinNumRight = 0;
-				int carNumLeft = 0;
-				int carNumRight = 0;
-				List<CarNum> result =carNumDao.findByHQL("select model from CarNum as model where DateDiff(Minute,model.time, ? )=1 and model.video = ? order by model.time ", keys);		
-				if(result.size() == 0){
-					
-				}else{
-					CarNum lastMin = result.get(0);
-					lastMinNumLeft = lastMin.getCarNumLeft();
-					lastMinNumRight = lastMin.getCarNumRight();
-				} 
-				carNumLeft = nowNum.getCarNumLeft() - lastMinNumLeft;
-				carNumRight = nowNum.getCarNumRight() - lastMinNumRight;
+				
+				int carNumLeft = nowNum.getCarNumLeft() - lastMinNumLeft;
+				int carNumRight = nowNum.getCarNumRight() - lastMinNumRight;
+				lastMinNumLeft = nowNum.getCarNumLeft();
+				lastMinNumRight = nowNum.getCarNumRight();
 					
 				Timestamp time = new Timestamp(System.currentTimeMillis());
 			
