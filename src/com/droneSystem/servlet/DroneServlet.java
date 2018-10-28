@@ -297,7 +297,7 @@ public class DroneServlet extends HttpServlet {
 		        v.setType(ReqType);
 		        vMgr.save(v);
 		        //由于前端视频延迟，本处延迟5s调用算法
-				TimeUnit.MILLISECONDS.sleep(4000);
+				TimeUnit.MILLISECONDS.sleep(3500);
 				
 		        framerecorder f = new framerecorder();
 		        if(ReqType == 1){
