@@ -57,7 +57,7 @@ div.trafficarea{width:3200px; height:1508px; border:2px solid #14548c; margin-bo
 div.snowarea{width:3200px; height:1508px; border:2px solid #14548c; margin-bottom:63px; display:none}
 div.sandarea{width:3200px; height:1508px; border:2px solid #14548c; display:none}
 div.infraredarea{width:3200px; height:1508px; border:2px solid #14548c; display:none}
-
+div.videoinquiry{position:absolute; z-index:101; left:40px; top:250px; width:2021px; height:1505px;display:none; background:url(../images/personbg.png) repeat-x top}
 
 div.userlist{position:absolute; z-index:101; left:2100px; top:250px; width:2500px; height:1616px;display:none; background:url(../images/personbg.png) repeat-x top}
 div.sousuolf{margin:10px 0 30px 100px}
