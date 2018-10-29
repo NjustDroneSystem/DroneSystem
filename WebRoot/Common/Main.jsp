@@ -936,8 +936,7 @@
 		            })();	
 		            function showInfo(thisMarker,point){
 			         //thisMarker.setAnimation(BMAP_ANIMATION_BOUNCE);
-			         var content = 
-					"<p style='padding-top:10px;line-height:1.5;font-size:30px;text-indent:0em'>无人机编号："+point.code+"<br/>经度："+point.longitude+"<br/>纬度："+point.latitude+"<br/>状态:"+point.status+"</p>";
+			         var content = "<p style='padding-top:10px;line-height:1.5;font-size:30px;text-indent:0em'>无人机编号："+point.code+"<br/>经度："+point.longitude+"<br/>纬度："+point.latitude+"<br/>状态:"+point.status+"</p>";
 					 var infoWindow = new BMap.InfoWindow(content, opts);
 					 thisMarker.openInfoWindow(infoWindow);
 			       }	

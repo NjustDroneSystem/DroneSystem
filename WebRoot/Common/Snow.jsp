@@ -40,9 +40,9 @@
 		<div class="fright">
 		 <a id="drop_down" href="javascript:void(0)" style="margin-right:29px">admin<img src="../images/down_sanjiao.png" /></a><a id="logout" href="javascript:void(0)" onclick="doLogout()" style="margin-left:0px"><img src="../images/lines10.png" />退出</a>
 		 <div class="js_list001" id="drop_list">
-			<p id="p1"><a href="#">用户列表</a></p>
-			<p id="p2"><a href="#">角色列表</a></p>
-			<p id="p3"><a href="#">权限列表</a></p>
+			<p id="p1"><a href="#all" >用户列表</a></p>
+			<p id="p2"><a href="#all" >角色列表</a></p>
+			<p id="p3"><a href="#all" >权限列表</a></p>
 		</div> 
 		</div>
 	</div>
@@ -93,147 +93,76 @@
 	
 	<!--弹框001-->
 	<div class="userlist" id="userlist">
-		<h5 class="title_sample"><span>用户列表</span><a id="userlist_close" href="javascript:void(0)" onclick="closeUserlist()"><img src="../images/cross.png" /></a></h5>
-		<div class="fleft sousuolf"><a href="#"><img src="../images/addperson.png" /></a><a href="#"><img src="../images/delectperson.png" /></a></div>
+		<h5 class="title_sample"><span>用户列表</span><a id="userlist_close" href="javacript:void(0);" onclick="return false"><img src="../images/cross.png" /></a></h5>
+		<div class="fleft sousuolf"><a onclick="addUser()"><img src="../images/addperson.png" /></a></div>
 		<div class="fright sousuort"><input type="text" /><button><img src="../images/searchicon.png" /></button></div>
 		<div class="myclear"></div> 
-		<!-------每页112条数据-------->
-		<table width="100%" border="0" cellpadding="0" cellspacing="0" class="person_name">
-		  <tr>
-			<th scope="col" width="140">&nbsp;</th>
-			<th scope="col">ID</th>
-			<th scope="col">用户名</th>
-			<th scope="col">真实姓名</th>
-			<th scope="col">部门</th>
-			<th scope="col">角色</th>
-			<th scope="col">账号状态</th>
-			<th scope="col">注册时间</th>
-			<th scope="col">操作选择</th>
-		  </tr>
-		  <tr>
-			<td><input type="checkbox" /></td>
-			<td>17001</td>
-			<td>33dfadsfd</td>
-			<td>张天翼</td>
-			<td>审计部门</td>
-			<td>普通管理员</td>
-			<td>可用</td>
-			<td>2017-05-22</td>
-			<td><a href="#">编辑</a><a href="#">删除</a></td>
-		  </tr>
-		   <tr>
-			<td><input type="checkbox" /></td>
-			<td>17001</td>
-			<td>33dfadsfd</td>
-			<td>张天翼</td>
-			<td>审计部门</td>
-			<td>普通管理员</td>
-			<td>可用</td>
-			<td>2017-05-22</td>
-			<td><a href="#">编辑</a><a href="#">删除</a></td>
-		  </tr>
-		   <tr>
-			<td><input type="checkbox" /></td>
-			<td>17001</td>
-			<td>33dfadsfd</td>
-			<td>张天翼</td>
-			<td>审计部门</td>
-			<td>普通管理员</td>
-			<td>可用</td>
-			<td>2017-05-22</td>
-			<td><a href="#">编辑</a><a href="#">删除</a></td>
-		  </tr>
-		   <tr>
-			<td><input type="checkbox" /></td>
-			<td>17001</td>
-			<td>33dfadsfd</td>
-			<td>张天翼</td>
-			<td>审计部门</td>
-			<td>普通管理员</td>
-			<td>可用</td>
-			<td>2017-05-22</td>
-			<td><a href="#">编辑</a><a href="#">删除</a></td>
-		  </tr>
-		   <tr>
-			<td><input type="checkbox" /></td>
-			<td>17001</td>
-			<td>33dfadsfd</td>
-			<td>张天翼</td>
-			<td>审计部门</td>
-			<td>普通管理员</td>
-			<td>可用</td>
-			<td>2017-05-22</td>
-			<td><a href="#">编辑</a><a href="#">删除</a></td>
-		  </tr>
-		   <tr>
-			<td><input type="checkbox" /></td>
-			<td>17001</td>
-			<td>33dfadsfd</td>
-			<td>张天翼</td>
-			<td>审计部门</td>
-			<td>普通管理员</td>
-			<td>可用</td>
-			<td>2017-05-22</td>
-			<td><a href="#">编辑</a><a href="#">删除</a></td>
-		  </tr>
-		   <tr>
-			<td><input type="checkbox" /></td>
-			<td>17001</td>
-			<td>33dfadsfd</td>
-			<td>张天翼</td>
-			<td>审计部门</td>
-			<td>普通管理员</td>
-			<td>可用</td>
-			<td>2017-05-22</td>
-			<td><a href="#">编辑</a><a href="#">删除</a></td>
-		  </tr>
-		   <tr>
-			<td><input type="checkbox" /></td>
-			<td>17001</td>
-			<td>33dfadsfd</td>
-			<td>张天翼</td>
-			<td>审计部门</td>
-			<td>普通管理员</td>
-			<td>可用</td>
-			<td>2017-05-22</td>
-			<td><a href="#">编辑</a><a href="#">删除</a></td>
-		  </tr>
-		   <tr>
-			<td><input type="checkbox" /></td>
-			<td>17001</td>
-			<td>33dfadsfd</td>
-			<td>张天翼</td>
-			<td>审计部门</td>
-			<td>普通管理员</td>
-			<td>可用</td>
-			<td>2017-05-22</td>
-			<td><a href="#">编辑</a><a href="#">删除</a></td>
-		  </tr>
-		   <tr>
-			<td><input type="checkbox" /></td>
-			<td>17001</td>
-			<td>33dfadsfd</td>
-			<td>张天翼</td>
-			<td>审计部门</td>
-			<td>普通管理员</td>
-			<td>可用</td>
-			<td>2017-05-22</td>
-			<td><a href="#">编辑</a><a href="#">删除</a></td>
-		  </tr>
-		   <tr>
-			<td><input type="checkbox" /></td>
-			<td>17001</td>
-			<td>33dfadsfd</td>
-			<td>张天翼</td>
-			<td>审计部门</td>
-			<td>普通管理员</td>
-			<td>可用</td>
-			<td>2017-05-22</td>
-			<td><a href="#">编辑</a><a href="#">删除</a></td>
-		  </tr>
+		<table id="usertable" width="100%" border="0" cellpadding="0" cellspacing="0" class="person_name">
 		</table>
-		<p class="endpages"><a href="#">1</a><a href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#">...</a><a href="#">49</a><a href="#">下一页</a><span>到第<input type="text" />页<button>确定</button></span></p>
+		<p class="endpages" id="user"></p>
 	</div> 
+	<div id="new_user" style="position:absolute; z-index:101; left:2750px; top:500px; width:1250px; height:900px;display:none; background:url(../images/personbg.png) repeat-x top">
+		<h5 class="title_sample"><span>添加用户</span><a id="userlist_close" href="javacript:void(0);" onclick="return false" ><img src="../images/cross.png" /></a></h5>
+		<form id="new_user_form" style="padding:10px 20px 10px 50px;font-size:40px;" method="post">
+			<tr style="width:1000px;margin-left:auto;margin-right:auto;"><td style="font-size:40px;">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名 : </td><td><input type="text" name="Name" class="easyui-validatebox" required="true" style="width:70%;margin:25px;padding:10px 15px 10px 15px"></td></tr><br/>
+			<tr style="width:1000px;margin-left:auto;margin-right:auto;"><td align="center" width="30%">用&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;名 : </td><td align="center" width="70%"><input type="text" name="userName" class="easyui-validatebox" required="true" style="width:70%;margin:25px;padding:10px 15px 10px 15px"></td></tr><br/>
+			<tr style="width:1000px;margin-left:auto;margin-right:auto;">
+				<td>所&nbsp;属&nbsp;部&nbsp;门 : </td>
+				<td>
+					<select id="department" class="easyui-validatebox" name="DepartmentId" style="width:73%;margin:25px;padding:10px 15px 10px 15px" required="true">
+						<option value="1">财务部</option>
+						<option value="2">收发室</option>
+						<option value="3">业务管理科</option>
+					</select>
+				</td>
+			</tr><br/>
+			<tr style="width:1000px;margin-left:auto;margin-right:auto;">
+				<td>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别 : </td>
+				<td>
+					<select class="easyui-validatebox" name="Gender" style="width:73%;margin:25px;padding:10px 15px 10px 15px" required="true">
+						<option value="0">男</option>
+						<option value="1">女</option>
+					</select>
+				</td>
+			</tr><br/>
+			<tr style="width:1000px;margin-left:auto;margin-right:auto;"><td>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码 : </td><td><input type="text" name="Password" class="easyui-validatebox" required="true" style="width:70%;margin:25px;padding:10px 15px 10px 15px"></td></tr><br/>
+			<div style="padding:5px;text-align:center;margin-top:30px">
+				<button id="new_submit_btn" class="easyui-linkbutton" icon="icon-ok" style="width:150px;height:60px;margin-right:20px" onclick="saveUser(this)">确认</button>
+				<button class="easyui-linkbutton" icon="icon-cancel" style="width:150px;height:60px" onclick='$("#new_user").css("display","none");'>取消</button>
+			</div>
+		</form>
+	</div>
+	<div id="modify_user" style="position:absolute; z-index:101; left:2750px; top:500px; width:1250px; height:900px;display:none; background:url(../images/personbg.png) repeat-x top">
+		<h5 class="title_sample"><span>修改用户</span><a id="userlist_close" href="javacript:void(0);" onclick="return false" ><img src="../images/cross.png" /></a></h5>
+		<form id="modify_user_form" style="padding:10px 20px 10px 50px;font-size:40px;" method="post">
+			<tr style="width:1000px;margin-left:auto;margin-right:auto;"><td>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名 : </td><td><input type="text" name="Name" class="easyui-validatebox" required="true" style="width:70%;margin:25px;padding:10px 15px 10px 15px"></td></tr>
+			<tr style="width:1000px;margin-left:auto;margin-right:auto;">
+				<td>所&nbsp;属&nbsp;部&nbsp;门 : </td>
+				<td>
+					<select id="department" class="easyui-validatebox" name="DepartmentId" style="width:73%;margin:25px;padding:10px 15px 10px 15px" required="true">
+						<option value="1">财务部</option>
+						<option value="2">收发室</option>
+						<option value="3">业务管理科</option>
+					</select>
+				</td>
+			</tr>
+			<tr style="width:1000px;margin-left:auto;margin-right:auto;">
+				<td>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别 : </td>
+				<td>
+					<select class="easyui-validatebox" name="Gender" style="width:73%;margin:25px;padding:10px 15px 10px 15px" required="true">
+						<option value="0">男</option>
+						<option value="1">女</option>
+					</select>
+				</td>
+			</tr>
+			<tr style="width:1000px;margin-left:auto;margin-right:auto;"><td>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码 : </td><td><input type="text" name="Password" class="easyui-validatebox" required="true" style="width:70%;margin:25px;padding:10px 15px 10px 15px"></td></tr>
+			<tr><td><input style='display:none;' name='Id' class='easyui-validatebox' value='-1'></input></td></tr>
+			<div style="padding:5px;text-align:center;margin-top:30px">
+				<button id="modify_submit_btn" class="easyui-linkbutton" icon="icon-ok" style="width:150px;height:60px;margin-right:20px" onclick="modifyUser()">确认</button>
+				<button class="easyui-linkbutton" icon="icon-cancel" style="width:150px;height:60px" onclick='$("#modify_user").css("display","none");'>取消</button>
+			</div>
+		</form>
+	</div>
 	<!--弹框001结束-->
 	<!--弹框002-->
 	<div class="userlist" id="rolelist">
@@ -733,7 +662,7 @@
 	var opts = {
 		width : 0,     // 信息窗口宽度
 		height: 0,     // 信息窗口高度
-		title : "<span style='font-size:20px;color:#0099cc;background-color:#FFFFFF'>"+"雪阻信息窗口"+"</span>" , // 信息窗口标题
+		title : "<span style='font-size:35px;color:#0099cc;background-color:#FFFFFF'>"+"雪阻信息窗口"+"</span>" , // 信息窗口标题
 		enableMessage:true//设置允许信息窗发送短息
 	    };    
 	getUnmans();
@@ -781,11 +710,13 @@
 			            marker.addEventListener("click", function (){
 			            //map.panTo(point);		            
 						showInfo(this, thepoint);//开启信息窗口
+						//缩放
+						map.centerAndZoom(point, 14);
 						sendURL(droneId);
 						var vlc = document.getElementById("vlc"); 
 						var id = 0; 
 						//id = vlc.playlist.add(videoUrl); //添加mrl到播放列表
-						id = vlc.playlist.add("../Inc/MOV_0030.MOV"); //添加mrl到播放列表						
+						id = vlc.playlist.add("../Inc/snow_test_clip.mov"); //添加mrl到播放列表						
 						vlc.playlist.playItem(id);  //播放播放列表里的序列
 						
 						/* videojs("my-video").ready(function(){
@@ -797,8 +728,7 @@
 		            })();		            		           		
 			function showInfo(thisMarker,point){
 			         //thisMarker.setAnimation(BMAP_ANIMATION_BOUNCE);
-			         var content = 
-					"<p style='margin:0;line-height:1.5;font-size:20px;text-indent:0em'>无人机编号： "+point.code+"<br/>经度："+point.longitude+" 纬度："+point.latitude+"<br/>状态:"+point.status+"</p>";
+			         var content = "<p style='padding-top:10px;line-height:1.5;font-size:30px;text-indent:0em'>无人机编号："+point.code+"<br/>经度："+point.longitude+"<br/>纬度："+point.latitude+"<br/>状态:"+point.status+"</p>";
 					 var infoWindow = new BMap.InfoWindow(content, opts);
 					 thisMarker.openInfoWindow(infoWindow);
 			       }	
@@ -821,23 +751,23 @@
 						          lastData = data.ts;
 						          //console.log(data);
 						          //lastData = Math.round(Math.random() * 1000);
-						        
+						        	axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
+								    var data0 = option1.series[0].data;
+								    //var data1 = option1.series[1].data;
+								    data0.shift();
+								    data0.push(lastData);
+								    //data1.shift();
+								    //data1.push((Math.random() * 10 + 5).toFixed(1) - 0);
+								    option1.xAxis[0].data.shift();
+						    		option1.xAxis[0].data.push(axisData);
+						    		option1.xAxis[1].data.shift();
+		                            option1.xAxis[1].data.push(app.count++);				    		
+						    		myChart1.setOption(option1);
 						          }
 						      }
 						  }); 
 
-						    axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
-						    var data0 = option1.series[0].data;
-						    //var data1 = option1.series[1].data;
-						    data0.shift();
-						    data0.push(lastData);
-						    //data1.shift();
-						    //data1.push((Math.random() * 10 + 5).toFixed(1) - 0);
-						    option1.xAxis[0].data.shift();
-				    		option1.xAxis[0].data.push(axisData);
-				    		option1.xAxis[1].data.shift();
-                            option1.xAxis[1].data.push(app.count++);				    		
-				    		myChart1.setOption(option1);
+						    
 						  // 动态数据接口 addData
 					      /* myChart1.addData([
 					        [
@@ -848,7 +778,7 @@
 					            axisData //横轴数据
 					        ]		       
 						  ]); */
-						}, 500);
+						}, 1000);
 				     }            		           		
 				}	
 		}	
@@ -863,7 +793,7 @@
            	cache: false, 
            	dataType: 'json',
            	url: '/droneSystem/DroneServlet.do?method=3',
-          	data:{droneId:droneId, type:3,inputStream:"D:\\test\\freeway_clip_3m.mov"},
+          	data:{droneId:droneId, type:1,inputStream:"D:\\test\\snow_test_clip.mov"},
 //			data:{droneId:droneId, type:3,inputStream:"D:\\test\\total_Receive_HDMI.h264"},
 //			data:{droneId:droneId, type:3,inputStream:"rtsp://47.94.19.230:10554/gzrtsp.sdp"},
 //			data:{droneId:droneId, type:3,inputStream:"rtsp://47.94.19.230:10554/stream0.sdp"},
@@ -908,4 +838,4 @@
 
 
 </script>
-
+<script type="text/javascript" src="../JScript/UserOperation.js"></script>

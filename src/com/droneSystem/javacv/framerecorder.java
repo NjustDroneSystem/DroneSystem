@@ -123,7 +123,7 @@ public class framerecorder {
 					record.setVideo(video);
 					
 					
-					 if(reqType == 1 && flag % 10 ==1){
+					 if(reqType == 1 && flag % 20 ==1){
 						 String Volume = HttpUtil.doPost("http://127.0.0.1:4050",
 									"{\"UAVID\":\"1\", \"ImgSrc\":\"" + fileName
 											+ "\",\"Lat\":\"" + latitude + "\",\"Lon\":\""
@@ -136,7 +136,7 @@ public class framerecorder {
 						 record.setValueLeft(Double.parseDouble(resp.getString("Value")));
 						
 					 }
-					 if(reqType == 2 && flag % 10 ==1){
+					 if(reqType == 2 && flag % 20 ==1){
 						 String Volume = HttpUtil.doPost("http://127.0.0.1:4050",
 									"{\"UAVID\":\"1\", \"ImgSrc\":\"" + fileName
 											+ "\",\"Lat\":\"" + latitude + "\",\"Lon\":\""
