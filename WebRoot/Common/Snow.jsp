@@ -693,7 +693,7 @@
 			                    color: ['white']
 			                }                            
 			        },
-			        max: 1200,
+			        max: 5,
            			min: 0,
 		           boundaryGap: [0.2, 0.2],
 		           

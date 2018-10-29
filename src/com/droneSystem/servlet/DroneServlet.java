@@ -54,7 +54,7 @@ public class DroneServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		Integer method = Integer.parseInt(req.getParameter("method"));	//≈–∂œ«Î«Ûµƒ∑Ω∑®¿‡–Õ
+		Integer method = Integer.parseInt(req.getParameter("method"));	//Âà§Êñ≠ËØ∑Ê±ÇÁöÑÊñπÊ≥ïÁ±ªÂûã
 		HttpUtil hUtil = new HttpUtil();
 		DroneManager  droneMgr = new DroneManager();
 		VideoManager vMgr = new VideoManager();
@@ -63,7 +63,7 @@ public class DroneServlet extends HttpServlet {
 		TrafficFlowManager TFMgr = new TrafficFlowManager();
 		CarNumManager carNumMgr = new CarNumManager();
 		switch (method) {
-		case 0: //≤È—ØÀ˘”–’˝‘⁄÷¥––»ŒŒÒµƒŒﬁ»Àª˙
+		case 0: //Êü•ËØ¢ÊâÄÊúâÊ≠£Âú®ÊâßË°å‰ªªÂä°ÁöÑÊó†‰∫∫Êú∫
 			JSONObject res = new JSONObject();
 			try {
 				
@@ -90,7 +90,7 @@ public class DroneServlet extends HttpServlet {
 					} catch (JSONException ex) {
 						ex.printStackTrace();
 					}
-					if(e.getClass() == java.lang.Exception.class){ //◊‘∂®“Âµƒœ˚œ¢
+					if(e.getClass() == java.lang.Exception.class){ //Ëá™ÂÆö‰πâÁöÑÊ∂àÊÅØ
 						log.debug("exception in DroneServlet-->case 0", e);
 					}else{
 						log.error("error in DroneServlet-->case 0", e);
@@ -104,7 +104,7 @@ public class DroneServlet extends HttpServlet {
 				}
 			break;
 			
-		case 1: //∏˘æ›∏ﬂÀŸπ´¬∑≤È—ØÀ˘”–’˝‘⁄÷¥––»ŒŒÒµƒŒﬁ»Àª˙
+		case 1: //Ê†πÊçÆÈ´òÈÄüÂÖ¨Ë∑ØÊü•ËØ¢ÊâÄÊúâÊ≠£Âú®ÊâßË°å‰ªªÂä°ÁöÑÊó†‰∫∫Êú∫
 			JSONObject res1 = new JSONObject();
 			try {
 				String highwayId = req.getParameter("Id");
@@ -132,7 +132,7 @@ public class DroneServlet extends HttpServlet {
 					} catch (JSONException ex) {
 						ex.printStackTrace();
 					}
-					if(e.getClass() == java.lang.Exception.class){ //◊‘∂®“Âµƒœ˚œ¢
+					if(e.getClass() == java.lang.Exception.class){ //Ëá™ÂÆö‰πâÁöÑÊ∂àÊÅØ
 						log.debug("exception in DroneServlet-->case 1", e);
 					}else{
 						log.error("error in DroneServlet-->case 1", e);
@@ -145,8 +145,8 @@ public class DroneServlet extends HttpServlet {
 					//System.out.println(res.toString());
 				}
 			break;
-		case 11: //–¬Ω®Œﬁ»Àª˙
-			System.out.println(new Timestamp(System.currentTimeMillis()) + " : Ω” ’µΩ–¬Ω®Œﬁ»Àª˙«Î«Û£°");
+		case 11: //Êñ∞Âª∫Êó†‰∫∫Êú∫
+			System.out.println(new Timestamp(System.currentTimeMillis()) + " : Êé•Êî∂Âà∞Êñ∞Âª∫Êó†‰∫∫Êú∫ËØ∑Ê±ÇÔºÅ");
 			JSONObject res11 = new JSONObject();
 			try {
 				InputStream is= null;
@@ -168,7 +168,7 @@ public class DroneServlet extends HttpServlet {
 				List<Drone> droneList = droneMgr.findByCode(Code);
 				if(droneList.size() != 0){
 					res11.put("isOK", true);
-					res11.put("msg", "≥ˆ≥ß±‡∫≈Œ™£∫" + Code + "µƒŒﬁ»Àª˙‘¯æ≠ÃÌº”π˝£°");
+					res11.put("msg", "Âá∫ÂéÇÁºñÂè∑‰∏∫Ôºö" + Code + "ÁöÑÊó†‰∫∫Êú∫ÊõæÁªèÊ∑ªÂä†ËøáÔºÅ");
 					res11.put("droneId", droneList.get(0).getId());
 					break;
 				}
@@ -187,15 +187,15 @@ public class DroneServlet extends HttpServlet {
 				
 				res11.put("isOK", true);
 				res11.put("droneId", drone.getId());
-				System.out.println("–¬Ω®Œﬁ»Àª˙≥…π¶£°");
+				System.out.println("Êñ∞Âª∫Êó†‰∫∫Êú∫ÊàêÂäüÔºÅ");
 				} catch (Exception e) {
 					try {
 						res11.put("isOK", false);
-						res11.put("msg", String.format("¥¶¿Ì ß∞‹£°¥ÌŒÛ–≈œ¢£∫%s", (e!=null && e.getMessage()!=null)?e.getMessage():"Œﬁ"));
+						res11.put("msg", String.format("Â§ÑÁêÜÂ§±Ë¥•ÔºÅÈîôËØØ‰ø°ÊÅØÔºö%s", (e!=null && e.getMessage()!=null)?e.getMessage():"Êó†"));
 					} catch (JSONException ex) {
 						ex.printStackTrace();
 					}
-					if(e.getClass() == java.lang.Exception.class){ //◊‘∂®“Âµƒœ˚œ¢
+					if(e.getClass() == java.lang.Exception.class){ //Ëá™ÂÆö‰πâÁöÑÊ∂àÊÅØ
 						log.debug("exception in DroneServlet-->case 2", e);
 					}else{
 						log.error("error in DroneServlet-->case 2", e);
@@ -208,8 +208,8 @@ public class DroneServlet extends HttpServlet {
 					//System.out.println(res.toString());
 				}
 			break;
-		case 2: //Œﬁ»Àª˙ µ ±∏¸–¬Ω”ø⁄
-			System.out.println(new Timestamp(System.currentTimeMillis()) + " : Ω” ’µΩ∏¸–¬Œﬁ»Àª˙«Î«Û£°");
+		case 2: //Êó†‰∫∫Êú∫ÂÆûÊó∂Êõ¥Êñ∞Êé•Âè£
+			System.out.println(new Timestamp(System.currentTimeMillis()) + " : Êé•Êî∂Âà∞Êõ¥Êñ∞Êó†‰∫∫Êú∫ËØ∑Ê±ÇÔºÅ");
 			JSONObject res2 = new JSONObject();
 			try {
 				InputStream is= null;
@@ -217,7 +217,7 @@ public class DroneServlet extends HttpServlet {
 				String bodyInfo = IOUtils.toString(is, "utf-8");
 				System.out.println(bodyInfo);
 				JSONObject orderSheetJson = new JSONObject(bodyInfo).getJSONObject("Drone");
-				String DroneId  = orderSheetJson.getString("droneId");	//Œﬁ»Àª˙ID
+				String DroneId  = orderSheetJson.getString("droneId");	//Êó†‰∫∫Êú∫ID
 				String Longitude = orderSheetJson.getString("longitude");
 				String Latitude = orderSheetJson.getString("latitude");
 				String Height = orderSheetJson.getString("height");
@@ -245,15 +245,15 @@ public class DroneServlet extends HttpServlet {
 				droneMgr.update(drone);
 				
 				res2.put("isOK", true);
-				System.out.println("∏¸–¬Œﬁ»Àª˙≥…π¶£°");
+				System.out.println("Êõ¥Êñ∞Êó†‰∫∫Êú∫ÊàêÂäüÔºÅ");
 				} catch (Exception e) {
 					try {
 						res2.put("isOK", false);
-						res2.put("msg", String.format("¥¶¿Ì ß∞‹£°¥ÌŒÛ–≈œ¢£∫%s", (e!=null && e.getMessage()!=null)?e.getMessage():"Œﬁ"));
+						res2.put("msg", String.format("Â§ÑÁêÜÂ§±Ë¥•ÔºÅÈîôËØØ‰ø°ÊÅØÔºö%s", (e!=null && e.getMessage()!=null)?e.getMessage():"Êó†"));
 					} catch (JSONException ex) {
 						ex.printStackTrace();
 					}
-					if(e.getClass() == java.lang.Exception.class){ //◊‘∂®“Âµƒœ˚œ¢
+					if(e.getClass() == java.lang.Exception.class){ //Ëá™ÂÆö‰πâÁöÑÊ∂àÊÅØ
 						log.debug("exception in DroneServlet-->case 2", e);
 					}else{
 						log.error("error in DroneServlet-->case 2", e);
@@ -267,7 +267,7 @@ public class DroneServlet extends HttpServlet {
 				}
 			break;
 		
-		case 3: //≤‚ ‘∑Ω∑®  ∂¡»° ”∆µ¡˜£¨±£¥Ê ”∆µŒƒº˛£¨≤¢Ω´ ”∆µ√˚≥∆¥Ê»Î ˝æ›ø‚
+		case 3: //ÊµãËØïÊñπÊ≥ï  ËØªÂèñËßÜÈ¢ëÊµÅÔºå‰øùÂ≠òËßÜÈ¢ëÊñá‰ª∂ÔºåÂπ∂Â∞ÜËßÜÈ¢ëÂêçÁß∞Â≠òÂÖ•Êï∞ÊçÆÂ∫ì
 			JSONObject res3 = new JSONObject();
 			try {
 				int droneId = Integer.parseInt(req.getParameter("droneId"));
@@ -296,7 +296,7 @@ public class DroneServlet extends HttpServlet {
 		        v.setVideo(outputFile);
 		        v.setType(ReqType);
 		        vMgr.save(v);
-		        //”…”⁄«∞∂À ”∆µ—”≥Ÿ£¨±æ¥¶—”≥Ÿ5sµ˜”√À„∑®
+		        //Áî±‰∫éÂâçÁ´ØËßÜÈ¢ëÂª∂ËøüÔºåÊú¨Â§ÑÂª∂Ëøü5sË∞ÉÁî®ÁÆóÊ≥ï
 				TimeUnit.MILLISECONDS.sleep(3500);
 				
 		        framerecorder f = new framerecorder();
@@ -341,7 +341,7 @@ public class DroneServlet extends HttpServlet {
 					} catch (JSONException ex) {
 						ex.printStackTrace();
 					}
-					if(e.getClass() == java.lang.Exception.class){ //◊‘∂®“Âµƒœ˚œ¢
+					if(e.getClass() == java.lang.Exception.class){ //Ëá™ÂÆö‰πâÁöÑÊ∂àÊÅØ
 						log.debug("exception in DroneServlet-->case 3", e);
 					}else{
 						log.error("error in DroneServlet-->case 3", e);
@@ -354,7 +354,7 @@ public class DroneServlet extends HttpServlet {
 					//System.out.println(res.toString());
 				}
 			break;
-		case 4: //≤‚ ‘∑Ω∑®
+		case 4: //ÊµãËØïÊñπÊ≥ï
 			JSONObject res4 = new JSONObject();
 			try {
 				String ts = req.getParameter("type");
@@ -378,7 +378,7 @@ public class DroneServlet extends HttpServlet {
 					} catch (JSONException ex) {
 						ex.printStackTrace();
 					}
-					if(e.getClass() == java.lang.Exception.class){ //◊‘∂®“Âµƒœ˚œ¢
+					if(e.getClass() == java.lang.Exception.class){ //Ëá™ÂÆö‰πâÁöÑÊ∂àÊÅØ
 						log.debug("exception in DroneServlet-->case 4", e);
 					}else{
 						log.error("error in DroneServlet-->case 4", e);
@@ -391,7 +391,7 @@ public class DroneServlet extends HttpServlet {
 					//System.out.println(res.toString());
 				}
 			break;
-		case 5: //≤‚ ‘∑Ω∑®
+		case 5: //ÊµãËØïÊñπÊ≥ï
 			JSONObject res5 = new JSONObject();
 			try {
 				String type = req.getParameter("type");
@@ -414,7 +414,7 @@ public class DroneServlet extends HttpServlet {
 					} catch (JSONException ex) {
 						ex.printStackTrace();
 					}
-					if(e.getClass() == java.lang.Exception.class){ //◊‘∂®“Âµƒœ˚œ¢
+					if(e.getClass() == java.lang.Exception.class){ //Ëá™ÂÆö‰πâÁöÑÊ∂àÊÅØ
 						log.debug("exception in DroneServlet-->case 6", e);
 					}else{
 						log.error("error in DroneServlet-->case 6", e);
@@ -427,68 +427,70 @@ public class DroneServlet extends HttpServlet {
 					//System.out.println(res.toString());
 				}
 			break;
-		case 6: //≤‚ ‘∑Ω∑®
+		case 6: //ÊµãËØïÊñπÊ≥ï
 			JSONObject res6 = new JSONObject();
 			try {
 				String droneId = req.getParameter("droneId");
 				Drone drone = droneMgr.findById(Integer.parseInt(droneId));
 				String type = req.getParameter("type");
-				List<Video> videos =  vMgr.findByVarProperty(new KeyValueWithOperator("drone", drone, "="));
-				Video video = videos.get(videos.size()-1);
-				int reqType = Integer.parseInt(type);
-				Double ts = 0.0;
-				Double tsLeft = 0.0;
-				Double tsRight = 0.0;
-				Timestamp time = new Timestamp(System.currentTimeMillis());
-				if(reqType == 1){
-					SnowVolumeDAO snowVDao = new SnowVolumeDAO();
-					SnowVolume snowv = (SnowVolume) snowVDao.findByVideo(video).get(0);
-					ts = snowv.getSnowVolume();
-					time = snowv.getTime();	
-				}if(reqType == 2){
-					SandVolumeDAO sandVDao = new SandVolumeDAO();
-					SandVolume sandv = (SandVolume) sandVDao.findByVideo(video).get(0);
-					ts = sandv.getSandVolume();
-					time = sandv.getTime();
-				}if(reqType == 3){
-					TrafficFlowDAO TFVDao = new TrafficFlowDAO();
-					TrafficFlow tf = (TrafficFlow) TFVDao.findByVideo(video).get(0);
-					tsLeft = tf.getVolumeLeft();
-					tsRight = tf.getVolumeRight();
-					time = tf.getTime();
-				}
-					
-				if(reqType == 3){
-					res6.put("isOK", true);
-					res6.put("tsLeft", tsLeft);
-					res6.put("tsRight", tsRight);
-					res6.put("time", time);
-				}else{
-					res6.put("isOK", true);
-					res6.put("ts", ts);
-					res6.put("time", time);
+				List<Video> videos =  vMgr.findByVarProperty(new KeyValueWithOperator("drone", drone, "="),new KeyValueWithOperator("type", Integer.parseInt(type), "="));
+				if(videos.size() != 0){
+					Video video = videos.get(videos.size()-1);
+					int reqType = Integer.parseInt(type);
+					Double ts = 0.0;
+					Double tsLeft = 0.0;
+					Double tsRight = 0.0;
+					Timestamp time = new Timestamp(System.currentTimeMillis());
+					if(reqType == 1){
+						SnowVolumeDAO snowVDao = new SnowVolumeDAO();
+						SnowVolume snowv = (SnowVolume) snowVDao.findByVideo(video).get(0);
+						ts = snowv.getSnowVolume();
+						time = snowv.getTime();	
+					}if(reqType == 2){
+						SandVolumeDAO sandVDao = new SandVolumeDAO();
+						SandVolume sandv = (SandVolume) sandVDao.findByVideo(video).get(0);
+						ts = sandv.getSandVolume();
+						time = sandv.getTime();
+					}if(reqType == 3){
+						TrafficFlowDAO TFVDao = new TrafficFlowDAO();
+						TrafficFlow tf = (TrafficFlow) TFVDao.findByVideo(video).get(0);
+						tsLeft = tf.getVolumeLeft();
+						tsRight = tf.getVolumeRight();
+						time = tf.getTime();
+					}
+						
+					if(reqType == 3){
+						res6.put("isOK", true);
+						res6.put("tsLeft", tsLeft);
+						res6.put("tsRight", tsRight);
+						res6.put("time", time);
+					}else{
+						res6.put("isOK", true);
+						res6.put("ts", ts);
+						res6.put("time", time);
+					}
 				}
 				
-				} catch (Exception e) {
-					try {
-						res6.put("isOK", false);
-					} catch (JSONException ex) {
-						ex.printStackTrace();
-					}
-					if(e.getClass() == java.lang.Exception.class){ //◊‘∂®“Âµƒœ˚œ¢
-						log.debug("exception in DroneServlet-->case 6", e);
-					}else{
-						log.error("error in DroneServlet-->case 6", e);
-					} 
-
-				}finally{
-					resp.setContentType("text/json");
-					resp.setCharacterEncoding("UTF-8");
-					resp.getWriter().write(res6.toString());
-					//System.out.println(res.toString());
+			} catch (Exception e) {
+				try {
+					res6.put("isOK", false);
+				} catch (JSONException ex) {
+					ex.printStackTrace();
 				}
+				if(e.getClass() == java.lang.Exception.class){
+					log.debug("exception in DroneServlet-->case 6", e);
+				}else{
+					log.error("error in DroneServlet-->case 6", e);
+				} 
+
+			}finally{
+				resp.setContentType("text/json");
+				resp.setCharacterEncoding("UTF-8");
+				resp.getWriter().write(res6.toString());
+				//System.out.println(res.toString());
+			}
 			break;
-		case 7: //≤‚ ‘∑Ω∑®
+		case 7: //ÊµãËØïÊñπÊ≥ï
 			JSONObject res7 = new JSONObject();
 			try {
 				CarNumDAO carNumDao = new CarNumDAO();
@@ -520,7 +522,7 @@ public class DroneServlet extends HttpServlet {
 					} catch (JSONException ex) {
 						ex.printStackTrace();
 					}
-					if(e.getClass() == java.lang.Exception.class){ //◊‘∂®“Âµƒœ˚œ¢
+					if(e.getClass() == java.lang.Exception.class){ //Ëá™ÂÆö‰πâÁöÑÊ∂àÊÅØ
 						log.debug("exception in DroneServlet-->case 7", e);
 					}else{
 						log.error("error in DroneServlet-->case 7", e);
