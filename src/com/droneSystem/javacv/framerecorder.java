@@ -44,8 +44,14 @@ public class framerecorder {
 			// 获取视频源
 			FFmpegFrameGrabber grabber = new FFmpegFrameGrabber(inputFile);
 			grabber.setOption("rtsp_transport", "http");
-			grabber.setImageWidth(576);
-		 	grabber.setImageHeight(320);
+			// 车流量要求截图分辨率较小以加快算法速度，雪阻、沙阻要求截图清晰以提高算法精度
+			if(type == 3) {
+				grabber.setImageWidth(576);
+			 	grabber.setImageHeight(320);
+			} else if(type == 1 || type == 2){
+				grabber.setImageWidth(1920);
+			 	grabber.setImageHeight(1080);
+			}
 			// 流媒体输出地址，分辨率（长，高），是否录制音频（0:不录制/1:录制）
 			FFmpegFrameRecorder recorder = new FFmpegFrameRecorder(outputFile,
 					1920, 1080, audioChannel);
@@ -117,7 +123,7 @@ public class framerecorder {
 					record.setVideo(video);
 					
 					
-					 if(reqType == 1 && flag % 45 ==1){
+					 if(reqType == 1 && flag % 10 ==1){
 						 String Volume = HttpUtil.doPost("http://127.0.0.1:4050",
 									"{\"UAVID\":\"1\", \"ImgSrc\":\"" + fileName
 											+ "\",\"Lat\":\"" + latitude + "\",\"Lon\":\""
@@ -130,7 +136,7 @@ public class framerecorder {
 						 record.setValueLeft(Double.parseDouble(resp.getString("Value")));
 						
 					 }
-					 if(reqType == 2 && flag % 45 ==1){
+					 if(reqType == 2 && flag % 10 ==1){
 						 String Volume = HttpUtil.doPost("http://127.0.0.1:4050",
 									"{\"UAVID\":\"1\", \"ImgSrc\":\"" + fileName
 											+ "\",\"Lat\":\"" + latitude + "\",\"Lon\":\""
