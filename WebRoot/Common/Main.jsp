@@ -913,7 +913,7 @@
 						showInfo(this, thepoint);//开启信息窗口
 						
 						//缩放
-						//map.centerAndZoom(new BMap.Point(thepoint.longitude, thepoint.lagitude), 15);
+						map.centerAndZoom(point, 14);
 						
 						sendURL(droneId);
 						
@@ -995,7 +995,7 @@
 					            axisData //横轴数据
 					        ]		       
 						  ]); */
-						}, 500);
+						},500);
 				     } 
 				     
 				     function getEcharts2(droneId){
