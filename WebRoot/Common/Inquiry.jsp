@@ -14,6 +14,8 @@
 <script type="text/javascript" src="../JScript/admin.js"></script>
 <!-- <script type="text/javascript" src="../JScript/inquiry.js"></script> -->
 <script type="text/javascript" src="../JScript/json2.js"></script>
+<link rel="stylesheet" type="text/css" href="../Inc/Style/video-js.css" />
+<script type="text/javascript" src="http://vjs.zencdn.net/5.18.4/video.min.js"></script>
 <title>内蒙古无人机项目管理系统-查询统计</title>
 </head>
 <body>
@@ -82,10 +84,34 @@
 	</div>
 	<div class="myclear"></div>	
 	
+	<div class="videoinquiry" id="videoquery">
+		<h5 class="title_sample"><span id="videoplaying">视频播放</span><a id="userlist_close" href="javascript:void(0);"><img src="../images/cross.png" /></a></h5>
+		<div id="video" style="width:2500px;height:1410px">
+		<object type='application/x-vlc-plugin' id='vlc' events='True' width="2021px" height="1505px" pluginspage="http://www.videolan.org" codebase="http://downloads.videolan.org/pub/videolan/vlc-webplugins/2.0.6/npapi-vlc-2.0.6.tar.xz">
+        <!-- <param name='mrl' value='../Inc/MOV_0030.MOV' /> -->        
+		<!-- <param name='mrl' value='rtsp://47.94.19.230:10554/gzrtsp.sdp' /> -->
+        <param name='volume' value='50' />
+        <param name='autoplay' value='false' />
+        <param name='loop' value='false' />
+        <param name='fullscreen' value='false' />
+        </object>
+			<!--  <video id="my-video" class="video-js" controls preload="auto" width="2500px" height="1410px"
+            poster="../images/8.jpg" data-setup="{}">
+			<source src="../Inc/MOV_0030.MOV" type="video/mov">
+				 <source src="rtmp://live.hkstv.hk.lxdns.com/live/hks" type="rtmp/flv">
+				<p class="vjs-no-js">
+					To view this video please enable JavaScript, and consider upgrading to a web browser that
+				<a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+				</p>
+			</video>
+			<script src="http://vjs.zencdn.net/5.10.4/video.js"></script> -->
+			</div>
+			<p class="endpages"></p>
+	</div> 
 	
 	<!--弹框001-->
 	<div class="userlist" id="userlist">
-		<h5 class="title_sample"><span>用户列表</span><a id="userlist_close" href="javacript:void(0);" onclick="return false"><img src="../images/cross.png" /></a></h5>
+		<h5 class="title_sample"><span>用户列表</span><a id="userlist_close" href="javascript:void(0);" ><img src="../images/cross.png" /></a></h5>
 		<div class="fleft sousuolf"><a onclick="addUser()"><img src="../images/addperson.png" /></a></div>
 		<div class="fright sousuort"><input type="text" /><button><img src="../images/searchicon.png" /></button></div>
 		<div class="myclear"></div> 
@@ -94,7 +120,7 @@
 		<p class="endpages" id="user"></p>
 	</div> 
 	<div id="new_user" style="position:absolute; z-index:101; left:2750px; top:500px; width:1250px; height:900px;display:none; background:url(../images/personbg.png) repeat-x top">
-		<h5 class="title_sample"><span>添加用户</span><a id="userlist_close" href="javacript:void(0);" onclick="return false" ><img src="../images/cross.png" /></a></h5>
+		<h5 class="title_sample"><span>添加用户</span><a id="userlist_close" href="javascript:void(0);" ><img src="../images/cross.png" /></a></h5>
 		<form id="new_user_form" style="padding:10px 20px 10px 50px;font-size:40px;" method="post">
 			<tr style="width:1000px;margin-left:auto;margin-right:auto;"><td style="font-size:40px;">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名 : </td><td><input type="text" name="Name" class="easyui-validatebox" required="true" style="width:70%;margin:25px;padding:10px 15px 10px 15px"></td></tr><br/>
 			<tr style="width:1000px;margin-left:auto;margin-right:auto;"><td align="center" width="30%">用&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;名 : </td><td align="center" width="70%"><input type="text" name="userName" class="easyui-validatebox" required="true" style="width:70%;margin:25px;padding:10px 15px 10px 15px"></td></tr><br/>
@@ -125,7 +151,7 @@
 		</form>
 	</div>
 	<div id="modify_user" style="position:absolute; z-index:101; left:2750px; top:500px; width:1250px; height:900px;display:none; background:url(../images/personbg.png) repeat-x top">
-		<h5 class="title_sample"><span>修改用户</span><a id="userlist_close" href="javacript:void(0);" onclick="return false" ><img src="../images/cross.png" /></a></h5>
+		<h5 class="title_sample"><span>修改用户</span><a id="userlist_close" href="javacript:void(0);" ><img src="../images/cross.png" /></a></h5>
 		<form id="modify_user_form" style="padding:10px 20px 10px 50px;font-size:40px;" method="post">
 			<tr style="width:1000px;margin-left:auto;margin-right:auto;"><td>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名 : </td><td><input type="text" name="Name" class="easyui-validatebox" required="true" style="width:70%;margin:25px;padding:10px 15px 10px 15px"></td></tr>
 			<tr style="width:1000px;margin-left:auto;margin-right:auto;">
@@ -157,8 +183,8 @@
 	</div>
 	<!--弹框001结束-->
 	<div class="userlist" id="rolelist">
-		<h5 class="title_sample"><span>角色列表</span><a href="#"><img src="../images/cross.png" /></a></h5>
-		<div class="fleft sousuolf"><a href="#"><img src="../images/addperson.png" /></a><a href="#"><img src="../images/delectperson.png" /></a></div>
+		<h5 class="title_sample"><span>角色列表</span><a href="javascript:void(0)"><img src="../images/cross.png" /></a></h5>
+		<div class="fleft sousuolf"><a href="javascript:void(0)"><img src="../images/addperson.png" /></a><a href="javascript:void(0)"><img src="../images/delectperson.png" /></a></div>
 		<div class="myclear"></div>
 		<!-------由于权限描述字数不定，所以没办法确定放多少条目，开发自己斟酌-------->
 		<table width="100%" border="0" cellpadding="0" cellspacing="0" class="person_name">
@@ -338,8 +364,6 @@
 			data:queryJson,
 			//data:{video.page:page},
 			success: function(data){
-				console.log(queryJson);
-				console.log(data);
 			    initVideoPage(data.total);
 				showVideo(data); 			
 			}
@@ -360,9 +384,9 @@
 			tr += "<td width='10%' class='video_id'>" + item.id + "</td>";   
 			tr += "<td width='15%'>" + item.droneCode + "</td>";  
 			tr += "<td width='25%'>" + item.time + "</td>"; 
-			tr += "<td width='25%'>" + item.video + "</td>";       
+			tr += "<td width='25%' class='video_name'>" + item.video + "</td>";       
 			tr += "<td width='15%' class='video_type'>" + item.type  + "</td>";				
-			tr += "<td width='10%'><a id='trafficbutton' href='#' onclick='showCharts(this)'>查看</a></td>";   
+			tr += "<td width='10%'><a id='trafficbutton' href='javascript:void(0)' onclick='showCharts(this)'>查看</a></td>";   
 			  										
 			$("#videolist").append("<tr>"+tr+"</tr>");			
 									
@@ -372,6 +396,7 @@
 	function showCharts(element){
 		  var videoId = $(element).parent().parent().find(".video_id").text();
 		  var videoType = $(element).parent().parent().find(".video_type").text();
+		  var videoName = $(element).parent().parent().find(".video_name").text();
           var url = '/droneSystem/VideoServlet.do?method=1';
 		  var paramData={id:videoId};
 		  $.ajax({
@@ -384,6 +409,17 @@
 		          console.log("get redis error!!!");
 		      },
 		      success: function(data){ 
+		      $(".videoinquiry").show();
+		      $("#videoplaying").text(videoName);
+		      var vlc = document.getElementById("vlc"); 
+			  var id = 0; 
+			  id = vlc.playlist.add("../Inc/"+videoName); //添加mrl到播放列表						
+			  vlc.playlist.playItem(id);  //播放播放列表里的序列
+		      /* videojs("my-video").ready(function(){
+							var myPlayer = this;
+							myPlayer.play();
+							}); */
+							closevideo();
 		      if(videoType==3){
 		       	        
 		         var xdata = [];
@@ -394,7 +430,7 @@
 			            ydata1[i] = data.carNums[i].valueLeft;
 			            ydata2[i] = data.carNums[i].valueRight;
 			     } 
-			     console.log(xdata);
+			    // console.log(xdata);
 		         aFun(xdata,ydata1,ydata2);
 		        $('.trafficarea').show();
                 $('.sandarea').hide();			
@@ -451,6 +487,14 @@
 				}
 				});		      						      
    }
+   
+   function closevideo()
+	 {	
+	 	 $(".title_sample a img").click(function (){	 	      
+	          $(this).parent().parent().parent().hide("fast");
+	         
+	  });
+	 }
    	
 	/* *
 	 * @brief 初始化页面控件
