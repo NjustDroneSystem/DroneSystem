@@ -70,7 +70,7 @@
 			</video>
 			-->
 		<object type='application/x-vlc-plugin' id='vlc' events='True' width="2500px" height="1410px" pluginspage="http://www.videolan.org" codebase="http://downloads.videolan.org/pub/videolan/vlc-webplugins/2.0.6/npapi-vlc-2.0.6.tar.xz">
-<!-- <param name='mrl' value='../Inc/MOV_0030.MOV' /> -->        
+<!-- <param name='mrl' value='../Inc/MOV_0030.MOV' />  -->       
 		<param name='mrl' value='rtsp://47.94.19.230:10554/gzrtsp.sdp' />
         <param name='volume' value='50' />
         <param name='autoplay' value='false' />
@@ -395,7 +395,7 @@
 	<!--弹框003结束-->
 	<!--弹框004-->
 	<div class="userlist" id="rescueplanlist">
-		<h5 class="title_sample"><span>当前为Ⅲ级应急响应资源配置方案</span><a href="#"><img src="../images/cross.png" /></a></h5>
+		<h5 class="title_sample"><span>当前为Ⅲ级应急响应资源配置方案</span><a href="javascript:void(0)"><img src="../images/cross.png" /></a></h5>
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="person_name">
 		  <tr>
 			<th align="center" width="12%" style="height:145px">类型</th>
@@ -693,7 +693,7 @@
 			                    color: ['white']
 			                }                            
 			        },
-			        max: 1200,
+			        max: 5,
            			min: 0,
 		           boundaryGap: [0.2, 0.2],
 		           
@@ -724,7 +724,7 @@
 	var lastData = 0;
 	clearInterval(app);
 	var app = {};
-	app.count = 11;
+	app.count = 10;
 	myChart1.setOption(option1);
     $(window).resize(function(){
        myChart1.resize();
@@ -776,16 +776,23 @@
 		            marker.setLabel(label);  //添加标签
 		            
 		            (function(){
+		                var droneId = data.drones[i].droneId;
 			            var thepoint = data.drones[i]; 
 			            marker.addEventListener("click", function (){
 			            //map.panTo(point);		            
 						showInfo(this, thepoint);//开启信息窗口
-						test();
-						videojs("my-video").ready(function(){
+						sendURL(droneId);
+						var vlc = document.getElementById("vlc"); 
+						var id = 0; 
+						//id = vlc.playlist.add(videoUrl); //添加mrl到播放列表
+						id = vlc.playlist.add("../Inc/MOV_0030.MOV"); //添加mrl到播放列表						
+						vlc.playlist.playItem(id);  //播放播放列表里的序列
+						
+						/* videojs("my-video").ready(function(){
 							var myPlayer = this;
 							myPlayer.play();
-						});
-						getEcharts();
+						}); */
+						getEcharts(droneId);
 			            });
 		            })();		            		           		
 			function showInfo(thisMarker,point){
@@ -795,10 +802,10 @@
 					 var infoWindow = new BMap.InfoWindow(content, opts);
 					 thisMarker.openInfoWindow(infoWindow);
 			       }	
-			       function getEcharts(){
+			       function getEcharts(droneId){
 				          app.timeTicket = setInterval(function (){
 						  var url = '/droneSystem/DroneServlet.do?method=6';
-						  var paramData={type:3,videoId:5};
+						   var paramData={type:1,droneId:droneId};
 						  $.ajax({
 						      url: url,
 						      type: 'post',
@@ -811,8 +818,9 @@
 						      success: function(data){
 						          if(data != null){
 						          
-						          //lastData = data.ts;
-						          lastData = Math.round(Math.random() * 1000);
+						          lastData = data.ts;
+						          //console.log(data);
+						          //lastData = Math.round(Math.random() * 1000);
 						        
 						          }
 						      }
@@ -822,7 +830,7 @@
 						    var data0 = option1.series[0].data;
 						    //var data1 = option1.series[1].data;
 						    data0.shift();
-						    data0.push(Math.round(Math.random() * 1000));
+						    data0.push(lastData);
 						    //data1.shift();
 						    //data1.push((Math.random() * 10 + 5).toFixed(1) - 0);
 						    option1.xAxis[0].data.shift();
@@ -840,7 +848,7 @@
 					            axisData //横轴数据
 					        ]		       
 						  ]); */
-						}, 3000);
+						}, 500);
 				     }            		           		
 				}	
 		}	
@@ -849,13 +857,16 @@
 	
 	
 	
-	 function test(){
+	function sendURL(droneId){
 	  $.ajax({
        	 	type: "post", 
            	cache: false, 
            	dataType: 'json',
            	url: '/droneSystem/DroneServlet.do?method=3',
-           	data:{type:1,inputStream:"D:\\test\\XZ.mp4"},
+          	data:{droneId:droneId, type:3,inputStream:"D:\\test\\freeway_clip_3m.mov"},
+//			data:{droneId:droneId, type:3,inputStream:"D:\\test\\total_Receive_HDMI.h264"},
+//			data:{droneId:droneId, type:3,inputStream:"rtsp://47.94.19.230:10554/gzrtsp.sdp"},
+//			data:{droneId:droneId, type:3,inputStream:"rtsp://47.94.19.230:10554/stream0.sdp"},
             success: function(data){
             //alert(321);
          		videoId = data.videoId;
