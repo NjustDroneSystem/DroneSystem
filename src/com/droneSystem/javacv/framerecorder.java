@@ -34,7 +34,7 @@ import com.droneSystem.manager.TrafficFlowManager;
 //获取流地址并且保存视频帧发送出去，并且录制视频帧保存本地
 public class framerecorder {
 	public static String videoFramesPath = "D:/test1";
-
+	public static String videoFilePath = "E:/apache-tomcat-7.0.39-windows-x64/webapps/droneSystem/Inc/";
 	public static void frameRecord(String inputFile, String outputFile,
 			int audioChannel, int type, int id, Drone drone, Video video)
 			throws Exception, org.bytedeco.javacv.FrameRecorder.Exception {
@@ -53,11 +53,12 @@ public class framerecorder {
 			 	grabber.setImageHeight(1080);
 			}
 			// 流媒体输出地址，分辨率（长，高），是否录制音频（0:不录制/1:录制）
-			FFmpegFrameRecorder recorder = new FFmpegFrameRecorder(outputFile,
+			FFmpegFrameRecorder recorder = new FFmpegFrameRecorder(videoFilePath+outputFile,
 					1920, 1080, audioChannel);
 			recorder.setVideoCodec(avcodec.AV_CODEC_ID_H264); // avcodec.AV_CODEC_ID_H264，编码
 			recorder.setInterleaved(true);
-			recorder.setFrameRate(15);
+			recorder.setFrameRate(8);
+			//recorder.setVideoBitrate(3000000);
 			// 开始取视频源
 			Long now = System.currentTimeMillis();
 			recordByFrame(grabber, recorder, isStart, type, id, drone, video);
@@ -98,12 +99,14 @@ public class framerecorder {
 			recorder.start();
 			Frame frame = null;
 			int flag = 0;
+			String fileName;
+			File outPut;
 			while (status && (frame = grabber.grabFrame()) != null) {
 				recorder.record(frame);
 				//if(flag % 2 == 0){
-					String fileName = videoFramesPath + "/img_"
+					fileName = videoFramesPath + "/img_"
 							+ String.valueOf(flag) + ".jpg";
-					File outPut = new File(fileName);
+					outPut = new File(fileName);
 					frame = grabber.grabImage();
 					if (frame != null) {
 						Long now = System.currentTimeMillis();
@@ -134,7 +137,8 @@ public class framerecorder {
 						 snowv.setTime(time);
 						 snowVMgr.update(snowv);
 						 record.setValueLeft(Double.parseDouble(resp.getString("Value")));
-						
+						 record.setValueRight(0.0);
+						 reMgr.save(record);
 					 }
 					 if(reqType == 2 && flag % 20 ==1){
 						 String Volume = HttpUtil.doPost("http://127.0.0.1:4050",
@@ -147,6 +151,8 @@ public class framerecorder {
 						 sandv.setTime(time);
 						 sandVMgr.update(sandv);
 						 record.setValueLeft(Double.parseDouble(resp.getString("Value")));
+						 record.setValueRight(0.0);
+						 reMgr.save(record);
 					 }
 					if (reqType == 3) {
 						String Volume = HttpUtil.doPost("http://127.0.0.1:4050",

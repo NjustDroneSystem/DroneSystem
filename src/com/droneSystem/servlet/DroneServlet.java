@@ -297,7 +297,7 @@ public class DroneServlet extends HttpServlet {
 		        v.setType(ReqType);
 		        vMgr.save(v);
 		        //由于前端视频延迟，本处延迟调用算法
-				TimeUnit.MILLISECONDS.sleep(3000);
+				TimeUnit.MILLISECONDS.sleep(2000);
 				
 		        framerecorder f = new framerecorder();
 		        if(ReqType == 1){
@@ -433,60 +433,63 @@ public class DroneServlet extends HttpServlet {
 				String droneId = req.getParameter("droneId");
 				Drone drone = droneMgr.findById(Integer.parseInt(droneId));
 				String type = req.getParameter("type");
-				List<Video> videos =  vMgr.findByVarProperty(new KeyValueWithOperator("drone", drone, "="));
-				Video video = videos.get(videos.size()-1);
-				int reqType = Integer.parseInt(type);
-				Double ts = 0.0;
-				Double tsLeft = 0.0;
-				Double tsRight = 0.0;
-				Timestamp time = new Timestamp(System.currentTimeMillis());
-				if(reqType == 1){
-					SnowVolumeDAO snowVDao = new SnowVolumeDAO();
-					SnowVolume snowv = (SnowVolume) snowVDao.findByVideo(video).get(0);
-					ts = snowv.getSnowVolume();
-					time = snowv.getTime();	
-				}if(reqType == 2){
-					SandVolumeDAO sandVDao = new SandVolumeDAO();
-					SandVolume sandv = (SandVolume) sandVDao.findByVideo(video).get(0);
-					ts = sandv.getSandVolume();
-					time = sandv.getTime();
-				}if(reqType == 3){
-					TrafficFlowDAO TFVDao = new TrafficFlowDAO();
-					TrafficFlow tf = (TrafficFlow) TFVDao.findByVideo(video).get(0);
-					tsLeft = tf.getVolumeLeft();
-					tsRight = tf.getVolumeRight();
-					time = tf.getTime();
-				}
-					
-				if(reqType == 3){
-					res6.put("isOK", true);
-					res6.put("tsLeft", tsLeft);
-					res6.put("tsRight", tsRight);
-					res6.put("time", time);
-				}else{
-					res6.put("isOK", true);
-					res6.put("ts", ts);
-					res6.put("time", time);
+				List<Video> videos =  vMgr.findByVarProperty(new KeyValueWithOperator("drone", drone, "="),new KeyValueWithOperator("type", Integer.parseInt(type), "="));
+				if(videos.size() != 0){
+					Video video = videos.get(videos.size()-1);
+					int reqType = Integer.parseInt(type);
+					Double ts = 0.0;
+					Double tsLeft = 0.0;
+					Double tsRight = 0.0;
+					Timestamp time = new Timestamp(System.currentTimeMillis());
+					if(reqType == 1){
+						SnowVolumeDAO snowVDao = new SnowVolumeDAO();
+						SnowVolume snowv = (SnowVolume) snowVDao.findByVideo(video).get(0);
+						ts = snowv.getSnowVolume();
+						time = snowv.getTime();	
+					}if(reqType == 2){
+						SandVolumeDAO sandVDao = new SandVolumeDAO();
+						SandVolume sandv = (SandVolume) sandVDao.findByVideo(video).get(0);
+						ts = sandv.getSandVolume();
+						time = sandv.getTime();
+					}if(reqType == 3){
+						TrafficFlowDAO TFVDao = new TrafficFlowDAO();
+						TrafficFlow tf = (TrafficFlow) TFVDao.findByVideo(video).get(0);
+						tsLeft = tf.getVolumeLeft();
+						tsRight = tf.getVolumeRight();
+						time = tf.getTime();
+					}
+						
+					if(reqType == 3){
+						res6.put("isOK", true);
+						res6.put("tsLeft", tsLeft);
+						res6.put("tsRight", tsRight);
+						res6.put("time", time);
+					}else{
+						res6.put("isOK", true);
+						res6.put("ts", ts);
+						res6.put("time", time);
+					}
 				}
 				
-				} catch (Exception e) {
-					try {
-						res6.put("isOK", false);
-					} catch (JSONException ex) {
-						ex.printStackTrace();
-					}
-					if(e.getClass() == java.lang.Exception.class){ //自定义的消息
-						log.debug("exception in DroneServlet-->case 6", e);
-					}else{
-						log.error("error in DroneServlet-->case 6", e);
-					} 
-
-				}finally{
-					resp.setContentType("text/json");
-					resp.setCharacterEncoding("UTF-8");
-					resp.getWriter().write(res6.toString());
-					//System.out.println(res.toString());
+				
+			} catch (Exception e) {
+				try {
+					res6.put("isOK", false);
+				} catch (JSONException ex) {
+					ex.printStackTrace();
 				}
+				if(e.getClass() == java.lang.Exception.class){ //自定义的消息
+					log.debug("exception in DroneServlet-->case 6", e);
+				}else{
+					log.error("error in DroneServlet-->case 6", e);
+				} 
+
+			}finally{
+				resp.setContentType("text/json");
+				resp.setCharacterEncoding("UTF-8");
+				resp.getWriter().write(res6.toString());
+				//System.out.println(res.toString());
+			}
 			break;
 		case 7: //测试方法
 			JSONObject res7 = new JSONObject();

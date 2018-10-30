@@ -115,10 +115,10 @@ public class VideoServlet extends HttpServlet {
 //				List<CarNum> resultList = cnMgr.findByVarProperty(new KeyValueWithOperator("video", v, "="));
 //				int listSize = resultList.size();
 				int listSize = recordList.size();
-				int interval = listSize/100 + 1;
+				int interval = listSize/200 + 1;
 				int reqSize = listSize/interval;
 				JSONArray options = new JSONArray();
-				for(int i = 0; i < reqSize; i = i + interval){
+				for(int i = 0; i < listSize; i = i + interval){
 					JSONObject option = new JSONObject();
 //					CarNum cn = resultList.get(i);
 //					option.put("carNumLeft", cn.getCarNumLeft());
