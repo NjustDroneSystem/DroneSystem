@@ -40,9 +40,9 @@
 		<div class="fright">
 		 <a id="drop_down" href="javascript:void(0)" style="margin-right:29px">admin<img src="../images/down_sanjiao.png" /></a><a id="logout" href="javascript:void(0)" onclick="doLogout()" style="margin-left:0px"><img src="../images/lines10.png" />退出</a>
 		 <div class="js_list001" id="drop_list">
-			<p id="p1"><a href="#all" >用户列表</a></p>
-			<p id="p2"><a href="#all" >角色列表</a></p>
-			<p id="p3"><a href="#all" >权限列表</a></p>
+			<p id="p1"><a href="javascript:void(0)" >用户列表</a></p>
+			<p id="p2"><a href="javascript:void(0)" >角色列表</a></p>
+			<p id="p3"><a href="javascript:void(0)" >权限列表</a></p>
 		</div> 
 		</div>
 	</div>
@@ -106,7 +106,7 @@
 			<tr style="width:1000px;margin-left:auto;margin-right:auto;"><td style="font-size:40px;">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名 : </td><td><input type="text" name="Name" class="easyui-validatebox" required="true" style="width:70%;margin:25px;padding:10px 15px 10px 15px"></td></tr><br/>
 			<tr style="width:1000px;margin-left:auto;margin-right:auto;"><td align="center" width="30%">用&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;名 : </td><td align="center" width="70%"><input type="text" name="userName" class="easyui-validatebox" required="true" style="width:70%;margin:25px;padding:10px 15px 10px 15px"></td></tr><br/>
 			<tr style="width:1000px;margin-left:auto;margin-right:auto;">
-				<td>所&nbsp;属&nbsp;部&nbsp;门 : </td>s
+				<td>所&nbsp;属&nbsp;部&nbsp;门 : </td>
 				<td>
 					<select id="department" class="easyui-validatebox" name="DepartmentId" style="width:73%;margin:25px;padding:10px 15px 10px 15px" required="true">
 						<option value="1">财务部</option>

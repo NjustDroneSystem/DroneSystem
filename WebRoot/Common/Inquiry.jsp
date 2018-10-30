@@ -36,9 +36,9 @@
 		<div class="fright">
 		 <a id="drop_down" href="javascript:void(0)" style="margin-right:29px">admin<img src="../images/down_sanjiao.png" /></a><a id="logout" href="javascript:void(0)" style="margin-left:0px" onclick="doLogout()"><img src="../images/lines10.png" />退出</a>
 		 <div class="js_list001" id="drop_list">
-			<p id="p1"><a href="#all">用户列表</a></p>
-			<p id="p2"><a href="#all">角色列表</a></p>
-			<p id="p3"><a href="#all">权限列表</a></p>
+			<p id="p1"><a href="javascript:void(0)">用户列表</a></p>
+			<p id="p2"><a href="javascript:void(0)">角色列表</a></p>
+			<p id="p3"><a href="javascript:void(0)">权限列表</a></p>
 		</div> 
 		</div>
 	</div>
@@ -111,7 +111,7 @@
 	
 	<!--弹框001-->
 	<div class="userlist" id="userlist">
-		<h5 class="title_sample"><span>用户列表</span><a id="userlist_close" href="javascript:void(0);" ><img src="../images/cross.png" /></a></h5>
+		<h5 class="title_sample"><span>用户列表</span><a id="userlist_close" href="javascript:void(0)" ><img src="../images/cross.png" /></a></h5>
 		<div class="fleft sousuolf"><a onclick="addUser()"><img src="../images/addperson.png" /></a></div>
 		<div class="fright sousuort"><input type="text" /><button><img src="../images/searchicon.png" /></button></div>
 		<div class="myclear"></div> 

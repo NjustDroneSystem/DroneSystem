@@ -40,9 +40,9 @@
 		<div class="fright">
 		 <a id="drop_down" href="javascript:void(0)" style="margin-right:29px">admin<img src="../images/down_sanjiao.png" /></a><a id="logout" href="javascript:void(0)" onclick="doLogout()" style="margin-left:0px"><img src="../images/lines10.png" />退出</a>
 		 <div class="js_list001" id="drop_list">
-			<p id="p1"><a href="#all" >用户列表</a></p>
-			<p id="p2"><a href="#all" >角色列表</a></p>
-			<p id="p3"><a href="#all" >权限列表</a></p>
+			<p id="p1"><a href="javascript:void(0)" >用户列表</a></p>
+			<p id="p2"><a href="javascript:void(0)" >角色列表</a></p>
+			<p id="p3"><a href="javascript:void(0)" >权限列表</a></p>
 		</div> 
 		</div>
 	</div>
@@ -93,7 +93,7 @@
 	
 	<!--弹框001-->
 	<div class="userlist" id="userlist">
-		<h5 class="title_sample"><span>用户列表</span><a id="userlist_close" href="javacript:void(0);" onclick="return false"><img src="../images/cross.png" /></a></h5>
+		<h5 class="title_sample"><span>用户列表</span><a id="userlist_close" href="javascript:void(0)"><img src="../images/cross.png" /></a></h5>
 		<div class="fleft sousuolf"><a onclick="addUser()"><img src="../images/addperson.png" /></a></div>
 		<div class="fright sousuort"><input type="text" /><button><img src="../images/searchicon.png" /></button></div>
 		<div class="myclear"></div> 
@@ -102,7 +102,7 @@
 		<p class="endpages" id="user"></p>
 	</div> 
 	<div id="new_user" style="position:absolute; z-index:101; left:2750px; top:500px; width:1250px; height:900px;display:none; background:url(../images/personbg.png) repeat-x top">
-		<h5 class="title_sample"><span>添加用户</span><a id="userlist_close" href="javacript:void(0);" onclick="return false" ><img src="../images/cross.png" /></a></h5>
+		<h5 class="title_sample"><span>添加用户</span><a id="userlist_close" href="javascript:void(0);" ><img src="../images/cross.png" /></a></h5>
 		<form id="new_user_form" style="padding:10px 20px 10px 50px;font-size:40px;" method="post">
 			<tr style="width:1000px;margin-left:auto;margin-right:auto;"><td style="font-size:40px;">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名 : </td><td><input type="text" name="Name" class="easyui-validatebox" required="true" style="width:70%;margin:25px;padding:10px 15px 10px 15px"></td></tr><br/>
 			<tr style="width:1000px;margin-left:auto;margin-right:auto;"><td align="center" width="30%">用&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;名 : </td><td align="center" width="70%"><input type="text" name="userName" class="easyui-validatebox" required="true" style="width:70%;margin:25px;padding:10px 15px 10px 15px"></td></tr><br/>
@@ -133,7 +133,7 @@
 		</form>
 	</div>
 	<div id="modify_user" style="position:absolute; z-index:101; left:2750px; top:500px; width:1250px; height:900px;display:none; background:url(../images/personbg.png) repeat-x top">
-		<h5 class="title_sample"><span>修改用户</span><a id="userlist_close" href="javacript:void(0);" onclick="return false" ><img src="../images/cross.png" /></a></h5>
+		<h5 class="title_sample"><span>修改用户</span><a id="userlist_close" href="javascript:void(0);" ><img src="../images/cross.png" /></a></h5>
 		<form id="modify_user_form" style="padding:10px 20px 10px 50px;font-size:40px;" method="post">
 			<tr style="width:1000px;margin-left:auto;margin-right:auto;"><td>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名 : </td><td><input type="text" name="Name" class="easyui-validatebox" required="true" style="width:70%;margin:25px;padding:10px 15px 10px 15px"></td></tr>
 			<tr style="width:1000px;margin-left:auto;margin-right:auto;">

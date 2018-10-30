@@ -31,7 +31,7 @@
 			tr += "<td>" + item.Education  + "</td>";     
 			tr += "<td>" + item.Status + "</td>";    
 			tr += "<td>" + item.CancelDate + "</td>";     					
-			tr += "<td><a href='#all' onclick='prepareToModifyUser(this)'>编辑</a><a href='#all' onclick='deleteUser(this)'>删除</a></td>";   
+			tr += "<td><a href='javascript:void(0)' onclick='prepareToModifyUser(this)'>编辑</a><a href='javascript:void(0)' onclick='deleteUser(this)'>删除</a></td>";   
 			  										
 			$("#usertable").append("<tr>"+tr+"</tr>");			
 									
@@ -81,18 +81,18 @@
 		totalPage = Math.ceil(totalCntOfUser / 10);
 		var aLabel = '';
 		if (totalPage >= 3) {
-			aLabel += '<a class="change_page" href="#all">上一页</a>'
-			aLabel += '<a class="change_page" href="#all">1</a>';
-			aLabel += '<a href="#all">...</a>';
-			aLabel += '<a class="change_page" href="#all">'+totalPage+'</a>';
-			aLabel += '<a class="change_page" href="#all">下一页</a><span>到第<input id="switch_page" type="text" />页<button id="confirm_page">确定</button></span>'
+			aLabel += '<a class="change_page" href="javascript:void(0)">上一页</a>'
+			aLabel += '<a class="change_page" href="javascript:void(0)">1</a>';
+			aLabel += '<a href="javascript:void(0)">...</a>';
+			aLabel += '<a class="change_page" href="javascript:void(0)">'+totalPage+'</a>';
+			aLabel += '<a class="change_page" href="javascript:void(0)">下一页</a><span>到第<input id="switch_page" type="text" />页<button id="confirm_page">确定</button></span>'
 			$("#user").append(aLabel);
 		} else {
-			aLabel += '<a class="change_page" href="#all">上一页</a>'
+			aLabel += '<a class="change_page" href="javascript:void(0)">上一页</a>'
 			for(var i = 1; i <= totalPage; i++){
-				aLabel += '<a class="change_page" href="#all">'+i+'</a>';
+				aLabel += '<a class="change_page" href="javascript:void(0)">'+i+'</a>';
 			}
-			aLabel += '<a class="change_page" href="#all">下一页</a><span>到第<input id="switch_page" type="text" />页<button id="confirm_page">确定</button></span>'
+			aLabel += '<a class="change_page" href="javascript:void(0)">下一页</a><span>到第<input id="switch_page" type="text" />页<button id="confirm_page">确定</button></span>'
 			$("#user").append(aLabel);
 		}
 		$(".change_page").click(function(){
