@@ -29,7 +29,7 @@
 			<li><a href="Main.jsp">流量信息</a></li>
 			<li><a href="Snow.jsp">雪阻信息</a></li>
 			<li><a href="Sand.jsp">沙阻信息</a></li>
-			<li><a href="javascript:void(0)" onclick="ale()">红外信息</a></li>
+			<li><a href="Infrared.jsp">红外信息</a></li>
 			<li><a href="Inquiry.jsp" class="pagenow">查询统计</a></li>
 		</ul>
 		</div>

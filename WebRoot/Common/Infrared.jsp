@@ -9,17 +9,17 @@
 <script type="text/javascript" src="http://api.map.baidu.com/library/TrafficControl/1.4/src/TrafficControl_min.js" charset="utf-8"></script>
 <link rel="stylesheet" type="text/css" href="../Inc/Style/themes/default/easyui.css" />
 <link rel="stylesheet" type="text/css" href="../Inc/Style/Style.css" />
-<link rel="stylesheet" type="text/css" href="../Inc/Style/video-js.css" >
+<link rel="stylesheet" type="text/css" href="../Inc/Style/video-js.css" />
 <script type="text/javascript" src="../Inc/JScript/jquery-1.6.min.js"></script>
 <script type="text/javascript" src="../Inc/JScript/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../Inc/JScript/locale/easyui-lang-zh_CN.js" charset="utf-8"></script>
 <script type="text/javascript" src="../JScript/upload.js"></script>
 <script type="text/javascript" src="../JScript/admin.js"></script>
 <script type="text/javascript" src="../JScript/map.js"></script>
-<script type="text/javascript" src="../JScript/chart1.js"></script>
-<script type="text/javascript" src="../JScript/chart2.js"></script>
+<!-- <script type="text/javascript" src="../JScript/chart1.js"></script> -->
+<!-- <script type="text/javascript" src="../JScript/chart2.js"></script> -->
 <script type="text/javascript" src="../JScript/json2.js"></script>
-<script type="text/javascript" src="http://vjs.zencdn.net/5.18.4/video.min.js"></script>
+<!-- <script type="text/javascript" src="http://vjs.zencdn.net/5.18.4/video.min.js"></script> -->
 <title>内蒙古无人机项目管理系统-红外</title>
 </head>
 <body>
@@ -33,197 +33,137 @@
 			<li><a href="Main.jsp">流量信息</a></li>
 			<li><a href="Snow.jsp">雪阻信息</a></li>
 			<li><a href="Sand.jsp">沙阻信息</a></li>
-			<li><a href="javascript:void(0)" onclick="ale()">红外信息</a></li>
-			<li><a href="javascript:void(0)" onclick="ale()">查询统计</a></li>
+			<li><a href="Infrared.jsp" class="pagenow">红外信息</a></li>
+			<li><a href="Inquiry.jsp">查询统计</a></li>
 		</ul>
 		</div>
 		<div class="fright">
-		 <a id="drop_down" href="javascript:void(0)">admin<img src="../images/down_sanjiao.png" /></a><a id="logout" href="javascript:void(0)" onclick="doLogout()"><img src="../images/lines10.png" />退出</a>
+		 <a id="drop_down" href="javascript:void(0)" style="margin-right:29px">admin<img src="../images/down_sanjiao.png" /></a><a id="logout" href="javascript:void(0)" onclick="doLogout()" style="margin-left:0px"><img src="../images/lines10.png" />退出</a>
 		 <div class="js_list001" id="drop_list">
-			<p id="p1"><a href="#">用户列表</a></p>
-			<p id="p2"><a href="#">角色列表</a></p>
-			<p id="p3"><a href="#">权限列表</a></p>
+			<p id="p1"><a href="javascript:void(0)" >用户列表</a></p>
+			<p id="p2"><a href="javascript:void(0)" >角色列表</a></p>
+			<p id="p3"><a href="javascript:void(0)" >权限列表</a></p>
 		</div> 
 		</div>
 	</div>
 	<div class="myclear"></div>
+	<div class="overlay"></div>
 	
-	<p class="h128box"><button>应急响应资源配置方案</button></p>
+	<p class="h128box"></p>
 	
 	<div class="fleft maparea">
 		<h5 class="title_sample"><span>红外地图</span></h5>
 		<div id="allmap" style="width: 2021px; height: 1410px">
 		</div>
 	</div>
-	
 	<div class="fleft videoarea">
-		<h5 class="title_sample"><span>车流量视频</span></h5>
-		<div id="video" style="width:2500px;height:1410px">
-			<video id="my-video" class="video-js vjs-default-skin" controls="controls" preload="auto" title="无人机视频"  width="2500px" height="1410px"
+		<h5 class="title_sample"><span>红外视频</span></h5>
+		<div id="video" style="width:2500px;height:1410px">	
+        <div id="video" style="width:2500px;height:1410px">
+<!--			<video id="my-video" class="video-js vjs-default-skin" controls="controls" preload="auto" title="无人机视频"  width="2500px" height="1410px"
 			poster="http://video-js.zencoder.com/oceans-clip.png" data-setup="{}">
-			<source src="../maps/MOV_0030.mp4" type="video/mp4">
-				<!-- <source src="rtmp://live.hkstv.hk.lxdns.com/live/hks" type="rtmp/flv">-->
+			<source src="../Inc/MOV_0030.MOV" type="video/mp4">
+				 <source src="rtmp://live.hkstv.hk.lxdns.com/live/hks" type="rtmp/flv">
 				<p class="vjs-no-js">
-				To view this video please enable JavaScript, and consider upgrading to a web browser that
+					To view this video please enable JavaScript, and consider upgrading to a web browser that
 				<a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
 				</p>
 			</video>
+			-->
+		<object type='application/x-vlc-plugin' id='vlc' events='True' width="2500px" height="1410px" pluginspage="http://www.videolan.org" codebase="http://downloads.videolan.org/pub/videolan/vlc-webplugins/2.0.6/npapi-vlc-2.0.6.tar.xz">
+        <param name='mrl' value='../Inc/Infrared.mp4' />        
+<!-- 		<param name='mrl' value='rtsp://47.94.19.230:10554/gzrtsp.sdp' /> -->
+        <param name='volume' value='50' />
+        <param name='autoplay' value='false' />
+        <param name='loop' value='false' />
+        <param name='fullscreen' value='false' />
+    </object>
+		</div>
 		</div>
 	</div>
 	
 	<div class="fleft timesarea">
-		<h5 class="title_sample"><span>实时车流量变化情况</span></h5>
+		<h5 class="title_sample"><span>实时红外车流量变化情况</span></h5>
 		<div id="echarts1" style="width:960px;height:616px"></div>
 	</div>
 	<div class="fleft montharea">
-		<h5 class="title_sample"><span>月流量变化情况</span></h5>
+		<h5 class="title_sample"><span>每分钟红外车流量变化情况</span></h5>
 		<div id="echarts2" style="width:960px;height:616px"></div>
 	</div>
 	<div class="myclear"></div>
 	
 	<!--弹框001-->
-	<div class="userlist">
-		<h5 class="title_sample"><span>用户列表</span><a id="userlist_close" href="javascript:void(0)" onclick="closeUserlist()"><img src="../images/cross.png" /></a></h5>
-		<div class="fleft sousuolf"><a href="#"><img src="../images/addperson.png" /></a><a href="#"><img src="../images/delectperson.png" /></a></div>
+	<div class="userlist" id="userlist">
+		<h5 class="title_sample"><span>用户列表</span><a id="userlist_close" href="javascript:void(0)"><img src="../images/cross.png" /></a></h5>
+		<div class="fleft sousuolf"><a onclick="addUser()"><img src="../images/addperson.png" /></a></div>
 		<div class="fright sousuort"><input type="text" /><button><img src="../images/searchicon.png" /></button></div>
 		<div class="myclear"></div> 
-		<!-------每页112条数据-------->
-		<table width="100%" border="0" cellpadding="0" cellspacing="0" class="person_name">
-		  <tr>
-			<th scope="col" width="140">&nbsp;</th>
-			<th scope="col">ID</th>
-			<th scope="col">用户名</th>
-			<th scope="col">真实姓名</th>
-			<th scope="col">部门</th>
-			<th scope="col">角色</th>
-			<th scope="col">账号状态</th>
-			<th scope="col">注册时间</th>
-			<th scope="col">操作选择</th>
-		  </tr>
-		  <tr>
-			<td><input type="checkbox" /></td>
-			<td>17001</td>
-			<td>33dfadsfd</td>
-			<td>张天翼</td>
-			<td>审计部门</td>
-			<td>普通管理员</td>
-			<td>可用</td>
-			<td>2017-05-22</td>
-			<td><a href="#">编辑</a><a href="#">删除</a></td>
-		  </tr>
-		   <tr>
-			<td><input type="checkbox" /></td>
-			<td>17001</td>
-			<td>33dfadsfd</td>
-			<td>张天翼</td>
-			<td>审计部门</td>
-			<td>普通管理员</td>
-			<td>可用</td>
-			<td>2017-05-22</td>
-			<td><a href="#">编辑</a><a href="#">删除</a></td>
-		  </tr>
-		   <tr>
-			<td><input type="checkbox" /></td>
-			<td>17001</td>
-			<td>33dfadsfd</td>
-			<td>张天翼</td>
-			<td>审计部门</td>
-			<td>普通管理员</td>
-			<td>可用</td>
-			<td>2017-05-22</td>
-			<td><a href="#">编辑</a><a href="#">删除</a></td>
-		  </tr>
-		   <tr>
-			<td><input type="checkbox" /></td>
-			<td>17001</td>
-			<td>33dfadsfd</td>
-			<td>张天翼</td>
-			<td>审计部门</td>
-			<td>普通管理员</td>
-			<td>可用</td>
-			<td>2017-05-22</td>
-			<td><a href="#">编辑</a><a href="#">删除</a></td>
-		  </tr>
-		   <tr>
-			<td><input type="checkbox" /></td>
-			<td>17001</td>
-			<td>33dfadsfd</td>
-			<td>张天翼</td>
-			<td>审计部门</td>
-			<td>普通管理员</td>
-			<td>可用</td>
-			<td>2017-05-22</td>
-			<td><a href="#">编辑</a><a href="#">删除</a></td>
-		  </tr>
-		   <tr>
-			<td><input type="checkbox" /></td>
-			<td>17001</td>
-			<td>33dfadsfd</td>
-			<td>张天翼</td>
-			<td>审计部门</td>
-			<td>普通管理员</td>
-			<td>可用</td>
-			<td>2017-05-22</td>
-			<td><a href="#">编辑</a><a href="#">删除</a></td>
-		  </tr>
-		   <tr>
-			<td><input type="checkbox" /></td>
-			<td>17001</td>
-			<td>33dfadsfd</td>
-			<td>张天翼</td>
-			<td>审计部门</td>
-			<td>普通管理员</td>
-			<td>可用</td>
-			<td>2017-05-22</td>
-			<td><a href="#">编辑</a><a href="#">删除</a></td>
-		  </tr>
-		   <tr>
-			<td><input type="checkbox" /></td>
-			<td>17001</td>
-			<td>33dfadsfd</td>
-			<td>张天翼</td>
-			<td>审计部门</td>
-			<td>普通管理员</td>
-			<td>可用</td>
-			<td>2017-05-22</td>
-			<td><a href="#">编辑</a><a href="#">删除</a></td>
-		  </tr>
-		   <tr>
-			<td><input type="checkbox" /></td>
-			<td>17001</td>
-			<td>33dfadsfd</td>
-			<td>张天翼</td>
-			<td>审计部门</td>
-			<td>普通管理员</td>
-			<td>可用</td>
-			<td>2017-05-22</td>
-			<td><a href="#">编辑</a><a href="#">删除</a></td>
-		  </tr>
-		   <tr>
-			<td><input type="checkbox" /></td>
-			<td>17001</td>
-			<td>33dfadsfd</td>
-			<td>张天翼</td>
-			<td>审计部门</td>
-			<td>普通管理员</td>
-			<td>可用</td>
-			<td>2017-05-22</td>
-			<td><a href="#">编辑</a><a href="#">删除</a></td>
-		  </tr>
-		   <tr>
-			<td><input type="checkbox" /></td>
-			<td>17001</td>
-			<td>33dfadsfd</td>
-			<td>张天翼</td>
-			<td>审计部门</td>
-			<td>普通管理员</td>
-			<td>可用</td>
-			<td>2017-05-22</td>
-			<td><a href="#">编辑</a><a href="#">删除</a></td>
-		  </tr>
+		<table id="usertable" width="100%" border="0" cellpadding="0" cellspacing="0" class="person_name">
 		</table>
-		<p class="endpages"><a href="#">1</a><a href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#">...</a><a href="#">49</a><a href="#">下一页</a><span>到第<input type="text" />页<button>确定</button></span></p>
+		<p class="endpages" id="user"></p>
 	</div> 
+	<div id="new_user" style="position:absolute; z-index:101; left:2750px; top:500px; width:1250px; height:900px;display:none; background:url(../images/personbg.png) repeat-x top">
+		<h5 class="title_sample"><span>添加用户</span><a id="userlist_close" href="javascript:void(0)"><img src="../images/cross.png" /></a></h5>
+		<form id="new_user_form" style="padding:10px 20px 10px 50px;font-size:40px;" method="post">
+			<tr style="width:1000px;margin-left:auto;margin-right:auto;"><td style="font-size:40px;">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名 : </td><td><input type="text" name="Name" class="easyui-validatebox" required="true" style="width:70%;margin:25px;padding:10px 15px 10px 15px"></td></tr><br/>
+			<tr style="width:1000px;margin-left:auto;margin-right:auto;"><td align="center" width="30%">用&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;名 : </td><td align="center" width="70%"><input type="text" name="userName" class="easyui-validatebox" required="true" style="width:70%;margin:25px;padding:10px 15px 10px 15px"></td></tr><br/>
+			<tr style="width:1000px;margin-left:auto;margin-right:auto;">
+				<td>所&nbsp;属&nbsp;部&nbsp;门 : </td>
+				<td>
+					<select id="department" class="easyui-validatebox" name="DepartmentId" style="width:73%;margin:25px;padding:10px 15px 10px 15px" required="true">
+						<option value="1">财务部</option>
+						<option value="2">收发室</option>
+						<option value="3">业务管理科</option>
+					</select>
+				</td>
+			</tr><br/>
+			<tr style="width:1000px;margin-left:auto;margin-right:auto;">
+				<td>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别 : </td>
+				<td>
+					<select class="easyui-validatebox" name="Gender" style="width:73%;margin:25px;padding:10px 15px 10px 15px" required="true">
+						<option value="0">男</option>
+						<option value="1">女</option>
+					</select>
+				</td>
+			</tr><br/>
+			<tr style="width:1000px;margin-left:auto;margin-right:auto;"><td>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码 : </td><td><input type="text" name="Password" class="easyui-validatebox" required="true" style="width:70%;margin:25px;padding:10px 15px 10px 15px"></td></tr><br/>
+			<div style="padding:5px;text-align:center;margin-top:30px">
+				<button id="new_submit_btn" class="easyui-linkbutton" icon="icon-ok" style="width:150px;height:60px;margin-right:20px" onclick="saveUser(this)">确认</button>
+				<button class="easyui-linkbutton" icon="icon-cancel" style="width:150px;height:60px" onclick='$("#new_user").css("display","none");'>取消</button>
+			</div>
+		</form>
+	</div>
+	<div id="modify_user" style="position:absolute; z-index:101; left:2750px; top:500px; width:1250px; height:900px;display:none; background:url(../images/personbg.png) repeat-x top">
+		<h5 class="title_sample"><span>修改用户</span><a id="userlist_close" href="javascript:void(0);"><img src="../images/cross.png" /></a></h5>
+		<form id="modify_user_form" style="padding:10px 20px 10px 50px;font-size:40px;" method="post">
+			<tr style="width:1000px;margin-left:auto;margin-right:auto;"><td>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名 : </td><td><input type="text" name="Name" class="easyui-validatebox" required="true" style="width:70%;margin:25px;padding:10px 15px 10px 15px"></td></tr>
+			<tr style="width:1000px;margin-left:auto;margin-right:auto;">
+				<td>所&nbsp;属&nbsp;部&nbsp;门 : </td>
+				<td>
+					<select id="department" class="easyui-validatebox" name="DepartmentId" style="width:73%;margin:25px;padding:10px 15px 10px 15px" required="true">
+						<option value="1">财务部</option>
+						<option value="2">收发室</option>
+						<option value="3">业务管理科</option>
+					</select>
+				</td>
+			</tr>
+			<tr style="width:1000px;margin-left:auto;margin-right:auto;">
+				<td>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别 : </td>
+				<td>
+					<select class="easyui-validatebox" name="Gender" style="width:73%;margin:25px;padding:10px 15px 10px 15px" required="true">
+						<option value="0">男</option>
+						<option value="1">女</option>
+					</select>
+				</td>
+			</tr>
+			<tr style="width:1000px;margin-left:auto;margin-right:auto;"><td>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码 : </td><td><input type="text" name="Password" class="easyui-validatebox" required="true" style="width:70%;margin:25px;padding:10px 15px 10px 15px"></td></tr>
+			<tr><td><input style='display:none;' name='Id' class='easyui-validatebox' value='-1'></input></td></tr>
+			<div style="padding:5px;text-align:center;margin-top:30px">
+				<button id="modify_submit_btn" class="easyui-linkbutton" icon="icon-ok" style="width:150px;height:60px;margin-right:20px" onclick="modifyUser()">确认</button>
+				<button class="easyui-linkbutton" icon="icon-cancel" style="width:150px;height:60px" onclick='$("#modify_user").css("display","none");'>取消</button>
+			</div>
+		</form>
+	</div>
 	<!--弹框001结束-->
 	<!--弹框002-->
 	<div class="userlist" id="rolelist">
@@ -388,19 +328,186 @@
 
 <script type="text/javascript">
     // 百度地图API功能
-    var map = new BMap.Map("allmap");
+   var map = new BMap.Map("allmap");
     var timer=1;
 	var videoId = 0;
-	var axisData;
+	 var myChart1 = echarts.init(document.getElementById('echarts1'),'blue');   
+		var now = new Date();
+		var len = 10;
+		var res = [];
+		while (len--) {
+		res.unshift(now.toLocaleTimeString().replace(/^\D*/,''));
+		    now = new Date(now - 2000);
+		}
+		var res1 = [];
+		//var res2 = [];
+		var len = 10;
+		while (len--) {
+		    res1.push(0);
+		  
+		}
+		var xAxisData = res; //x轴数据
+		var yAxisData = res1; //y轴数据
+
+	
+	// 指定图表的配置项和数据
+	var option1 = {
+			title : {
+			    text: '',
+			    textstyle:{
+			    	"fontSize":"20",
+		            "fontWeight": "bolder"
+		    },
+			},
+			tooltip : {
+			    trigger: 'axis', 
+		        axisPointer: {
+		            type: 'cross',
+		            label: {
+		            //    backgroundColor: 'F2F2F2'
+		            }
+		        }
+			 },
+		    legend: {
+		        data:['红外车流量'],
+		        textStyle: {  
+		            color: '#fff',          //legend字体颜色 
+		            fontSize:'22'
+
+		        }
+		    },
+		    toolbox: {
+		        show : true,
+		        feature : {
+		            dataView : {show: true, readOnly: false},
+		           // magicType : {show: true,  type:['line', 'bar']},
+		            restore : {show: true},
+		            saveAsImage : {show: true}
+		        },
+		        
+	            itemSize:'22',
+	            emphasis:{//触发时
+	                iconStyle:{
+	                    borderColor:"white"//图形的描边颜色
+	                }
+	            }
+
+		    },
+		    dataZoom : {
+		        show : false,
+		        start : 0,
+		        end : 100
+		    },
+		    xAxis : [
+		        {
+		            type : 'category',
+		            axisLabel: {        
+		                show: true,
+		                textStyle: {
+		                    color: '#fff',
+		                    fontSize:'20'
+		                }
+		            },
+		        // 控制网格线是否显示
+			        splitLine: {
+			                show: false, 
+			                //  改变轴线颜色
+			                lineStyle: {
+			                    // 使用深浅的间隔色
+			                    color: ['white']
+			                }                            
+			        },
+		            axisLine:{
+		                lineStyle:{
+		                    color:'#FFFFFF',
+		                    width:1
+		                }
+		            },
+		            axisPointer: {
+	                type: 'shadow'
+	                },
+
+		            boundaryGap : true,
+		            data:xAxisData
+		        },
+		         {
+		            type: 'category',
+		            boundaryGap: true,
+		            data: (function (){
+		                var res = [];
+		                var len = 10;
+		                while (len--) {
+		                    res.push(10 - len - 1);
+		                }
+		                return res;
+		            })()
+		        }
+		   ],
+		   yAxis : [
+		      {
+		           type : 'value',
+		           scale: true,
+		           name : '车流量M^2',
+		           axisLabel: {        
+		                show: true,
+		                textStyle: {
+		                    color: '#fff',
+		                    fontSize:'20'
+		                }
+		            },
+		        // 控制网格线是否显示
+			        splitLine: {
+			                show: false, 
+			                //  改变轴线颜色
+			                lineStyle: {
+			                    // 使用深浅的间隔色
+			                    color: ['white']
+			                }                            
+			        },
+			        max: 1200,
+           			min: 0,
+		           boundaryGap: [0.2, 0.2],
+		           
+		      }
+		  ],
+		  series : [
+		       {
+		            name:"车流量",
+		            type:'bar',
+		            //stack:'one',
+		            data:yAxisData,
+		            markPoint : {
+			                data : [
+			                    {type : 'max', name: '最大值'},
+			                    {type : 'min', name: '最小值'}
+			                ]
+			            },
+			            markLine : {
+			                data : [
+			                    {type : 'average', name: '平均值'}
+			                ]
+			            }		            
+		       }		       
+		  ]
+		};
+
+    var axisData;
 	var lastData = 0;
 	clearInterval(app);
 	var app = {};
-	var opts = {
+	app.count = 11;
+	myChart1.setOption(option1);
+    $(window).resize(function(){
+       myChart1.resize();
+    });
+    window.onresize = myChart1.resize();
+	
+    var opts = {
 		width : 0,     // 信息窗口宽度
 		height: 0,     // 信息窗口高度
-		title : "<span style='font-size:20px;color:#0099cc;background-color:#FFFFFF'>"+"红外信息窗口"+"</span>" , // 信息窗口标题
+		title : "<span style='font-size:20px;color:#0099cc;background-color:#FFFFFF'>"+"沙阻信息窗口"+"</span>" , // 信息窗口标题
 		enableMessage:true//设置允许信息窗发送短息
-	    };    
+	    };   
 	getUnmans();
 	setInterval("getUnmans()",60000) ;//设定每一分钟刷新一次
     function getUnmans(id){
@@ -422,7 +529,7 @@
 				   
 				    anchor:new BMap.Size(0,0),
                     imageOffset:new BMap.Size(0,0)});
-                    icon.setImageSize(new BMap.Size(24, 24));
+                    icon.setImageSize(new BMap.Size(44, 44));
 			        var point = new BMap.Point(data.drones[i].longitude,data.drones[i].latitude);  
 			        var marker = new BMap.Marker(point,{ // 创建标注点
 							icon: icon
@@ -432,10 +539,10 @@
                     var label = new window.BMap.Label("无人机编号:"+data.drones[i].code,{offset: new window.BMap.Size(20, -10)});  // 创建文本标注对象
 		                label.setStyle({
 			                  color : "#0099cc",
-			                  fontSize : "20px",
+			                  fontSize : "40px",
 			                  backgroundColor :"0.05",
 			                  border:"0",			                  
-			                  lineHeight : "20px",
+			                  lineHeight : "40px",
 			                  fontWeight :"bold" //字体加粗
 		                 });
 		            marker.setLabel(label);  //添加标签
@@ -446,13 +553,80 @@
 			            //map.panTo(point);		            
 						showInfo(this, thepoint);//开启信息窗口
 						test();
-						videojs("my-video").ready(function(){
+						/* videojs("my-video").ready(function(){
 							var myPlayer = this;
 							myPlayer.play();
-						});
+						}); */
 						getEcharts();
 			            });
-		            })();		            		           		
+		            })();
+		            		            		           		
+				function showInfo(thisMarker,point){
+			         //thisMarker.setAnimation(BMAP_ANIMATION_BOUNCE);
+			         var content = 
+					"<p style='margin:0;line-height:1.5;font-size:20px;text-indent:0em'>无人机编号： "+point.code+"<br/>经度："+point.longitude+" 纬度："+point.latitude+"<br/>状态:"+point.status+"</p>";
+					 var infoWindow = new BMap.InfoWindow(content, opts);
+					 thisMarker.openInfoWindow(infoWindow);
+			       }	
+			       function getEcharts(){
+				          app.timeTicket = setInterval(function (){
+						  var url = '/droneSystem/DroneServlet.do?method=6';
+						  var paramData={type:4,droneId:droneId};
+						  $.ajax({
+						      url: url,
+						      type: 'post',
+						      data: paramData,
+						      dataType: 'json',
+						      cache: false,
+						      error:function(){
+						          console.log("get redis error!!!");
+						      },
+						      success: function(data){
+						          if(data != null){				       
+						            lastData = data.ts;
+						            //console.log(data);
+						            //lastData = Math.round(Math.random() * 1000);
+						        	axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
+								    var data0 = option1.series[0].data;
+								    //var data1 = option1.series[1].data;
+								    data0.shift();
+								    data0.push(lastData);
+								    //data1.shift();
+								    //data1.push((Math.random() * 10 + 5).toFixed(1) - 0);
+								    option1.xAxis[0].data.shift();
+						    		option1.xAxis[0].data.push(axisData);
+						    		option1.xAxis[1].data.shift();
+		                            option1.xAxis[1].data.push(app.count++);				    		
+						    		myChart1.setOption(option1);
+						        
+						          }
+						      }
+						  }); 
+
+						    axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
+						    var data0 = option1.series[0].data;
+						    //var data1 = option1.series[1].data;
+						    data0.shift();
+						    data0.push(Math.round(Math.random() * 1000));
+						    //data1.shift();
+						    //data1.push((Math.random() * 10 + 5).toFixed(1) - 0);
+						    option1.xAxis[0].data.shift();
+				    		option1.xAxis[0].data.push(axisData);
+				    		option1.xAxis[1].data.shift();
+                            option1.xAxis[1].data.push(app.count++);				    		
+				    		myChart1.setOption(option1);
+						  // 动态数据接口 addData
+					      /* myChart1.addData([
+					        [
+					            0,        // 系列索引
+					            lastData, // 新增数据
+					            false,     // 新增数据是否从队列头部插入
+					            false,    // 是否增加队列长度，false则自定删除原有数据，队头插入删队尾，队尾插入删队头
+					            axisData //横轴数据
+					        ]		       
+						  ]); */
+						}, 3000);
+				     }            		           		
 				}	
 		}	
 		}); 	
@@ -460,59 +634,13 @@
 	}
 	
 	
-	
-	 function showInfo(thisMarker,point){
-         //thisMarker.setAnimation(BMAP_ANIMATION_BOUNCE);
-         var content = 
-		"<p style='margin:0;line-height:1.5;font-size:20px;text-indent:0em'>无人机编号： "+point.code+"<br/>经度："+point.longitude+" 纬度："+point.latitude+"</br>雪阻预警等级： 2</br>状态： 0</p>";
-		 var infoWindow = new BMap.InfoWindow(content, opts);
-		 thisMarker.openInfoWindow(infoWindow);
-     }
-     
-           
-     function getEcharts(){
-          app.timeTicket = setInterval(function (){
-		  var url = '/droneSystem/DroneServlet.do?method=6';
-		  var paramData={type:1};
-		  $.ajax({
-		      url: url,
-		      type: 'post',
-		      data: paramData,
-		      dataType: 'json',
-		      cache: false,
-		      error:function(){
-		          console.log("get redis error!!!");
-		      },
-		      success: function(data){
-		          if(data != null){
-		          //alert(data.ts);
-		          axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
-		          lastData = data.ts;
-		          //lastData = Math.round(Math.random() * 1000);
-		        
-		          }
-		      }
-		  }); 
-		  // 动态数据接口 addData
-	      myChart.addData([
-	        [
-	            0,        // 系列索引
-	            lastData, // 新增数据
-	            false,     // 新增数据是否从队列头部插入
-	            false,    // 是否增加队列长度，false则自定删除原有数据，队头插入删队尾，队尾插入删队头
-	            axisData //横轴数据
-	        ]		       
-		  ]);
-		}, 2000);
-     }
-     
 	 function test(){
 	  $.ajax({
        	 	type: "post", 
            	cache: false, 
            	dataType: 'json',
            	url: '/droneSystem/DroneServlet.do?method=3',
-           	data:{type:3,inputStream:"D:\\test\\LL.mp4"},
+           	data:{type:2,inputStream:"D:\\test\\SZ.mp4"},
             success: function(data){
             //alert(321);
          		videoId = data.videoId;
@@ -527,7 +655,7 @@
                	cache: false, 
              	dataType: 'json',
              	url: '/droneSystem/DroneServlet.do?method=5',
-             	data:{type:3},
+             	data:{type:2},
             	success: function(data){
             		//alert(data.ts);
 					timer ++;
@@ -543,7 +671,7 @@
 			cache: false, 
 			dataType: 'json',
 			url: '/droneSystem/DroneServlet.do?method=6',
-			data:{type:3,videoId:videoId},
+			data:{type:2,videoId:videoId},
 			success: function(data){
 			//alert(videoId);
             //alert(videoId + data.ts);
@@ -554,4 +682,3 @@
 
 
 </script>
-

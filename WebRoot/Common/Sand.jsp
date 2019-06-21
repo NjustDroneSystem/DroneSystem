@@ -33,7 +33,7 @@
 			<li><a href="Main.jsp">流量信息</a></li>
 			<li><a href="Snow.jsp">雪阻信息</a></li>
 			<li><a href="Sand.jsp" class="pagenow">沙阻信息</a></li>
-			<li><a href="javascript:void(0)" onclick="ale()">红外信息</a></li>
+			<li><a href="Infrared.jsp">红外信息</a></li>
 			<li><a href="Inquiry.jsp">查询统计</a></li>
 		</ul>
 		</div>
@@ -643,7 +643,7 @@
 			       function getEcharts(){
 				          app.timeTicket = setInterval(function (){
 						  var url = '/droneSystem/DroneServlet.do?method=6';
-						  var paramData={type:3,videoId:5};
+						  var paramData={type:2,droneId:droneId};
 						  $.ajax({
 						      url: url,
 						      type: 'post',
@@ -655,10 +655,21 @@
 						      },
 						      success: function(data){
 						          if(data != null){
-						          
-						          //lastData = data.ts;
-						          lastData = Math.round(Math.random() * 1000);
-						        
+						            lastData = data.ts;
+						            //console.log(data);
+						            //lastData = Math.round(Math.random() * 1000);
+						        	axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
+								    var data0 = option1.series[0].data;
+								    //var data1 = option1.series[1].data;
+								    data0.shift();
+								    data0.push(lastData);
+								    //data1.shift();
+								    //data1.push((Math.random() * 10 + 5).toFixed(1) - 0);
+								    option1.xAxis[0].data.shift();
+						    		option1.xAxis[0].data.push(axisData);
+						    		option1.xAxis[1].data.shift();
+		                            option1.xAxis[1].data.push(app.count++);				    		
+						    		myChart1.setOption(option1);
 						          }
 						      }
 						  }); 

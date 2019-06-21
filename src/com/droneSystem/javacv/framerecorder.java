@@ -6,6 +6,8 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+import com.mathworks.toolbox.javabuilder.*;
+import WinRPCA.*;
 
 import javax.imageio.ImageIO;
 
@@ -35,6 +37,8 @@ import com.droneSystem.manager.TrafficFlowManager;
 public class framerecorder {
 	public static String videoFramesPath = "D:/test1";
 	public static String videoFilePath = "E:/apache-tomcat-7.0.39-windows-x64/webapps/droneSystem/Inc/";
+//	public static String videoFramesPath = "C:/test1/";
+//	public static String videoFilePath = "C:/Users/wzhang/Downloads/apache-tomcat-7.0.39-windows-x64/webapps/droneSystem/Inc/";
 	public static void frameRecord(String inputFile, String outputFile,
 			int audioChannel, int type, int id, Drone drone, Video video)
 			throws Exception, org.bytedeco.javacv.FrameRecorder.Exception {
@@ -44,14 +48,18 @@ public class framerecorder {
 			// 获取视频源
 			FFmpegFrameGrabber grabber = new FFmpegFrameGrabber(inputFile);
 			grabber.setOption("rtsp_transport", "http");
-			// 车流量要求截图分辨率较小以加快算法速度，雪阻、沙阻要求截图清晰以提高算法精度
+			// 车流量要求截图分辨率较小以加快算法速度，雪阻、沙阻要求截图清晰以提高算法精度,红外要求图片大小为250*200
 			if(type == 3) {
 				grabber.setImageWidth(576);
 			 	grabber.setImageHeight(320);
 			} else if(type == 1 || type == 2){
 				grabber.setImageWidth(1920);
 			 	grabber.setImageHeight(1080);
+			} else if(type == 4){
+				grabber.setImageWidth(250);
+				grabber.setImageHeight(200);
 			}
+			
 			// 流媒体输出地址，分辨率（长，高），是否录制音频（0:不录制/1:录制）
 			FFmpegFrameRecorder recorder = new FFmpegFrameRecorder(videoFilePath+outputFile,
 					1920, 1080, audioChannel);
@@ -84,6 +92,8 @@ public class framerecorder {
 		SandVolume sandv = new SandVolume();
 		double latitude = drone.getLatitude();
 		double longitude = drone.getLongitude();
+		Object[] InfraredCar = null; 
+        winRPCA winrpca = null;
 		TrafficFlow tf = new TrafficFlow();
 		if (reqType == 1) {
 			snowv = snowVMgr.findById(id);
@@ -107,6 +117,9 @@ public class framerecorder {
 					fileName = videoFramesPath + "/img_"
 							+ String.valueOf(flag) + ".jpg";
 					outPut = new File(fileName);
+					winrpca = new winRPCA(); //
+	                InfraredCar = winrpca.winRPCA_median(1,fileName); //调用红外算法，得到实时红外车辆数目
+	                //System.out.println(InfraredCar[0]); //InfraredCar需要保存并post到前端
 					frame = grabber.grabImage();
 					if (frame != null) {
 						Long now = System.currentTimeMillis();
