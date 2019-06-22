@@ -1069,7 +1069,7 @@
 //			data:{droneId:droneId, type:3,inputStream:"rtsp://47.94.19.230:10554/gzrtsp.sdp"},
 //			data:{droneId:droneId, type:3,inputStream:"rtsp://47.94.19.230:10554/stream0.sdp"},
             success: function(data){
-            alert("124");
+            //alert("124");
          		videoId = data.videoId;
 			}	
 		}); 	

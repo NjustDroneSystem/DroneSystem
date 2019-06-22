@@ -93,7 +93,7 @@ public class framerecorder {
 		double latitude = drone.getLatitude();
 		double longitude = drone.getLongitude();
 		Object[] InfraredCar = null; 
-        winRPCA winrpca = null;
+        WinRPCA winrpca = null;
 		TrafficFlow tf = new TrafficFlow();
 		if (reqType == 1) {
 			snowv = snowVMgr.findById(id);
@@ -117,7 +117,7 @@ public class framerecorder {
 					fileName = videoFramesPath + "/img_"
 							+ String.valueOf(flag) + ".jpg";
 					outPut = new File(fileName);
-					winrpca = new winRPCA(); //
+					winrpca = new WinRPCA(); //
 	                InfraredCar = winrpca.winRPCA_median(1,fileName); //调用红外算法，得到实时红外车辆数目
 	                //System.out.println(InfraredCar[0]); //InfraredCar需要保存并post到前端
 					frame = grabber.grabImage();

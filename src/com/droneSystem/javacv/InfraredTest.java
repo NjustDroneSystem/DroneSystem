@@ -37,7 +37,7 @@ public class InfraredTest {
 	            recorder.start();  
 	            Frame frame = null; 
 	            Object[] result = null; 
-	            winRPCA winrpca = null;
+	            WinRPCA winrpca = null;
 	           
 	            
 	            int flag = 0;
@@ -49,7 +49,7 @@ public class InfraredTest {
 	                BufferedImage img = FrameToBufferedImage(frame);	             
 	                ImageIO.write(img, "jpg", outPut);
 	               // String fileName = "C:/Users/wzhang/Documents/MATLAB/Tensor-IPI/001.bmp";
-	                winrpca = new winRPCA();
+	                winrpca = new WinRPCA();
 	                result = winrpca.winRPCA_median(1,fileName);
 	                System.out.println(result[0]);
 	                flag++; 
