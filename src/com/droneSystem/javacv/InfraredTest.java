@@ -15,8 +15,8 @@ import WinRPCA.*;
 
 //获取流地址并且保存视频帧发送出去，并且录制视频帧保存本地
 
-public class InfraredTest {
-	 public static String videoFramesPath = "C:/test1/"; 
+public class InfraredTest { //红外算法测试，截取红外视频帧，WinRPCA算法处理输出每帧车辆数目
+	 public static String videoFramesPath = "D:/test1/"; 
 	 static OpenCVFrameConverter.ToIplImage converter = new OpenCVFrameConverter.ToIplImage();
 	 public static void frameRecord(String inputFile, String outputFile, int audioChannel)  
 	            throws Exception, org.bytedeco.javacv.FrameRecorder.Exception {  
@@ -75,9 +75,9 @@ public class InfraredTest {
 	 
 	 public static void main(String[] args)  
 			 throws FrameRecorder.Exception, FrameGrabber.Exception, InterruptedException, Exception {  
-	         String inputFile = "C:/temp/Infrared2.mp4";  
+	         String inputFile = "D:\\DevTools\\apache-tomcat-7.0.39-windows-x64\\webapps\\droneSystem\\Inc\\Infrared.mp4";  
 	         // Decodes-encodes  
-	         String outputFile = "C:/Users/recorde7.mp4";  
+	         String outputFile = "D:\\DevTools\\apache-tomcat-7.0.39-windows-x64\\webapps\\droneSystem\\Inc\\recorde7.mp4";  
 	         frameRecord(inputFile, outputFile,1);  
 	}  
 }
