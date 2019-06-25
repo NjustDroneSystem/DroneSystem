@@ -536,7 +536,7 @@
 			                    color: ['white']
 			                }                            
 			        },
-			        max: 1200,
+			        max: 1,
            			min: 0,
 		           boundaryGap: [0.2, 0.2],
 		           
@@ -620,16 +620,25 @@
 		            marker.setLabel(label);  //添加标签
 		            
 		            (function(){
+		                var droneId = data.drones[i].droneId;
 			            var thepoint = data.drones[i]; 
 			            marker.addEventListener("click", function (){
 			            //map.panTo(point);		            
 						showInfo(this, thepoint);//开启信息窗口
-						test();
+						//缩放
+						map.centerAndZoom(point, 14);
+						sendURL(droneId);
+						var vlc = document.getElementById("vlc"); 
+						var id = 0; 
+						//id = vlc.playlist.add(videoUrl); //添加mrl到播放列表
+						id = vlc.playlist.add("../Inc/sand_detection.mp4"); //添加mrl到播放列表						
+						vlc.playlist.playItem(id);  //播放播放列表里的序列
+						
 						/* videojs("my-video").ready(function(){
 							var myPlayer = this;
 							myPlayer.play();
 						}); */
-						getEcharts();
+						getEcharts(droneId);
 			            });
 		            })();
 		            		            		           		
@@ -639,86 +648,76 @@
 					"<p style='margin:0;line-height:1.5;font-size:20px;text-indent:0em'>无人机编号： "+point.code+"<br/>经度："+point.longitude+" 纬度："+point.latitude+"<br/>状态:"+point.status+"</p>";
 					 var infoWindow = new BMap.InfoWindow(content, opts);
 					 thisMarker.openInfoWindow(infoWindow);
-			       }	
-			       function getEcharts(){
-				          app.timeTicket = setInterval(function (){
-						  var url = '/droneSystem/DroneServlet.do?method=6';
-						  var paramData={type:2,droneId:droneId};
-						  $.ajax({
-						      url: url,
-						      type: 'post',
-						      data: paramData,
-						      dataType: 'json',
-						      cache: false,
-						      error:function(){
-						          console.log("get redis error!!!");
-						      },
-						      success: function(data){
-						          if(data != null){
-						            lastData = data.ts;
-						            //console.log(data);
-						            //lastData = Math.round(Math.random() * 1000);
-						        	axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
-								    var data0 = option1.series[0].data;
-								    //var data1 = option1.series[1].data;
-								    data0.shift();
-								    data0.push(lastData);
-								    //data1.shift();
-								    //data1.push((Math.random() * 10 + 5).toFixed(1) - 0);
-								    option1.xAxis[0].data.shift();
-						    		option1.xAxis[0].data.push(axisData);
-						    		option1.xAxis[1].data.shift();
-		                            option1.xAxis[1].data.push(app.count++);				    		
-						    		myChart1.setOption(option1);
-						          }
-						      }
-						  }); 
+			    }	
+				function getEcharts(droneId){
+			          app.timeTicket = setInterval(function (){
+					  var url = '/droneSystem/DroneServlet.do?method=6';
+					   var paramData={type:2,droneId:droneId};
+					  $.ajax({
+					      url: url,
+					      type: 'post',
+					      data: paramData,
+					      dataType: 'json',
+					      cache: false,
+					      error:function(){
+					          console.log("get redis error!!!");
+					      },
+					      success: function(data){
+					          if(data != null){
+					          
+					          lastData = data.ts;
+					          //console.log(data);
+					          //lastData = Math.round(Math.random() * 1000);
+					        	axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
+							    var data0 = option1.series[0].data;
+							    //var data1 = option1.series[1].data;
+							    data0.shift();
+							    data0.push(lastData);
+							    //data1.shift();
+							    //data1.push((Math.random() * 10 + 5).toFixed(1) - 0);
+							    option1.xAxis[0].data.shift();
+					    		option1.xAxis[0].data.push(axisData);
+					    		option1.xAxis[1].data.shift();
+	                            option1.xAxis[1].data.push(app.count++);				    		
+					    		myChart1.setOption(option1);
+					          }
+					      }
+					  }); 
 
-						    axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
-						    var data0 = option1.series[0].data;
-						    //var data1 = option1.series[1].data;
-						    data0.shift();
-						    data0.push(Math.round(Math.random() * 1000));
-						    //data1.shift();
-						    //data1.push((Math.random() * 10 + 5).toFixed(1) - 0);
-						    option1.xAxis[0].data.shift();
-				    		option1.xAxis[0].data.push(axisData);
-				    		option1.xAxis[1].data.shift();
-                            option1.xAxis[1].data.push(app.count++);				    		
-				    		myChart1.setOption(option1);
-						  // 动态数据接口 addData
-					      /* myChart1.addData([
-					        [
-					            0,        // 系列索引
-					            lastData, // 新增数据
-					            false,     // 新增数据是否从队列头部插入
-					            false,    // 是否增加队列长度，false则自定删除原有数据，队头插入删队尾，队尾插入删队头
-					            axisData //横轴数据
-					        ]		       
-						  ]); */
-						}, 3000);
-				     }            		           		
-				}	
+					    
+					  // 动态数据接口 addData
+				      /* myChart1.addData([
+				        [
+				            0,        // 系列索引
+				            lastData, // 新增数据
+				            false,     // 新增数据是否从队列头部插入
+				            false,    // 是否增加队列长度，false则自定删除原有数据，队头插入删队尾，队尾插入删队头
+				            axisData //横轴数据
+				        ]		       
+					  ]); */
+					}, 1000);
+			    }            		           		
+			}	
 		}	
 		}); 	
     
 	}
 	
 	
-	 function test(){
-	  $.ajax({
-       	 	type: "post", 
-           	cache: false, 
-           	dataType: 'json',
-           	url: '/droneSystem/DroneServlet.do?method=3',
-           	data:{type:2,inputStream:"D:\\test\\SZ.mp4"},
-            success: function(data){
-            //alert(321);
-         		videoId = data.videoId;
-			}	
-		}); 	
-    
-	}
+    function sendURL(droneId){
+  	  $.ajax({
+         	 	type: "post", 
+             	cache: false, 
+             	dataType: 'json',
+             	url: '/droneSystem/DroneServlet.do?method=3',
+            	data:{droneId:droneId, type:2,inputStream:"D:\\test\\sand_detection.mp4"},
+              success: function(data){
+              	//alert("124");
+           		videoId = data.videoId;
+  			}	
+  		}); 	
+      
+  	}
 	
 	function test1(){
 		  $.ajax({

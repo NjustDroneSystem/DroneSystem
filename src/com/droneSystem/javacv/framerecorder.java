@@ -22,12 +22,14 @@ import com.droneSystem.util.HttpUtil;
 
 import com.droneSystem.hibernate.CarNum;
 import com.droneSystem.hibernate.Drone;
+import com.droneSystem.hibernate.InfraredVolume;
 import com.droneSystem.hibernate.Record;
 import com.droneSystem.hibernate.SandVolume;
 import com.droneSystem.hibernate.SnowVolume;
 import com.droneSystem.hibernate.TrafficFlow;
 import com.droneSystem.hibernate.Video;
 import com.droneSystem.manager.CarNumManager;
+import com.droneSystem.manager.InfraredVolumeManager;
 import com.droneSystem.manager.RecordManager;
 import com.droneSystem.manager.SandVolumeManager;
 import com.droneSystem.manager.SnowVolumeManager;
@@ -35,10 +37,8 @@ import com.droneSystem.manager.TrafficFlowManager;
 
 //获取流地址并且保存视频帧发送出去，并且录制视频帧保存本地
 public class framerecorder {
-	public static String videoFramesPath = "D:/test1";
-	public static String videoFilePath = "E:/apache-tomcat-7.0.39-windows-x64/webapps/droneSystem/Inc/";
-//	public static String videoFramesPath = "C:/test1/";
-//	public static String videoFilePath = "C:/Users/wzhang/Downloads/apache-tomcat-7.0.39-windows-x64/webapps/droneSystem/Inc/";
+	public static String videoFramesPath = "D:/test1/";
+	public static String videoFilePath = "D:/DevTools/apache-tomcat-7.0.39-windows-x64/webapps/droneSystem/Inc/";
 	public static void frameRecord(String inputFile, String outputFile,
 			int audioChannel, int type, int id, Drone drone, Video video)
 			throws Exception, org.bytedeco.javacv.FrameRecorder.Exception {
@@ -53,8 +53,8 @@ public class framerecorder {
 				grabber.setImageWidth(576);
 			 	grabber.setImageHeight(320);
 			} else if(type == 1 || type == 2){
-				grabber.setImageWidth(1920);
-			 	grabber.setImageHeight(1080);
+				grabber.setImageWidth(1080);
+			 	grabber.setImageHeight(720);
 			} else if(type == 4){
 				grabber.setImageWidth(250);
 				grabber.setImageHeight(200);
@@ -85,11 +85,12 @@ public class framerecorder {
 		SnowVolumeManager snowVMgr = new SnowVolumeManager();
 		SandVolumeManager sandVMgr = new SandVolumeManager();
 		TrafficFlowManager TFMgr = new TrafficFlowManager();
-
+		InfraredVolumeManager infraredVMgr = new InfraredVolumeManager();
 		RecordManager reMgr = new RecordManager();
 		CarNumManager carMgr = new CarNumManager();
 		SnowVolume snowv = new SnowVolume();
 		SandVolume sandv = new SandVolume();
+		InfraredVolume infraredv = new InfraredVolume();
 		double latitude = drone.getLatitude();
 		double longitude = drone.getLongitude();
 		Object[] InfraredCar = null; 
@@ -104,6 +105,9 @@ public class framerecorder {
 		if (reqType == 3) {
 			tf = TFMgr.findById(id);
 		}
+		if (reqType == 4) {
+			infraredv = infraredVMgr.findById(id);
+		}
 		try {// 建议在线程中使用该方法
 			grabber.start();
 			recorder.start();
@@ -117,9 +121,6 @@ public class framerecorder {
 					fileName = videoFramesPath + "/img_"
 							+ String.valueOf(flag) + ".jpg";
 					outPut = new File(fileName);
-					winrpca = new WinRPCA(); //
-	                InfraredCar = winrpca.winRPCA_median(1,fileName); //调用红外算法，得到实时红外车辆数目
-	                //System.out.println(InfraredCar[0]); //InfraredCar需要保存并post到前端
 					frame = grabber.grabImage();
 					if (frame != null) {
 						Long now = System.currentTimeMillis();
@@ -201,6 +202,18 @@ public class framerecorder {
 						// carNum.setCarNumRight(num);
 						carMgr.save(carNum);
 						//TimeUnit.MILLISECONDS.sleep(5);
+					}
+					if(reqType == 4 && flag % 100 ==1){
+						winrpca = new WinRPCA(); 
+		                InfraredCar = winrpca.winRPCA_median(1,fileName); //调用红外算法，得到实时红外车辆数目
+		                System.out.println(InfraredCar[0]); //InfraredCar需要保存并post到前端
+		                //存InfraredCar
+		                infraredv.setInfraredVolume(Integer.parseInt(InfraredCar[0].toString()));
+		                infraredv.setTime(time);
+		                infraredVMgr.update(infraredv);
+						record.setValueLeft(Double.parseDouble(InfraredCar[0].toString()));
+						record.setValueRight(0.0);
+						reMgr.save(record);
 					}
 				//}
 				flag++;

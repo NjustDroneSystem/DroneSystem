@@ -25,6 +25,8 @@ import com.droneSystem.hibernate.CarNum;
 import com.droneSystem.hibernate.CarNumDAO;
 import com.droneSystem.hibernate.Drone;
 import com.droneSystem.hibernate.Highway;
+import com.droneSystem.hibernate.InfraredVolume;
+import com.droneSystem.hibernate.InfraredVolumeDAO;
 import com.droneSystem.hibernate.SandVolume;
 import com.droneSystem.hibernate.SandVolumeDAO;
 import com.droneSystem.hibernate.SnowVolume;
@@ -38,6 +40,7 @@ import com.droneSystem.javacv.framerecorder;
 import com.droneSystem.manager.CarNumManager;
 import com.droneSystem.manager.DroneManager;
 import com.droneSystem.manager.HighwayManager;
+import com.droneSystem.manager.InfraredVolumeManager;
 import com.droneSystem.manager.SandVolumeManager;
 import com.droneSystem.manager.SnowVolumeManager;
 import com.droneSystem.manager.TaskManager;
@@ -59,6 +62,7 @@ public class DroneServlet extends HttpServlet {
 		DroneManager  droneMgr = new DroneManager();
 		VideoManager vMgr = new VideoManager();
 		SnowVolumeManager snowVMgr = new SnowVolumeManager();
+		InfraredVolumeManager infraredMgr = new InfraredVolumeManager();
 		SandVolumeManager sandVMgr = new SandVolumeManager();
 		TrafficFlowManager TFMgr = new TrafficFlowManager();
 		CarNumManager carNumMgr = new CarNumManager();
@@ -277,7 +281,7 @@ public class DroneServlet extends HttpServlet {
 				if(drone.getClicked()==true){
 					break;
 				}
-				drone.setClicked(true);
+				drone.setClicked(false);
 
 				Video v = new Video();
 //				String inputFile = "rtsp://localhost:8554/123"; 
@@ -331,8 +335,17 @@ public class DroneServlet extends HttpServlet {
 					int id = tf.getId();
 //					inputFile = "D://test//LL.mp4";
 			        f.frameRecord(inputFile, outputFile,1,ReqType,id, drone, v);
+				}if(ReqType == 4){
+					InfraredVolume infrared = new InfraredVolume();
+					infrared.setDrone(drone);
+					infrared.setVideo(v);
+					infrared.setTime(time);
+					infrared.setInfraredVolume(0);
+					infraredMgr.save(infrared);
+					int id = infrared.getId();
+//					inputFile = "D://test//SZ.mp4";
+			        f.frameRecord(inputFile, outputFile,1,ReqType,id, drone, v);
 				}
-				
 
 				res3.put("isOK", true);
 				} catch (Exception e) {
@@ -434,6 +447,7 @@ public class DroneServlet extends HttpServlet {
 				Drone drone = droneMgr.findById(Integer.parseInt(droneId));
 				String type = req.getParameter("type");
 				List<Video> videos =  vMgr.findByVarProperty(new KeyValueWithOperator("drone", drone, "="),new KeyValueWithOperator("type", Integer.parseInt(type), "="));
+				//System.out.println(videos.size());
 				if(videos.size() != 0){
 					Video video = videos.get(videos.size()-1);
 					int reqType = Integer.parseInt(type);
@@ -457,6 +471,12 @@ public class DroneServlet extends HttpServlet {
 						tsLeft = tf.getVolumeLeft();
 						tsRight = tf.getVolumeRight();
 						time = tf.getTime();
+					}
+					if(reqType == 4){
+						InfraredVolumeDAO InfraredDao = new InfraredVolumeDAO();
+						InfraredVolume infraredv = (InfraredVolume) InfraredDao.findByVideo(video).get(0);
+						ts =(double)infraredv.getInfraredVolume();
+						time = infraredv.getTime();
 					}
 						
 					if(reqType == 3){

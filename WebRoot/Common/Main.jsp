@@ -70,7 +70,7 @@
 			</video>
 			-->
 		<object type='application/x-vlc-plugin' id='vlc' events='True' width="2500px" height="1410px" pluginspage="http://www.videolan.org" codebase="http://downloads.videolan.org/pub/videolan/vlc-webplugins/2.0.6/npapi-vlc-2.0.6.tar.xz">
-<!-- <param name='mrl' value='../Inc/MOV_0030.MOV' /> -->        
+ <!--<param name='mrl' value='../Inc/Infrared.mp4' />     -->    
 		<param name='mrl' value='rtsp://47.94.19.230:10554/gzrtsp.sdp' />
         <param name='volume' value='50' />
         <param name='autoplay' value='false' />
@@ -923,7 +923,7 @@
 						var vlc = document.getElementById("vlc"); 
 						var id = 0; 
 						//id = vlc.playlist.add(videoUrl); //添加mrl到播放列表
-						id = vlc.playlist.add("../Inc/MOV_0030.MOV"); //添加mrl到播放列表						
+						id = vlc.playlist.add("../Inc/vehicle.mp4"); //添加mrl到播放列表						
 						vlc.playlist.playItem(id);  //播放播放列表里的序列
 						/* videojs("my-video").ready(function(){
 							var myPlayer = this;
@@ -1064,7 +1064,7 @@
            	cache: false, 
            	dataType: 'json',
            	url: '/droneSystem/DroneServlet.do?method=3',
-          	data:{droneId:droneId, type:3,inputStream:"C:\\temp\\Infrared.mp4"},
+          	data:{droneId:droneId, type:3,inputStream:"D:\\test\\vehicle.mp4"},
 //			data:{droneId:droneId, type:3,inputStream:"D:\\test\\total_Receive_HDMI.h264"},
 //			data:{droneId:droneId, type:3,inputStream:"rtsp://47.94.19.230:10554/gzrtsp.sdp"},
 //			data:{droneId:droneId, type:3,inputStream:"rtsp://47.94.19.230:10554/stream0.sdp"},

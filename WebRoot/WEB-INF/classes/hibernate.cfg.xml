@@ -7,12 +7,12 @@
 <hibernate-configuration>
 
 	<session-factory>
-		<property name="connection.url">jdbc:sqlserver://127.0.0.1:1433</property>
+		<property name="connection.url">jdbc:sqlserver://192.168.1.212:1433</property>
 		<property name="connection.driver_class">
 			com.microsoft.sqlserver.jdbc.SQLServerDriver
 		</property>
 		<property name="connection.username">sa</property>
-		<property name="connection.password">Ynysawmm020495</property>
+		<property name="connection.password">Passw0rd</property>
 		<property name="dialect">
 			org.hibernate.dialect.SQLServerDialect
 		</property>
@@ -40,6 +40,7 @@
  		<mapping resource="com/droneSystem/hibernate/RescuePlan.hbm.xml" /> 
  		<mapping resource="com/droneSystem/hibernate/Record.hbm.xml" /> 
  		<mapping resource="com/droneSystem/hibernate/CarNum.hbm.xml" /> 
+ 		<mapping resource="com/droneSystem/hibernate/InfraredVolume.hbm.xml" /> 
 	</session-factory>
 
 </hibernate-configuration>
